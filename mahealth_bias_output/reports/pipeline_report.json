@@ -1,0 +1,15 @@
+{
+  "execution_time": "2026-05-14T22:56:21.730291",
+  "languages": [
+    "English",
+    "Luganda",
+    "Runyankore",
+    "Swahili"
+  ],
+  "n_questions": 5,
+  "avg_sdi": 0.5760863023773953,
+  "lang_cluster_purity": 0.45,
+  "cultural_terms_found": 9,
+  "rca_total": 100,
+  "cultural_preserve_count": 20
+}
