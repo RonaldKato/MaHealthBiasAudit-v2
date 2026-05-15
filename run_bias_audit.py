@@ -389,10 +389,10 @@ def create_parallel_coordinates():
     ax.grid(True, alpha=0.3)
     
     # Add interpretation note
-    ax.text(0.02, 0.98, "Runyankore and Luganda show consistently higher bias across metrics\n"
-            "English shows lowest bias across all dimensions",
-            transform=ax.transAxes, fontsize=9, style='italic', color='gray',
-            verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    #ax.text(0.02, 0.98, "Runyankore and Luganda show consistently higher bias across metrics\n"
+    #        "English shows lowest bias across all dimensions",
+    #       transform=ax.transAxes, fontsize=9, style='italic', color='gray',
+    #       verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
     
     plt.tight_layout()
     save_figure(fig, "13_parallel_coordinates.png")
@@ -498,10 +498,10 @@ def create_metric_comparison_bars():
     ax.grid(True, alpha=0.3, axis='y')
     
     # Add interpretation
-    ax.text(0.02, 0.98, "Runyankore shows highest bias across most metrics\n"
-            "English shows lowest bias (the privileged baseline)", 
-            transform=ax.transAxes, fontsize=9, style='italic', color='gray',
-            verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    #ax.text(0.02, 0.98, "Runyankore shows highest bias across most metrics\n"
+    #        "English shows lowest bias (the privileged baseline)", 
+    #        transform=ax.transAxes, fontsize=9, style='italic', color='gray',
+    #       verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
     
     plt.tight_layout()
     save_figure(fig, "15_metric_comparison_bars.png")
@@ -640,7 +640,7 @@ def create_trust_aware_visual():
     colors = ['orange' if s < 0.7 else 'green' for s in trust_scores]
     axes[0].bar(languages, trust_scores, color=colors, edgecolor='black')
     axes[0].axhline(y=0.7, color='green', linestyle='--', linewidth=2, label='High Trust Threshold')
-    axes[0].set_title('Trust-Aware Module: Cultural Appropriateness Score', fontweight='bold')
+    axes[0].set_title('Trust-Aware Module: Cultural Appropriateness Score', fontweight='bold', )
     axes[0].set_ylabel('Trust Score')
     axes[0].set_ylim(0, 1)
     axes[0].tick_params(axis='x', rotation=45)

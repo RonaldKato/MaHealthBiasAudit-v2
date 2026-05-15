@@ -17,3 +17,9 @@ plotly>=5.10.0
 
 # Utilities
 tqdm>=4.64.0
+
+
+#git init
+##git commit -am "commit 15.05.2028"
+#git remote add origin https://github.com/RonaldKato/MaHealthBias.git
+#git remote -v
