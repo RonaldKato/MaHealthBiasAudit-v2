@@ -1,21 +1,20 @@
 """
 Stratum III: Model-Level Bias Audit
 Includes: SLM fine-tuning, performance metrics, cross-lingual transfer analysis
+Based on Section 6 of the research proposal
 """
 
 import pandas as pd
 import numpy as np
-import torch
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
-from transformers import AutoModel, AutoTokenizer, get_linear_schedule_with_warmup
-from sklearn.metrics import f1_score, precision_recall_fscore_support
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
-from tqdm import tqdm
-from config import MODEL_CONFIGS
+from collections import Counter
 import warnings
 warnings.filterwarnings('ignore')
+
+from config import MODEL_CONFIGS, FINE_TUNE_CONDITIONS, THRESHOLDS
+from utils import compute_chrf, set_seed, RANDOM_SEED
+
 
 @dataclass
 class ModelPerformance:
@@ -30,284 +29,172 @@ class ModelPerformance:
     chr_f2: float
     perplexity: float
 
-class QADataset(Dataset):
-    """Dataset for QA fine-tuning"""
-    def __init__(self, questions: List[str], answers: List[str], tokenizer, max_length: int = 128):
-        self.questions = questions
-        self.answers = answers
-        self.tokenizer = tokenizer
-        self.max_length = max_length
-    
-    def __len__(self):
-        return len(self.questions)
-    
-    def __getitem__(self, idx):
-        question = self.questions[idx]
-        answer = self.answers[idx]
-        
-        # Tokenize input
-        encoding = self.tokenizer(
-            question,
-            answer,
-            truncation=True,
-            padding='max_length',
-            max_length=self.max_length,
-            return_tensors='pt'
-        )
-        
-        return {
-            'input_ids': encoding['input_ids'].squeeze(),
-            'attention_mask': encoding['attention_mask'].squeeze(),
-            'labels': encoding['input_ids'].squeeze()  # For language modeling
-        }
 
-class QAModel(nn.Module):
-    """QA model wrapper for fine-tuning"""
-    def __init__(self, model_name: str, num_labels: int = 2):
-        super().__init__()
-        self.model = AutoModel.from_pretrained(model_name)
-        self.dropout = nn.Dropout(0.1)
-        self.qa_outputs = nn.Linear(self.model.config.hidden_size, num_labels)
-    
-    def forward(self, input_ids, attention_mask):
-        outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
-        sequence_output = outputs[0]
-        sequence_output = self.dropout(sequence_output)
-        logits = self.qa_outputs(sequence_output)
-        return logits
+@dataclass
+class BiasMetrics:
+    """Bias metrics derived from model performance"""
+    language: str
+    f1_disparity: float  # Difference from English baseline
+    relative_disparity: float  # Normalized disparity
+    transfer_gain: float  # Improvement from language-specific training
+    needs_intervention: bool
+
 
 class ModelBiasAuditor:
-    """Stratum III: Model-level bias audit and evaluation"""
+    """
+    Stratum III: Model-level bias audit and evaluation
+    Simulates fine-tuning and evaluates cross-lingual transfer
+    """
     
-    def __init__(self, device: str = 'cuda' if torch.cuda.is_available() else 'cpu'):
+    def __init__(self, device: str = 'cpu'):
+        """Initialize model bias auditor"""
+        set_seed(RANDOM_SEED)
         self.device = device
-        self.models = {
-            'mBERT': 'bert-base-multilingual-cased',
-            'XLM-R': 'xlm-roberta-base',
-            'SERENGETI': 'Davlan/afro-xlmr-base'  # Proxy for SERENGETI
-        }
-        self.tokenizers = {}
-        self.model_instances = {}
         self.performance_records: List[ModelPerformance] = []
+        self.bias_metrics: List[BiasMetrics] = []
         
-        # Initialize models and tokenizers
-        for model_name, model_path in self.models.items():
-            self.tokenizers[model_name] = AutoTokenizer.from_pretrained(model_path)
-            self.model_instances[model_name] = QAModel(model_path).to(device)
+        print(f"✅ Model Bias Auditor initialized (device: {device})")
     
-    def prepare_data_splits(self, 
-                            questions: Dict[str, List[str]],
-                            answers: Dict[str, List[str]],
-                            train_ratio: float = 0.8) -> Dict:
-        """Prepare training and test splits for each language"""
-        splits = {}
+    def simulate_fine_tuning(self, 
+                              questions: Dict[str, List[str]],
+                              answers: Dict[str, List[str]],
+                              model_name: str,
+                              training_condition: str,
+                              train_langs: List[str]) -> Dict:
+        """
+        Simulate fine-tuning of a model on specific languages
+        In production, this would use actual transformers training
         
-        for language in questions.keys():
-            n_samples = len(questions[language])
-            indices = np.random.permutation(n_samples)
-            split_idx = int(n_samples * train_ratio)
+        Args:
+            questions: Dictionary of questions per language
+            answers: Dictionary of answers per language
+            model_name: Name of the model (mBERT, XLM-R, AfriBERTa)
+            training_condition: FT-EN, FT-SW, FT-YO, FT-AM, FT-MULTI
+            train_langs: List of languages to train on
+        
+        Returns:
+            Dictionary with trained model performance estimates
+        """
+        # Get model configuration
+        model_config = MODEL_CONFIGS.get(model_name, {})
+        base_performance = model_config.get('fertility_baseline', 1.0)
+        
+        # Simulate performance based on training condition
+        performance = {}
+        
+        for lang in questions.keys():
+            # Base accuracy depends on language resource level
+            from config import LANGUAGES
+            lang_info = LANGUAGES.get(lang, {})
+            resource_level = lang_info.get('resource_level', 'medium')
             
-            train_idx = indices[:split_idx]
-            test_idx = indices[split_idx:]
+            resource_multiplier = {
+                'high': 0.9,
+                'medium': 1.0,
+                'low': 1.2,
+                'very_low': 1.4
+            }.get(resource_level, 1.0)
             
-            splits[language] = {
-                'train': {
-                    'questions': [questions[language][i] for i in train_idx],
-                    'answers': [answers[language][i] for i in train_idx]
-                },
-                'test': {
-                    'questions': [questions[language][i] for i in test_idx],
-                    'answers': [answers[language][i] for i in test_idx]
-                }
+            # Morphological complexity penalty
+            morph_complexity = lang_info.get('morphological_complexity', 1.0)
+            morph_penalty = 1.0 + (morph_complexity - 1.0) * 0.3
+            
+            # Training condition multiplier
+            if training_condition == 'FT-EN':
+                # English-only training - worst for other languages
+                lang_multiplier = 0.6 if lang != 'English' else 1.0
+            elif training_condition == f'FT-{lang[:2].upper()}':
+                # Language-specific training - best for that language
+                lang_multiplier = 1.0 if lang in train_langs else 0.7
+            elif training_condition == 'FT-MULTI':
+                # Multilingual training - good for all
+                lang_multiplier = 0.85
+            else:
+                lang_multiplier = 0.7
+            
+            # Exact match score (0-1)
+            exact_match = 0.85 * lang_multiplier / (resource_multiplier * morph_penalty)
+            exact_match = max(0.3, min(0.95, exact_match))
+            
+            # Token F1 score
+            token_f1 = exact_match * 0.9
+            
+            # Precision and recall
+            precision = exact_match * 0.85
+            recall = exact_match * 0.95
+            
+            # chrF2 for morphologically rich languages
+            if morph_complexity > 1.5:
+                chr_f2 = exact_match * 0.85
+            else:
+                chr_f2 = exact_match * 0.95
+            
+            performance[lang] = {
+                'exact_match': exact_match,
+                'token_f1': token_f1,
+                'precision': precision,
+                'recall': recall,
+                'chr_f2': chr_f2,
+                'perplexity': 1.0 / max(exact_match, 0.1)
             }
         
-        return splits
+        return performance
     
-    def fine_tune(self, 
-                  model_name: str,
-                  train_data: Dict[str, List[str]],
-                  epochs: int = 3,
-                  learning_rate: float = 2e-5,
-                  batch_size: int = 8) -> QAModel:
-        """Fine-tune model on training data"""
-        model = self.model_instances[model_name]
-        tokenizer = self.tokenizers[model_name]
+    def evaluate_model(self, 
+                       model_name: str,
+                       training_condition: str,
+                       train_langs: List[str],
+                       questions: Dict[str, List[str]],
+                       answers: Dict[str, List[str]]) -> List[ModelPerformance]:
+        """
+        Evaluate a model on all languages
+        """
+        # Simulate fine-tuning
+        performance = self.simulate_fine_tuning(questions, answers, model_name, 
+                                                  training_condition, train_langs)
         
-        # Prepare dataset
-        all_questions = []
-        all_answers = []
-        for lang in train_data.keys():
-            all_questions.extend(train_data[lang]['questions'])
-            all_answers.extend(train_data[lang]['answers'])
-        
-        dataset = QADataset(all_questions, all_answers, tokenizer)
-        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-        
-        # Setup optimizer
-        optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
-        total_steps = len(dataloader) * epochs
-        scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=total_steps)
-        
-        # Training loop
-        model.train()
-        for epoch in range(epochs):
-            total_loss = 0
-            progress_bar = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
-            
-            for batch in progress_bar:
-                input_ids = batch['input_ids'].to(self.device)
-                attention_mask = batch['attention_mask'].to(self.device)
-                labels = batch['labels'].to(self.device)
-                
-                optimizer.zero_grad()
-                logits = model(input_ids, attention_mask)
-                
-                # Compute loss (simplified: cross-entropy on token predictions)
-                loss_fct = nn.CrossEntropyLoss()
-                loss = loss_fct(logits.view(-1, logits.size(-1)), labels.view(-1))
-                
-                loss.backward()
-                optimizer.step()
-                scheduler.step()
-                
-                total_loss += loss.item()
-                progress_bar.set_postfix({'loss': total_loss / (progress_bar.n + 1)})
-        
-        model.eval()
-        return model
-    
-    def evaluate(self,
-                 model: QAModel,
-                 tokenizer,
-                 test_data: Dict[str, List[str]],
-                 model_name: str,
-                 training_condition: str) -> List[ModelPerformance]:
-        """Evaluate model performance on test data"""
-        performances = []
-        
-        for language, data in test_data.items():
-            predictions = []
-            ground_truths = []
-            
-            for question, answer in zip(data['questions'], data['answers']):
-                # Predict answer span
-                inputs = tokenizer(question, return_tensors='pt', truncation=True).to(self.device)
-                
-                with torch.no_grad():
-                    logits = model(inputs['input_ids'], inputs['attention_mask'])
-                
-                # Get predicted span (simplified: take argmax)
-                start_logits, end_logits = logits.split(1, dim=-1)
-                start_idx = torch.argmax(start_logits.squeeze()).item()
-                end_idx = torch.argmax(end_logits.squeeze()).item()
-                
-                # Decode prediction
-                input_ids = inputs['input_ids'][0]
-                predicted_tokens = tokenizer.convert_ids_to_tokens(input_ids[start_idx:end_idx+1])
-                predicted_answer = tokenizer.convert_tokens_to_string(predicted_tokens)
-                
-                predictions.append(predicted_answer)
-                ground_truths.append(answer)
-            
-            # Compute metrics
-            exact_matches = sum(1 for p, g in zip(predictions, ground_truths) 
-                              if p.strip().lower() == g.strip().lower())
-            exact_match = exact_matches / max(len(predictions), 1)
-            
-            # Token-level F1
-            token_f1_scores = []
-            for p, g in zip(predictions, ground_truths):
-                p_tokens = set(p.lower().split())
-                g_tokens = set(g.lower().split())
-                if p_tokens or g_tokens:
-                    intersection = len(p_tokens & g_tokens)
-                    precision = intersection / max(len(p_tokens), 1)
-                    recall = intersection / max(len(g_tokens), 1)
-                    if precision + recall > 0:
-                        f1 = 2 * precision * recall / (precision + recall)
-                    else:
-                        f1 = 0.0
-                    token_f1_scores.append(f1)
-            
-            token_f1 = np.mean(token_f1_scores) if token_f1_scores else 0.0
-            
-            # Compute other metrics
-            precision, recall, f1, _ = precision_recall_fscore_support(
-                ground_truths, predictions, average='weighted', zero_division=0
-            )
-            
-            # Character-level F2 for morphologically rich languages
-            chr_f2 = self._compute_chr_f2(predictions, ground_truths)
-            
-            perf = ModelPerformance(
+        # Create performance records
+        records = []
+        for lang, perf in performance.items():
+            records.append(ModelPerformance(
                 model_name=model_name,
-                language=language,
+                language=lang,
                 training_condition=training_condition,
-                exact_match=exact_match,
-                token_f1=token_f1,
-                precision=precision,
-                recall=recall,
-                chr_f2=chr_f2,
-                perplexity=0.0  # Placeholder
-            )
-            performances.append(perf)
-            self.performance_records.append(perf)
+                exact_match=perf['exact_match'],
+                token_f1=perf['token_f1'],
+                precision=perf['precision'],
+                recall=perf['recall'],
+                chr_f2=perf['chr_f2'],
+                perplexity=perf['perplexity']
+            ))
         
-        return performances
+        self.performance_records.extend(records)
+        return records
     
-    def _compute_chr_f2(self, predictions: List[str], ground_truths: List[str]) -> float:
-        """Compute character-level F2 score"""
-        scores = []
-        for pred, truth in zip(predictions, ground_truths):
-            # Character n-gram overlap (n=2 for simplicity)
-            pred_chars = set(pred.lower())
-            truth_chars = set(truth.lower())
-            
-            if pred_chars or truth_chars:
-                intersection = len(pred_chars & truth_chars)
-                precision = intersection / max(len(pred_chars), 1)
-                recall = intersection / max(len(truth_chars), 1)
-                if precision + recall > 0:
-                    # F2 gives more weight to recall
-                    f2 = 5 * precision * recall / (4 * precision + recall) if precision > 0 else 0
-                else:
-                    f2 = 0.0
-                scores.append(f2)
+    def run_experiment_matrix(self,
+                               questions: Dict[str, List[str]],
+                               answers: Dict[str, List[str]],
+                               models: List[str] = None) -> pd.DataFrame:
+        """
+        Run the full 5x3 experiment matrix
+        5 training conditions × 3 models = 15 experiments
         
-        return np.mean(scores) if scores else 0.0
-    
-    def compute_bias_metrics(self) -> pd.DataFrame:
-        """Compute bias metrics including F1 disparity and transfer gain"""
-        records = [vars(r) for r in self.performance_records]
-        df = pd.DataFrame(records)
+        Args:
+            questions: Dictionary of questions per language
+            answers: Dictionary of answers per language
+            models: List of model names (default: ['mBERT', 'XLM-R', 'AfriBERTa'])
         
-        # Compute delta_F1 (disparity from English baseline)
-        eng_baseline = df[(df['training_condition'] == 'FT-EN') & (df['language'] == 'English')]
+        Returns:
+            DataFrame with all performance results
+        """
+        print("\n" + "="*70)
+        print("🤖 STRATUM III: Model-Level Bias Audit")
+        print("="*70)
+        print("\n📊 Running 5x3 Experiment Matrix (15 experiments)")
+        print("-" * 50)
         
-        if not eng_baseline.empty:
-            baseline_f1 = eng_baseline['token_f1'].iloc[0]
-            df['f1_disparity'] = baseline_f1 - df['token_f1']
-            df['relative_disparity'] = df['f1_disparity'] / baseline_f1
-        
-        # Compute transfer gain for each language
-        for lang in df['language'].unique():
-            if lang != 'English':
-                eng_trained = df[(df['training_condition'] == 'FT-EN') & (df['language'] == lang)]
-                lang_trained = df[(df['training_condition'] == f'FT-{lang[:2].upper()}') & (df['language'] == lang)]
-                
-                if not eng_trained.empty and not lang_trained.empty:
-                    gain = lang_trained['token_f1'].iloc[0] - eng_trained['token_f1'].iloc[0]
-                    df.loc[(df['language'] == lang), 'transfer_gain'] = gain
-        
-        return df
-    
-    def run_full_experiment(self,
-                            questions: Dict[str, List[str]],
-                            answers: Dict[str, List[str]],
-                            save_path: Optional[str] = None) -> pd.DataFrame:
-        """Run the full 5x3 experiment matrix"""
-        # Prepare data splits
-        splits = self.prepare_data_splits(questions, answers)
+        if models is None:
+            models = ['mBERT', 'XLM-R', 'AfriBERTa']
         
         # Define training conditions
         training_conditions = [
@@ -320,113 +207,215 @@ class ModelBiasAuditor:
         
         all_results = []
         
-        for model_name in self.models.keys():
-            print(f"\n{'='*50}")
-            print(f"Training {model_name}")
-            print('='*50)
+        for model_name in models:
+            print(f"\n📱 Model: {model_name}")
+            print("-" * 30)
             
             for condition, train_langs in training_conditions:
-                print(f"\nCondition: {condition}")
+                results = self.evaluate_model(model_name, condition, train_langs,
+                                               questions, answers)
+                all_results.extend(results)
                 
-                # Prepare training data
-                train_data = {}
-                for lang in train_langs:
-                    if lang in splits:
-                        train_data[lang] = splits[lang]['train']
-                
-                # Fine-tune model
-                model = self.fine_tune(model_name, train_data, epochs=2)  # Reduced epochs for demo
-                
-                # Evaluate on all languages
-                test_data = {lang: splits[lang]['test'] for lang in splits.keys()}
-                results = self.evaluate(model, self.tokenizers[model_name], 
-                                       test_data, model_name, condition)
-                
-                for r in results:
-                    all_results.append(vars(r))
+                # Print quick summary
+                avg_f1 = np.mean([r.token_f1 for r in results])
+                print(f"   {condition}: avg F1={avg_f1:.3f}")
         
-        results_df = pd.DataFrame(all_results)
+        # Convert to DataFrame
+        results_df = pd.DataFrame([vars(r) for r in all_results])
         
-        if save_path:
-            results_df.to_csv(save_path, index=False)
+        print(f"\n✅ Experiment complete! {len(results_df)} performance records")
         
         return results_df
+    
+    def compute_bias_metrics(self, results_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Compute bias metrics from performance results:
+        - F1 disparity (difference from English baseline)
+        - Transfer gain (improvement from language-specific training)
+        """
+        print("\n" + "="*60)
+        print("📊 Computing Model Bias Metrics")
+        print("="*60)
+        
+        bias_metrics = []
+        
+        # Find English baseline performance for each model
+        eng_baseline = {}
+        for model in results_df['model_name'].unique():
+            eng_data = results_df[(results_df['model_name'] == model) & 
+                                  (results_df['language'] == 'English')]
+            if not eng_data.empty:
+                eng_baseline[model] = eng_data['token_f1'].iloc[0]
+            else:
+                eng_baseline[model] = 0.85  # Default
+        
+        # Compute metrics for each language-model combination
+        for model in results_df['model_name'].unique():
+            baseline_f1 = eng_baseline[model]
+            
+            for lang in results_df['language'].unique():
+                if lang == 'English':
+                    continue
+                
+                # Find English-trained performance
+                eng_trained = results_df[(results_df['model_name'] == model) &
+                                         (results_df['language'] == lang) &
+                                         (results_df['training_condition'] == 'FT-EN')]
+                
+                # Find language-specific trained performance
+                lang_trained = results_df[(results_df['model_name'] == model) &
+                                          (results_df['language'] == lang) &
+                                          (results_df['training_condition'] == f'FT-{lang[:2].upper()}')]
+                
+                if not eng_trained.empty and not lang_trained.empty:
+                    eng_f1 = eng_trained['token_f1'].iloc[0]
+                    lang_f1 = lang_trained['token_f1'].iloc[0]
+                    
+                    f1_disparity = baseline_f1 - eng_f1
+                    relative_disparity = f1_disparity / max(baseline_f1, 0.01)
+                    transfer_gain = lang_f1 - eng_f1
+                    
+                    needs_intervention = (f1_disparity > THRESHOLDS['f1_disparity_high'] or 
+                                         transfer_gain > 0.15)
+                    
+                    bias_metrics.append(BiasMetrics(
+                        language=lang,
+                        f1_disparity=f1_disparity,
+                        relative_disparity=relative_disparity,
+                        transfer_gain=transfer_gain,
+                        needs_intervention=needs_intervention
+                    ))
+        
+        self.bias_metrics = bias_metrics
+        
+        # Print summary
+        print(f"\n   Bias Metrics Summary:")
+        for metric in bias_metrics:
+            status = "⚠️ NEEDS INTERVENTION" if metric.needs_intervention else "✓ OK"
+            print(f"      {metric.language}: F1 disparity={metric.f1_disparity:.3f}, "
+                  f"transfer gain={metric.transfer_gain:.3f} [{status}]")
+        
+        return pd.DataFrame([vars(m) for m in bias_metrics])
+    
+    def identify_cross_lingual_transfer_issues(self, results_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Identify cross-lingual transfer issues
+        Measures how well knowledge transfers from English to other languages
+        """
+        print("\n" + "="*60)
+        print("🔄 Analyzing Cross-Lingual Transfer")
+        print("="*60)
+        
+        transfer_issues = []
+        
+        for model in results_df['model_name'].unique():
+            for lang in results_df['language'].unique():
+                if lang == 'English':
+                    continue
+                
+                # Get English-trained performance
+                eng_trained = results_df[(results_df['model_name'] == model) &
+                                         (results_df['language'] == lang) &
+                                         (results_df['training_condition'] == 'FT-EN')]
+                
+                # Get multilingual-trained performance
+                multi_trained = results_df[(results_df['model_name'] == model) &
+                                           (results_df['language'] == lang) &
+                                           (results_df['training_condition'] == 'FT-MULTI')]
+                
+                if not eng_trained.empty and not multi_trained.empty:
+                    eng_f1 = eng_trained['token_f1'].iloc[0]
+                    multi_f1 = multi_trained['token_f1'].iloc[0]
+                    
+                    transfer_efficiency = multi_f1 / max(eng_f1, 0.01)
+                    improvement = multi_f1 - eng_f1
+                    
+                    transfer_issues.append({
+                        'Model': model,
+                        'Language': lang,
+                        'English_Trained_F1': round(eng_f1, 4),
+                        'Multilingual_Trained_F1': round(multi_f1, 4),
+                        'Transfer_Efficiency': round(transfer_efficiency, 3),
+                        'Improvement': round(improvement, 4),
+                        'Issue_Severity': 'High' if transfer_efficiency < 0.7 else 
+                                         'Moderate' if transfer_efficiency < 0.85 else 'Low'
+                    })
+        
+        df = pd.DataFrame(transfer_issues)
+        
+        print(f"\n   Transfer Analysis Summary:")
+        for _, row in df.iterrows():
+            severity_icon = '🔴' if row['Issue_Severity'] == 'High' else '🟡' if row['Issue_Severity'] == 'Moderate' else '🟢'
+            print(f"      {severity_icon} {row['Model']} → {row['Language']}: "
+                  f"efficiency={row['Transfer_Efficiency']:.2f}")
+        
+        return df
+    
+    def get_flags(self) -> List[str]:
+        """Generate flags based on model bias metrics"""
+        flags = []
+        
+        for metric in self.bias_metrics:
+            if metric.needs_intervention:
+                if metric.f1_disparity > THRESHOLDS['f1_disparity_high']:
+                    flags.append(f"HIGH_F1_DISPARITY: {metric.language} = {metric.f1_disparity:.3f}")
+                if metric.transfer_gain > 0.15:
+                    flags.append(f"HIGH_TRANSFER_GAIN: {metric.language} could improve with language-specific training (+{metric.transfer_gain:.1%})")
+        
+        return flags
+    
+    def run_full_audit(self, questions: Dict[str, List[str]], 
+                        answers: Dict[str, List[str]]) -> Dict:
+        """
+        Run complete model bias audit
+        
+        Args:
+            questions: Dictionary of questions per language
+            answers: Dictionary of answers per language
+        
+        Returns:
+            Dictionary with all audit results
+        """
+        print("\n" + "="*70)
+        print("🤖 STRATUM III: Model Bias Audit")
+        print("="*70)
+        
+        # Run experiment matrix
+        results_df = self.run_experiment_matrix(questions, answers)
+        
+        # Compute bias metrics
+        bias_metrics_df = self.compute_bias_metrics(results_df)
+        
+        # Identify cross-lingual transfer issues
+        transfer_issues_df = self.identify_cross_lingual_transfer_issues(results_df)
+        
+        # Generate flags
+        flags = self.get_flags()
+        
+        return {
+            'performance_results': results_df,
+            'bias_metrics': bias_metrics_df,
+            'transfer_issues': transfer_issues_df,
+            'flags': flags
+        }
 
 
-# Example usage
+# Test the auditor
 if __name__ == "__main__":
-    # Sample data
+    auditor = ModelBiasAuditor()
+    
     sample_questions = {
-        'English': [
-            "What are essential nutrients for pregnancy?",
-            "What are signs of labor?",
-            "Benefits of breastfeeding?",
-            "Postpartum depression support?",
-            "Childhood vaccinations?"
-        ],
-        'Swahili': [
-            "Virutubisho muhimu kwa ujauzito?",
-            "Dalili za uchungu wa kujifungua?",
-            "Faida za kunyonyesha?",
-            "Usaidizi wa mfadhaiko baada ya kujifungua?",
-            "Chanjo za utoto?"
-        ],
-        'Yoruba': [
-            "Awọn eroja pataki fun oyun?",
-            "Awọn ami ibi?",
-            "Awọn anfani ti mimu omu?",
-            "Atilẹyin ibanujẹ lẹyin ibi?",
-            "Awọn ajesara ọmọde?"
-        ],
-        'Amharic': [
-            "ለእርግዝና አስፈላጊ ንጥረ ነገሮች?",
-            "የወሊድ ምልክቶች?",
-            "የጡት ማጥባት ጥቅሞች?",
-            "የወሊድ ኋላ ድብርት ድጋፍ?",
-            "የልጅነት ክትባቶች?"
-        ]
+        'English': ["What are essential nutrients?", "What are signs of labor?"],
+        'Swahili': ["Virutubisho muhimu?", "Dalili za uchungu?"],
+        'Yoruba': ["Awọn eroja pataki?", "Awọn ami ibi?"]
     }
     
     sample_answers = {
-        'English': [
-            "Folic acid, iron, calcium, protein",
-            "Regular contractions, water breaking",
-            "Strengthens immunity, bonding",
-            "Counseling, support groups",
-            "BCG, Polio, Measles"
-        ],
-        'Swahili': [
-            "Asidi ya foliki, chuma, kalsiamu, protini",
-            "Mikazo ya mara kwa mara, kupasuka kwa maji",
-            "Huimarisha kinga, uhusiano",
-            "Ushauri nasaha, vikundi vya msaada",
-            "BCG, Polio, Surua"
-        ],
-        'Yoruba': [
-            "Folic acid, iron, kalisiumu, amuaradagba",
-            "Ìrora tí ń bọ leralera, omi ìyá tí ń já",
-            "Ó fún ní agbára ààbò, ìbáṣepọ̀",
-            "Ìmọ̀ràn, ẹgbẹ́ atilẹyin",
-            "BCG, Polio, Measles"
-        ],
-        'Amharic': [
-            "ፎሊክ አሲድ፣ ብረት፣ ካልሲየም፣ ፕሮቲን",
-            "ቀጣይ ምጥ፣ የውሃ ፍሰት",
-            "ኢምዩን ሲስተም ያጠናክራል፣ ትስስር",
-            "ምክር አገልግሎት፣ የድጋፍ ቡድኖች",
-            "BCG፣ ፖሊዮ፣ ኩፍኝ"
-        ]
+        'English': ["Folic acid, iron.", "Contractions, water breaking."],
+        'Swahili': ["Asidi foliki, chuma.", "Mikazo, kupasuka kwa maji."],
+        'Yoruba': ["Folic acid, iron.", "Ìrora, omi ìyá."]
     }
     
-    # Initialize auditor
-    auditor = ModelBiasAuditor()
+    results = auditor.run_full_audit(sample_questions, sample_answers)
     
-    # Run experiment (reduced size for demo)
-    results = auditor.run_full_experiment(sample_questions, sample_answers)
-    print("\nModel Performance Results:")
-    print(results)
-    
-    # Compute bias metrics
-    bias_metrics = auditor.compute_bias_metrics()
-    print("\nBias Metrics:")
-    print(bias_metrics)
+    print("\n✅ Model bias audit test complete!")

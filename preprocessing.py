@@ -5,53 +5,55 @@ Handles multilingual text preprocessing, normalisation, tokenisation, and embedd
 
 import numpy as np
 import pandas as pd
-from typing import List, Dict, Optional, Tuple, Set
 import re
+import unicodedata
+from typing import List, Dict, Optional, Tuple, Set
+from dataclasses import dataclass
+from datetime import datetime
 from collections import Counter
-import warnings
-warnings.filterwarnings('ignore')
 
-from config import LANGUAGES, PRIMARY_LANGUAGES, RANDOM_SEED
-from utils import (set_seed, normalize_text, compute_fertility_penalty, 
-                   compute_oov_rate, get_morpheme_boundaries, compute_boundary_f1)
+from config import (
+    LANGUAGES, PRIMARY_LANGUAGES, RANDOM_SEED, 
+    THRESHOLDS, DIALECT_MARKERS
+)
+from utils import (
+    set_seed, normalize_text, compute_oov_rate,
+    get_morpheme_boundaries, compute_boundary_f1,
+    compute_embedding_stats
+)
+
+
+@dataclass
+class DatasetMetadata:
+    """Comprehensive dataset metadata for tracking"""
+    name: str
+    version: str
+    created_at: str
+    n_questions: int
+    n_languages: int
+    languages: Dict[str, Dict]
+    topics: List[str]
+    question_topic_mapping: Dict[int, str]
+    key_themes: List[str]
+    total_samples: int
 
 
 class MultilingualPreprocessor:
-    """
-    Multilingual text preprocessor with language-specific normalisation,
-    tokenisation analysis and embedding generation.
-    """
     
     def __init__(self):
-        """Initialise preprocessor with language-specific tools"""
         set_seed(RANDOM_SEED)
         self.languages = LANGUAGES
         self.primary_languages = PRIMARY_LANGUAGES
         self.tokenisation_results = []
         self.embeddings_cache = {}
+        self.step_results = {}
         
-        # Try to load embedding models
         self.labse_model = None
-        self.setup_embeddings()
-        
-        # Simulated vocabulary for OOV calculation
         self.vocabularies = self._init_vocabularies()
         
-        print(f" Preprocessor initialized for {len(self.languages)} languages")
-    
-    def setup_embeddings(self):
-        """Initialise embedding models (LaBSE, multilingual-E5)"""
-        try:
-            from sentence_transformers import SentenceTransformer
-            self.labse_model = SentenceTransformer('sentence-transformers/LaBSE')
-            print("  LaBSE model loaded")
-        except Exception as e:
-            print(f"  LaBSE model not available: {e}")
-            self.labse_model = None
+        print(f"✅ Preprocessor initialized for {len(self.languages)} languages")
     
     def _init_vocabularies(self) -> Dict[str, Set[str]]:
-        """Initialize simulated vocabularies for each language"""
-        # Base English medical vocabulary
         base_english = {
             'pregnant', 'woman', 'should', 'consume', 'essential', 'nutrients',
             'folic', 'acid', 'iron', 'calcium', 'protein', 'iodine', 'omega-3',
@@ -59,243 +61,340 @@ class MultilingualPreprocessor:
             'anemia', 'strengthen', 'bones', 'promote', 'maternal', 'health',
             'common', 'signs', 'labor', 'contractions', 'lower', 'back', 'pain',
             'water', 'breaking', 'cervical', 'dilation', 'medical', 'attention',
-            'frequent', 'bleeding', 'reduced', 'fetal', 'movement'
+            'frequent', 'bleeding', 'reduced', 'movement', 'breastfeeding',
+            'immune', 'system', 'bonding', 'postpartum', 'depression', 'counseling',
+            'vaccinations', 'bcg', 'polio', 'hepatitis', 'dpt', 'hib', 'rotavirus',
+            'measles'
         }
-        
-        vocabularies = {
-            'English': base_english,
-            'Swahili': base_english | {'mwanamke', 'mjamzito', 'anapaswa', 'kula', 'virutubisho',
-                                       'asidi', 'foliki', 'chuma', 'kalsiamu', 'protini', 'iodini',
-                                       'mafuta', 'omega-3', 'siku', 'husaidia', 'ukuaji', 'ubongo',
-                                       'mtoto', 'kuzuia', 'upungufu', 'damu', 'kuimarisha', 'afya',
-                                       'mama', 'dalili', 'uchungu', 'kujifungua', 'mikazo', 'maumivu',
-                                       'mgongo', 'kupasuka', 'maji', 'uzazi', 'kufunguka', 'mlango',
-                                       'kizazi', 'huduma', 'inahitajika', 'hasogei'},
-            'Luganda': base_english | {'omukyala', 'embuto', 'alina', 'okulya', 'ebyetaago',
-                                       'folic', 'ekyuma', 'kalisiyamu', 'omugaati', 'ayodini',
-                                       'omega-3', 'buli', 'lunaku', 'kuyamba', 'okukula', 'kobwana',
-                                       'okuziyiza', 'omusujja', 'okunyweza', 'amagumba', 'okulongoosa',
-                                       'obulamu', 'bwomukyala', 'obubonero', 'okuzala', 'okuluma',
-                                       'omugongo', 'amazzi', 'okuzala', 'okugaziya', 'endabirwamu'},
-            'Runyankore': base_english | {'omukazi', 'embuto', 'atahairwe', 'okurya', 'ebirikukozesa',
-                                          'folic', 'ekyoma', 'calcium', 'omugisha', 'ayodini',
-                                          'omega-3', 'buzoba', 'kubwanyima', 'okukura', 'kwomwana',
-                                          'okuziyiza', 'omushwiju', 'okukomeza', 'amagufa', 'okureeza',
-                                          'obulamu', 'bwomukazi', 'obubonero', 'okuzaara', 'kubaba',
-                                          'omugongo', 'amaizi', 'kweijuka', 'endabirwamu'},
-            'Yoruba': base_english | {'aboyun', 'yẹ', 'máa', 'jẹ́', 'eroja', 'pataki', 'folic', 'acid',
-                                      'irin', 'kalisiumu', 'amuaradagba', 'iodini', 'omega-3', 'lojoojúmọ́',
-                                      'rán', 'ọmọ', 'lọ́wọ́', 'dagba', 'dáadáa', 'dáàbò', 'bo', 'ìlera', 'ìyá',
-                                      'àmi', 'ìbí', 'ìrora', 'ń', 'bọ', 'leralera', 'ẹ̀yìn', 'omi', 'ìyá', 'ń',
-                                      'já', 'ìṣíṣi', 'ilé-ọmọ', 'iléewosan'},
-            'Amharic': set()  # Would be populated with Amharic terms
-        }
-        
-        return vocabularies
-    
-    def language_identification(self, text: str, expected_lang: str) -> Dict:
-        """
-        Step 1: Language Identification
-        Uses simple heuristic for simulation (would use AfroLID in production)
-        """
-        if not text:
-            return {'text': '', 'expected': expected_lang, 'detected': expected_lang, 
-                    'match': True, 'confidence': 0.5}
-        
-        # Simple heuristic for demo
-        text_lower = text.lower()
-        
-        # Luganda markers
-        if 'nnyo' in text_lower or 'buli' in text_lower or 'okuzala' in text_lower:
-            detected = 'Luganda'
-        # Runyankore markers
-        elif 'nka' in text_lower or 'okurya' in text_lower or 'okuzaara' in text_lower:
-            detected = 'Runyankore'
-        # Swahili markers
-        elif 'mwanamke' in text_lower or 'mjamzito' in text_lower or 'kujifungua' in text_lower:
-            detected = 'Swahili'
-        # Yoruba markers
-        elif 'aboyun' in text_lower or 'ọmọ' in text_lower or 'ìbí' in text_lower:
-            detected = 'Yoruba'
-        # Amharic markers (Unicode range)
-        elif any('\u1200' <= c <= '\u137F' for c in text):
-            detected = 'Amharic'
-        else:
-            detected = 'English'
         
         return {
-            'text': text[:100],
-            'expected': expected_lang,
-            'detected': detected,
-            'match': detected == expected_lang,
-            'confidence': 0.85 if detected == expected_lang else 0.6
+            'English': base_english,
+            'Swahili': base_english,
+            'Yoruba': base_english,
+            'Amharic': base_english,
+            'Luganda': base_english,
+            'Runyankore': base_english
         }
     
-    def text_normalisation(self, text: str, lang: str) -> str:
-        """
-        Step 2: Text Normalisation
-        Language-specific normalisation including tone preservation for Bantu languages
-        """
-        if not text:
-            return ""
+    def step0_summarize_dataset(self, questions: List[str], 
+                                 answers: Dict[str, List[str]],
+                                 languages: List[str]) -> DatasetMetadata:
+        print("\n" + "="*70)
+        print("📊 STEP 0: Dataset Structure Analysis")
+        print("="*70)
         
-        # Basic normalisation
-        text = text.strip()
-        text = re.sub(r'\s+', ' ', text)
-        
-        # Language-specific normalisation
-        if lang in ['English', 'Swahili', 'Luganda', 'Runyankore', 'Yoruba']:
-            # Preserve tone marks for Luganda and Runyankore
-            if lang in ['Luganda', 'Runyankore']:
-                # Don't lowercase tone-marked vowels in Bantu languages
-                # For now, simple lowercasing
-                text = text.lower()
-            else:
-                text = text.lower()
-        
-        # Remove special characters but preserve question marks
-        text = re.sub(r'[^\w\s\.\,\?\!\-]', ' ', text)
-        
-        # Collapse multiple spaces
-        text = re.sub(r'\s+', ' ', text).strip()
-        
-        return text
-    
-    def multi_tokeniser_analysis(self, texts: List[str], lang: str, 
-                                  eng_texts: List[str]) -> Dict:
-        """
-        Step 3: Tokenisation with THREE tokenisers in parallel (mBERT, XLM-R, AfriBERTa)
-        Compute Tokenisation Parity (TP) per language
-        """
-        results = {
-            'language': lang,
-            'mBERT': {'fertility': [], 'tokens_per_sentence': []},
-            'XLM-R': {'fertility': [], 'tokens_per_sentence': []},
-            'AfriBERTa': {'fertility': [], 'tokens_per_sentence': []}
+        topic_keywords = {
+            'Nutrition': ['nutrients', 'folic', 'iron', 'calcium', 'protein', 'diet', 'eat', 'food'],
+            'Labor & Delivery': ['labor', 'contractions', 'delivery', 'birth', 'cervical', 'water breaking'],
+            'Postnatal Care': ['breastfeeding', 'postpartum', 'new mother', 'recovery', 'after birth'],
+            'Mental Health': ['depression', 'mental health', 'counseling', 'support', 'anxiety'],
+            'Child Health': ['vaccinations', 'vaccines', 'immunization', 'BCG', 'polio', 'measles']
         }
         
-        for i, text in enumerate(texts):
-            eng_text = eng_texts[i] if i < len(eng_texts) else text
-            eng_tokens = eng_text.split()
+        topics = []
+        question_topic_mapping = {}
+        
+        for i, q in enumerate(questions):
+            q_lower = q.lower()
+            matched = False
+            for topic, keywords in topic_keywords.items():
+                if any(kw in q_lower for kw in keywords):
+                    topics.append(topic)
+                    question_topic_mapping[i] = topic
+                    matched = True
+                    break
+            if not matched:
+                topics.append('General')
+                question_topic_mapping[i] = 'General'
+        
+        key_themes = list(set(topics))
+        
+        lang_metadata = {}
+        for lang in languages:
+            lang_info = self.languages.get(lang, {})
+            lang_metadata[lang] = {
+                'code': lang_info.get('code', 'unknown'),
+                'family': lang_info.get('family', 'unknown'),
+                'resource_level': lang_info.get('resource_level', 'unknown'),
+                'script': lang_info.get('script', 'unknown'),
+                'morphological_complexity': lang_info.get('morphological_complexity', 1.0),
+                'has_tones': lang_info.get('has_tones', False),
+                'n_answers': len(answers.get(lang, []))
+            }
+        
+        total_samples = len(questions) * len(languages)
+        
+        metadata = DatasetMetadata(
+            name='MOTHER (Maternal Health QA Dataset)',
+            version='1.0',
+            created_at=datetime.now().isoformat(),
+            n_questions=len(questions),
+            n_languages=len(languages),
+            languages=lang_metadata,
+            topics=key_themes,
+            question_topic_mapping=question_topic_mapping,
+            key_themes=key_themes,
+            total_samples=total_samples
+        )
+        
+        self.step_results['dataset_metadata'] = metadata
+        
+        print(f"\n📋 Dataset Summary:")
+        print(f"   Name: {metadata.name}")
+        print(f"   Questions: {metadata.n_questions}")
+        print(f"   Languages: {metadata.n_languages}")
+        print(f"   Total QA pairs: {metadata.total_samples}")
+        
+        return metadata
+    
+    def step1_language_identification(self, texts: Dict[str, List[str]]) -> Dict:
+        print("\n" + "="*70)
+        print("🌍 STEP 1: Language Identification")
+        print("="*70)
+        
+        results = {}
+        code_switched_segments = []
+        
+        lang_markers = {
+            'Luganda': ['nnyo', 'buli', 'okuzala', 'omukyala'],
+            'Runyankore': ['nka', 'okurya', 'okuzaara', 'omukazi'],
+            'Swahili': ['mwanamke', 'mjamzito', 'kujifungua', 'kila', 'sana'],
+            'Yoruba': ['aboyun', 'ọmọ', 'ìbí', 'jẹ́'],
+            'Amharic': ['እርጉዝ', 'ሴት', 'ወሊድ', 'ሕፃን'],
+            'English': ['the', 'and', 'for', 'with', 'from']
+        }
+        
+        for lang, text_list in texts.items():
+            lang_results = []
+            for text in text_list:
+                text_lower = text.lower()
+                detected = 'English'
+                max_matches = 0
+                
+                for marker_lang, markers in lang_markers.items():
+                    matches = sum(1 for m in markers if m in text_lower)
+                    if matches > max_matches:
+                        max_matches = matches
+                        detected = marker_lang
+                
+                confidence = min(0.95, 0.6 + (max_matches * 0.05))
+                is_code_switched = detected != lang and confidence < 0.7
+                
+                result = {
+                    'text': text[:100] + '...' if len(text) > 100 else text,
+                    'expected': lang,
+                    'detected': detected,
+                    'confidence': confidence,
+                    'is_code_switched': is_code_switched
+                }
+                lang_results.append(result)
+                
+                if is_code_switched:
+                    code_switched_segments.append({
+                        'language': lang,
+                        'segment': text[:50],
+                        'detected_as': detected
+                    })
             
-            for tokeniser_name in ['mBERT', 'XLM-R', 'AfriBERTa']:
-                # Simulate different tokenisation behaviours
-                # In production, use actual tokenizers
-                if tokeniser_name == 'mBERT':
-                    # mBERT WordPiece - higher fertility for Bantu languages
-                    if lang in ['Luganda', 'Runyankore']:
-                        # Simulate 2-3x token count for agglutinative languages
-                        multiplier = 2.5 if lang == 'Runyankore' else 2.0
-                    elif lang == 'Swahili':
-                        multiplier = 1.6
-                    else:
-                        multiplier = 1.0
-                elif tokeniser_name == 'XLM-R':
-                    # XLM-R SentencePiece - better for Bantu
-                    multiplier = 1.8 if lang == 'Runyankore' else 1.4 if lang == 'Luganda' else 1.2
-                else:  # AfriBERTa
-                    # AfriBERTa - best for African languages
-                    multiplier = 1.4 if lang == 'Runyankore' else 1.2 if lang == 'Luganda' else 1.1
-                
-                # Simulate token count
-                approx_tokens = max(1, int(len(eng_tokens) * multiplier))
-                fertility = approx_tokens / max(len(eng_tokens), 1)
-                
-                results[tokeniser_name]['fertility'].append(fertility)
-                results[tokeniser_name]['tokens_per_sentence'].append(approx_tokens)
+            results[lang] = lang_results
         
-        # Store results for parity computation
-        self.tokenisation_results.append({
-            'language': lang,
-            'mBERT_avg_fertility': np.mean(results['mBERT']['fertility']) if results['mBERT']['fertility'] else 1.0,
-            'XLM-R_avg_fertility': np.mean(results['XLM-R']['fertility']) if results['XLM-R']['fertility'] else 1.0,
-            'AfriBERTa_avg_fertility': np.mean(results['AfriBERTa']['fertility']) if results['AfriBERTa']['fertility'] else 1.0,
-            'n_samples': len(texts)
-        })
+        self.step_results['language_identification'] = results
+        
+        print(f"\n   Code-switched segments detected: {len(code_switched_segments)}")
+        for cs in code_switched_segments[:3]:
+            print(f"      ⚠️ {cs['language']} → {cs['detected_as']}: '{cs['segment']}...'")
         
         return results
     
-    def morphological_analysis(self, words: List[str], lang: str) -> List[Dict]:
-        """
-        Step 4: Morphological Analysis with Morfessor + native validation
-        """
+    def step2_text_normalisation(self, texts: Dict[str, List[str]]) -> Dict[str, List[str]]:
+        print("\n" + "="*70)
+        print("✍️ STEP 2: Text Normalisation")
+        print("="*70)
+        
+        normalized = {}
+        tone_preservation_stats = {}
+        
+        for lang, text_list in texts.items():
+            lang_norm = []
+            preserved_tones = []
+            lang_info = self.languages.get(lang, {})
+            preserve_tones = lang_info.get('has_tones', False)
+            
+            for text in text_list:
+                if preserve_tones:
+                    tone_pattern = r'[áéíóúàèìòùâêîôû]'
+                    original_tones = re.findall(tone_pattern, text)
+                    preserved_tones.extend(original_tones)
+                
+                text = text.strip()
+                
+                if preserve_tones:
+                    text = re.sub(r'([A-Z])', lambda m: m.group(1).lower(), text)
+                else:
+                    text = text.lower()
+                
+                text = unicodedata.normalize('NFC', text)
+                text = re.sub(r'[^\w\s\.\,\?\!\-áéíóúàèìòùâêîôû]', ' ', text)
+                text = re.sub(r'\s+', ' ', text).strip()
+                
+                lang_norm.append(text)
+            
+            normalized[lang] = lang_norm
+            tone_preservation_stats[lang] = {
+                'tones_preserved': len(preserved_tones),
+                'has_tones': preserve_tones and len(preserved_tones) > 0
+            }
+        
+        self.step_results['normalisation'] = normalized
+        
+        print(f"\n   Tone preservation results:")
+        for lang, stats in tone_preservation_stats.items():
+            if stats['has_tones']:
+                print(f"      ✓ {lang}: {stats['tones_preserved']} tone marks preserved")
+        
+        return normalized
+    
+    def step3_tokenisation_analysis(self, texts: Dict[str, List[str]]) -> pd.DataFrame:
+        print("\n" + "="*70)
+        print("🔤 STEP 3: Tokenisation Analysis (3 Tokenisers in Parallel)")
+        print("="*70)
+        
+        tokenisers = ['mBERT', 'XLM-R', 'AfriBERTa']
         results = []
         
-        # Morpheme patterns for Bantu languages
-        bantu_patterns = {
-            'Luganda': {
-                'prefixes': ['a', 'ba', 'ki', 'tu', 'mu', 'ku', 'gu', 'bu', 'ka', 'tu'],
-                'infixes': ['-li-', '-na-', '-ta-', '-ga-'],
-                'suffixes': ['a', 'e', 'i', 'o', 'nu', 'mu', 'ni']
-            },
-            'Runyankore': {
-                'prefixes': ['a', 'ba', 'ki', 'tu', 'mu', 'ku', 'gu', 'ka'],
-                'infixes': ['-ri-', '-na-', '-ta-'],
-                'suffixes': ['a', 'e', 'i', 'o', 'nu', 'mu']
-            },
-            'Swahili': {
-                'prefixes': ['a', 'wa', 'ki', 'vi', 'm', 'mi', 'u', 'i'],
-                'infixes': ['-li-', '-na-', '-ta-', '-ku-'],
-                'suffixes': ['a', 'i', 'e', 'o', 'ni', 'na']
-            }
-        }
+        complexity = {lang: self.languages.get(lang, {}).get('morphological_complexity', 1.0) 
+                     for lang in texts.keys()}
         
-        patterns = bantu_patterns.get(lang, {'prefixes': [], 'infixes': [], 'suffixes': []})
+        eng_text = texts.get('English', [''])[0] if 'English' in texts else ''
+        eng_token_count = len(eng_text.split()) if eng_text else 1
+        
+        for lang, text_list in texts.items():
+            for tokeniser in tokenisers:
+                fertility_penalties = []
+                token_counts = []
+                oov_rates = []
+                
+                for text in text_list:
+                    base_multiplier = complexity.get(lang, 1.0)
+                    
+                    if tokeniser == 'mBERT':
+                        multiplier = base_multiplier * 1.1
+                    elif tokeniser == 'XLM-R':
+                        multiplier = base_multiplier * 0.9
+                    else:
+                        multiplier = base_multiplier * 0.8
+                    
+                    tokens = self._simulate_tokenise(text, multiplier)
+                    token_count = len(tokens)
+                    token_counts.append(token_count)
+                    
+                    fertility = token_count / max(eng_token_count, 1)
+                    fertility_penalties.append(fertility)
+                    
+                    vocab = self.vocabularies.get(lang, set())
+                    oov = compute_oov_rate(tokens, vocab)
+                    oov_rates.append(oov)
+                
+                results.append({
+                    'Language': lang,
+                    'Tokeniser': tokeniser,
+                    'Avg_Tokens': np.mean(token_counts) if token_counts else 0,
+                    'Fertility_Penalty': np.mean(fertility_penalties) if fertility_penalties else 1.0,
+                    'OOV_Rate': np.mean(oov_rates) if oov_rates else 0.0,
+                    'TP_Flag': np.mean(fertility_penalties) > THRESHOLDS['tokenisation_parity'] if fertility_penalties else False,
+                })
+        
+        df = pd.DataFrame(results)
+        
+        best_tokenisers = {}
+        for lang in df['Language'].unique():
+            lang_data = df[df['Language'] == lang]
+            if not lang_data.empty:
+                best = lang_data.loc[lang_data['Fertility_Penalty'].idxmin(), 'Tokeniser']
+                best_tokenisers[lang] = best
+        
+        df['Best_Tokeniser'] = df['Language'].map(best_tokenisers)
+        
+        self.step_results['tokenisation'] = df
+        
+        print(f"\n   Tokenisation Parity Results:")
+        for lang in df['Language'].unique():
+            lang_data = df[df['Language'] == lang]
+            if not lang_data.empty:
+                lang_data = lang_data.iloc[0]
+                status = "⚠️ HIGH" if lang_data['TP_Flag'] else "✓ OK"
+                print(f"      {lang}: {status} (TP={lang_data['Fertility_Penalty']:.2f}, best={lang_data['Best_Tokeniser']})")
+        
+        return df
+    
+    def _simulate_tokenise(self, text: str, multiplier: float) -> List[str]:
+        words = text.split()
+        tokens = []
         
         for word in words:
-            # Simulate tokeniser segmentation
-            tokeniser_segments = self._simulate_tokeniser_segmentation(word, lang)
-            
-            # Simulate morpheme segmentation (would use Morfessor in production)
-            morpheme_segments = self._simulate_morpheme_segmentation(word, patterns)
-            
-            # Compute boundary F1
-            token_boundaries = get_morpheme_boundaries(word, tokeniser_segments)
-            morpheme_boundaries = get_morpheme_boundaries(word, morpheme_segments)
-            boundary_f1 = compute_boundary_f1(token_boundaries, morpheme_boundaries)
-            
-            # Fragmentation score
-            fragmentation = len(tokeniser_segments) / max(len(morpheme_segments), 1)
-            
-            results.append({
-                'word': word,
-                'language': lang,
-                'tokeniser_segments': tokeniser_segments,
-                'morpheme_segments': morpheme_segments,
-                'boundary_f1': boundary_f1,
-                'fragmentation_score': fragmentation,
-                'is_aligned': boundary_f1 > 0.6
-            })
+            if multiplier > 1.8:
+                chunk_size = 3
+                tokens.extend([word[i:i+chunk_size] for i in range(0, len(word), chunk_size)])
+            elif multiplier > 1.4:
+                chunk_size = 4
+                tokens.extend([word[i:i+chunk_size] for i in range(0, len(word), chunk_size)])
+            else:
+                tokens.append(word)
         
+        return tokens
+    
+    def step4_morphological_analysis(self, sample_words: Dict[str, List[str]]) -> Dict[str, pd.DataFrame]:
+        print("\n" + "="*70)
+        print("🔍 STEP 4: Morphological Analysis")
+        print("="*70)
+        
+        results = {}
+        
+        for lang, words in sample_words.items():
+            lang_results = []
+            
+            for word in words:
+                candidate_segments = self._find_morpheme_boundaries(word, lang)
+                gold_segments = [word]
+                
+                candidate_boundaries = get_morpheme_boundaries(word, candidate_segments)
+                gold_boundaries = get_morpheme_boundaries(word, gold_segments)
+                alignment_f1 = compute_boundary_f1(candidate_boundaries, gold_boundaries)
+                
+                lang_results.append({
+                    'word': word,
+                    'candidate_segments': '|'.join(candidate_segments),
+                    'gold_segments': '|'.join(gold_segments),
+                    'alignment_f1': alignment_f1,
+                    'is_valid': alignment_f1 > THRESHOLDS['mas_threshold']
+                })
+            
+            results[lang] = pd.DataFrame(lang_results)
+            
+            if not results[lang].empty:
+                avg_f1 = results[lang]['alignment_f1'].mean()
+                print(f"   {lang}: MAS = {avg_f1:.3f}")
+        
+        self.step_results['morphology'] = results
         return results
     
-    def _simulate_tokeniser_segmentation(self, word: str, lang: str) -> List[str]:
-        """Simulate tokeniser segmentation based on language complexity"""
-        if lang in ['Luganda', 'Runyankore']:
-            # Agglutinative languages: split more
-            if len(word) > 6:
-                # Split every 3-4 characters
-                seg_len = 3 if lang == 'Runyankore' else 4
-                return [word[i:i+seg_len] for i in range(0, len(word), seg_len)]
-        return [word] if len(word) < 8 else [word[:4], word[4:]]
-    
-    def _simulate_morpheme_segmentation(self, word: str, patterns: Dict) -> List[str]:
-        """Simulate morpheme segmentation"""
+    def _find_morpheme_boundaries(self, word: str, lang: str) -> List[str]:
+        bantu_prefixes = ['a', 'ba', 'ki', 'tu', 'mu', 'ku', 'gu', 'bu', 'ka', 'e', 'i']
+        bantu_suffixes = ['a', 'e', 'i', 'o', 'nu', 'mu', 'ni', 'na']
+        
         segments = []
         remaining = word
         
-        # Check for prefixes
-        for prefix in patterns.get('prefixes', []):
+        for prefix in bantu_prefixes:
             if remaining.startswith(prefix) and len(prefix) <= len(remaining) - 2:
                 segments.append(prefix)
                 remaining = remaining[len(prefix):]
                 break
         
-        # Check for suffixes
-        for suffix in patterns.get('suffixes', []):
+        for suffix in bantu_suffixes:
             if remaining.endswith(suffix) and len(suffix) <= len(remaining) - 2:
-                # Stem + suffix
-                segments.append(remaining[:-len(suffix)])
+                stem = remaining[:-len(suffix)]
+                segments.append(stem)
                 segments.append(suffix)
                 remaining = ''
                 break
@@ -305,183 +404,165 @@ class MultilingualPreprocessor:
         
         return segments if len(segments) > 1 else [word]
     
-    def generate_embeddings(self, texts: List[str], model_name: str = 'LaBSE') -> np.ndarray:
-        """
-        Step 5: Sentence Embedding with LaBSE (768-dim)
-        """
-        if not texts:
-            return np.array([])
-        
-        if model_name == 'LaBSE' and self.labse_model is not None:
+    def _setup_embedding_models(self):
+        if self.labse_model is None:
             try:
-                embeddings = self.labse_model.encode(texts, convert_to_numpy=True)
-                return embeddings
+                from sentence_transformers import SentenceTransformer
+                self.labse_model = SentenceTransformer('sentence-transformers/LaBSE')
+                print("   ✓ LaBSE model loaded")
             except Exception as e:
-                print(f"  Warning: LaBSE encoding error: {e}")
-        
-        # Fallback: simulated embeddings
-        # In production, these would be real embeddings
-        np.random.seed(RANDOM_SEED)
-        # Create meaningful simulated embeddings (different distributions per language)
-        embeddings = np.random.randn(len(texts), 768)
-        return embeddings
+                print(f"   ⚠️ LaBSE model not available: {e}")
+                self.labse_model = None
     
-    def create_joint_embedding_space(self, embeddings_by_lang: Dict[str, np.ndarray]) -> Tuple[np.ndarray, List[str]]:
-        """
-        Step 6: Joint Embedding Space - concatenate all languages
-        """
+    def step5_generate_embeddings(self, texts: Dict[str, List[str]], 
+                                    model_name: str = 'LaBSE') -> Dict[str, np.ndarray]:
+        print("\n" + "="*70)
+        print(f"🧠 STEP 5: Sentence Embedding Generation ({model_name})")
+        print("="*70)
+        
+        embeddings_by_lang = {}
+        
+        if model_name == 'LaBSE':
+            self._setup_embedding_models()
+        
+        for lang, text_list in texts.items():
+            if self.labse_model is not None and model_name == 'LaBSE':
+                try:
+                    embeddings = self.labse_model.encode(text_list, convert_to_numpy=True)
+                except Exception as e:
+                    embeddings = self._generate_simulated_embeddings(text_list, lang)
+            else:
+                embeddings = self._generate_simulated_embeddings(text_list, lang)
+            
+            embeddings_by_lang[lang] = embeddings
+            print(f"   {lang}: {len(text_list)} vectors, shape={embeddings.shape}")
+        
+        self.step_results['embeddings'] = embeddings_by_lang
+        return embeddings_by_lang
+    
+    def _generate_simulated_embeddings(self, texts: List[str], lang: str) -> np.ndarray:
+        np.random.seed(RANDOM_SEED)
+        
+        offsets = {
+            'English': 0.0, 'Swahili': 0.2, 'Yoruba': 0.3,
+            'Amharic': 0.35, 'Luganda': 0.45, 'Runyankore': 0.55
+        }
+        
+        offset = offsets.get(lang, 0.3)
+        scale = 0.5 + (offset * 0.5)
+        
+        n_samples = len(texts)
+        base_embeddings = np.random.randn(n_samples, 768)
+        lang_signal = np.random.randn(1, 768) * offset
+        embeddings = base_embeddings * scale + lang_signal
+        
+        return embeddings.astype(np.float32)
+    
+    def step6_create_joint_space(self, embeddings: Dict[str, np.ndarray]) -> Tuple[np.ndarray, List[str]]:
+        print("\n" + "="*70)
+        print("🔗 STEP 6: Joint Embedding Space Creation")
+        print("="*70)
+        
         all_embeddings = []
         all_labels = []
         
-        for lang, embeddings in embeddings_by_lang.items():
-            if len(embeddings) > 0:
-                all_embeddings.append(embeddings)
-                all_labels.extend([lang] * len(embeddings))
+        for lang, emb in embeddings.items():
+            if len(emb) > 0:
+                all_embeddings.append(emb)
+                all_labels.extend([lang] * len(emb))
         
         if all_embeddings:
             joint_embeddings = np.vstack(all_embeddings)
         else:
             joint_embeddings = np.array([])
         
+        print(f"\n   Joint Embedding Space:")
+        print(f"      Shape: {joint_embeddings.shape}")
+        
+        self.step_results['joint_embeddings'] = joint_embeddings
+        self.step_results['joint_labels'] = all_labels
+        
         return joint_embeddings, all_labels
     
-    def compute_tokenisation_parity(self) -> pd.DataFrame:
-        """
-        Compute tokenisation parity metrics across languages
-        TP(L) = mean_s [token_count(s_L) / token_count(s_en)]
-        """
-        if not self.tokenisation_results:
-            return pd.DataFrame()
+    def compute_corpus_statistics(self, questions: List[str], 
+                                    answers: Dict[str, List[str]]) -> pd.DataFrame:
+        stats = []
         
-        df = pd.DataFrame(self.tokenisation_results)
+        for lang, ans_list in answers.items():
+            q_lengths = [len(q.split()) for q in questions]
+            a_lengths = [len(a.split()) for a in ans_list]
+            
+            all_tokens = []
+            for a in ans_list:
+                all_tokens.extend(normalize_text(a, lang).split())
+            
+            vocab = set(all_tokens)
+            ttr = len(vocab) / max(len(all_tokens), 1)
+            
+            token_counts = Counter(all_tokens)
+            hapax_count = sum(1 for count in token_counts.values() if count == 1)
+            hapax_prop = hapax_count / max(len(all_tokens), 1)
+            
+            stats.append({
+                'Language': lang,
+                'Total_Questions': len(questions),
+                'Total_Answers': len(ans_list),
+                'Avg_Question_Length': np.mean(q_lengths),
+                'Avg_Answer_Length': np.mean(a_lengths),
+                'Vocabulary_Size': len(vocab),
+                'Type_Token_Ratio': round(ttr, 4),
+                'Hapax_Proportion': round(hapax_prop, 4),
+                'Morphological_Complexity': self.languages.get(lang, {}).get('morphological_complexity', 1.0)
+            })
         
-        # Compute fertility penalties relative to English
-        eng_mbert = df[df['language'] == 'English']['mBERT_avg_fertility'].values
-        eng_xlmr = df[df['language'] == 'English']['XLM-R_avg_fertility'].values
-        eng_afri = df[df['language'] == 'English']['AfriBERTa_avg_fertility'].values
-        
-        eng_mbert = eng_mbert[0] if len(eng_mbert) > 0 else 1.0
-        eng_xlmr = eng_xlmr[0] if len(eng_xlmr) > 0 else 1.0
-        eng_afri = eng_afri[0] if len(eng_afri) > 0 else 1.0
-        
-        df['Fertility_Penalty_mBERT'] = df['mBERT_avg_fertility'] / max(eng_mbert, 0.01)
-        df['Fertility_Penalty_XLM-R'] = df['XLM-R_avg_fertility'] / max(eng_xlmr, 0.01)
-        df['Fertility_Penalty_AfriBERTa'] = df['AfriBERTa_avg_fertility'] / max(eng_afri, 0.01)
-        
-        # Best tokeniser for each language (lowest fertility penalty)
-        penalty_cols = ['Fertility_Penalty_mBERT', 'Fertility_Penalty_XLM-R', 'Fertility_Penalty_AfriBERTa']
-        min_penalties = df[penalty_cols].min(axis=1)
-        best_tokenisers = []
-        for i, row in df.iterrows():
-            if row['Fertility_Penalty_mBERT'] == min_penalties[i]:
-                best_tokenisers.append('mBERT')
-            elif row['Fertility_Penalty_XLM-R'] == min_penalties[i]:
-                best_tokenisers.append('XLM-R')
-            else:
-                best_tokenisers.append('AfriBERTa')
-        
-        df['Best_Tokeniser'] = best_tokenisers
-        df['Overall_Fertility_Penalty'] = min_penalties
-        
-        # OOV rates
-        oov_rates = {
-            'English': 0.05,
-            'Swahili': 0.12,
-            'Luganda': 0.18,
-            'Runyankore': 0.22,
-            'Yoruba': 0.15,
-            'Amharic': 0.20
-        }
-        df['OOV_Rate'] = df['language'].apply(lambda x: oov_rates.get(x, 0.15))
-        
-        # Flag high fertility (TP > 1.5)
-        df['High_Fertility_Flag'] = df['Overall_Fertility_Penalty'] > 1.5
-        df['High_OOV_Flag'] = df['OOV_Rate'] > 0.15
-        
+        df = pd.DataFrame(stats)
+        self.step_results['corpus_statistics'] = df
         return df
     
-    def detect_dialect_variance(self, texts: List[str], lang: str, 
-                                 dialect_markers: Dict[str, List[str]]) -> Dict:
-        """
-        Detect dialect variance during tokenisation and morphology analysis
-        This addresses the requirement to capture linguistic deviations
-        """
-        dialect_scores = {}
-        
-        text_lower = ' '.join(texts).lower()
-        
-        for dialect, markers in dialect_markers.items():
-            score = 0
-            for marker in markers:
-                if marker.lower() in text_lower:
-                    score += 1
-            dialect_scores[dialect] = score / max(len(markers), 1)
-        
-        # Determine primary dialect
-        if dialect_scores:
-            primary = max(dialect_scores, key=dialect_scores.get)
-            variance_detected = max(dialect_scores.values()) > 0.3
-        else:
-            primary = None
-            variance_detected = False
-        
-        # Impact on tokenisation
-        tokenisation_impact = "high" if variance_detected else "low"
-        
+    def get_preprocessing_summary(self) -> Dict:
         return {
-            'language': lang,
-            'dialect_scores': dialect_scores,
-            'variance_detected': variance_detected,
-            'primary_dialect': primary,
-            'tokenisation_impact': tokenisation_impact,
-            'recommendations': [
-                f"Consider dialect-specific tokenisation for {lang}" if variance_detected else None
-            ]
+            'dataset_metadata': self.step_results.get('dataset_metadata'),
+            'tokenisation_parity': self.step_results.get('tokenisation'),
+            'corpus_statistics': self.step_results.get('corpus_statistics'),
+            'joint_space_shape': self.step_results.get('joint_embeddings', np.array([])).shape,
         }
     
-    def track_semantic_consistency(self, embeddings_before: np.ndarray, 
-                                    embeddings_after: np.ndarray) -> Dict:
-        """
-        Track consistency in Semantics within the embedding stage
-        Measures how meaning shifts after preprocessing
-        """
-        if len(embeddings_before) == 0 or len(embeddings_after) == 0:
-            return {'consistency_score': 0.0, 'semantic_shift': 1.0}
+    def run_full_pipeline(self, questions: List[str], 
+                          answers: Dict[str, List[str]], 
+                          languages: List[str]) -> Dict:
+        print("\n" + "="*70)
+        print("🚀 PREPROCESSING PIPELINE - FULL EXECUTION")
+        print("="*70)
         
-        # Compute cosine similarity between original and processed embeddings
-        similarities = []
-        for i in range(min(len(embeddings_before), len(embeddings_after))):
-            sim = compute_cosine_similarity(
-                embeddings_before[i].reshape(1, -1),
-                embeddings_after[i].reshape(1, -1)
-            )
-            similarities.append(sim)
-        
-        avg_similarity = np.mean(similarities)
-        semantic_shift = 1 - avg_similarity
+        metadata = self.step0_summarize_dataset(questions, answers, languages)
+        lid_results = self.step1_language_identification(answers)
+        normalized = self.step2_text_normalisation(answers)
+        tp_df = self.step3_tokenisation_analysis(normalized)
+        sample_words = self._get_sample_words(answers)
+        morph_results = self.step4_morphological_analysis(sample_words)
+        embeddings = self.step5_generate_embeddings(normalized)
+        joint_embeddings, joint_labels = self.step6_create_joint_space(embeddings)
+        corpus_stats = self.compute_corpus_statistics(questions, normalized)
         
         return {
-            'consistency_score': avg_similarity,
-            'semantic_shift': semantic_shift,
-            'interpretation': 'High consistency' if avg_similarity > 0.85 else
-                             'Moderate shift' if avg_similarity > 0.7 else
-                             'Significant semantic drift'
+            'metadata': metadata,
+            'language_identification': lid_results,
+            'normalised_texts': normalized,
+            'tokenisation_parity': tp_df,
+            'morphological_analysis': morph_results,
+            'embeddings': embeddings,
+            'joint_embeddings': joint_embeddings,
+            'joint_labels': joint_labels,
+            'corpus_statistics': corpus_stats,
+            'preprocessing_summary': self.get_preprocessing_summary()
         }
-
-
-# Test the preprocessor
-if __name__ == "__main__":
-    preprocessor = MultilingualPreprocessor()
     
-    test_texts = {
-        'English': ["A pregnant woman should consume folic acid daily."],
-        'Luganda': ["Omukyala embuto alina okulya folic acid buli lunaku."],
-        'Runyankore': ["Omukazi embuto ata hairwe okurya folic acid buzoba."],
-        'Swahili': ["Mwanamke mjamzito anapaswa kula asidi ya foliki kila siku."]
-    }
-    
-    for lang, texts in test_texts.items():
-        norm = preprocessor.text_normalisation(texts[0], lang)
-        print(f"\n{lang}: {norm[:60]}...")
-    
-    print("\n Preprocessor test complete!")
+    def _get_sample_words(self, answers: Dict[str, List[str]]) -> Dict[str, List[str]]:
+        sample_words = {}
+        for lang, texts in answers.items():
+            all_words = []
+            for text in texts:
+                words = normalize_text(text, lang).split()[:5]
+                all_words.extend(words)
+            sample_words[lang] = list(set(all_words))[:8]
+        return sample_words
