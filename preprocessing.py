@@ -51,7 +51,7 @@ class MultilingualPreprocessor:
         self.labse_model = None
         self.vocabularies = self._init_vocabularies()
         
-        print(f"✅ Preprocessor initialized for {len(self.languages)} languages")
+        print(f" Preprocessor initialized for {len(self.languages)} languages")
     
     def _init_vocabularies(self) -> Dict[str, Set[str]]:
         base_english = {
@@ -139,7 +139,7 @@ class MultilingualPreprocessor:
         
         self.step_results['dataset_metadata'] = metadata
         
-        print(f"\n📋 Dataset Summary:")
+        print(f"\n Dataset Summary:")
         print(f"   Name: {metadata.name}")
         print(f"   Questions: {metadata.n_questions}")
         print(f"   Languages: {metadata.n_languages}")
@@ -149,7 +149,7 @@ class MultilingualPreprocessor:
     
     def step1_language_identification(self, texts: Dict[str, List[str]]) -> Dict:
         print("\n" + "="*70)
-        print("🌍 STEP 1: Language Identification")
+        print("STEP 1: Language Identification")
         print("="*70)
         
         results = {}
@@ -202,13 +202,13 @@ class MultilingualPreprocessor:
         
         print(f"\n   Code-switched segments detected: {len(code_switched_segments)}")
         for cs in code_switched_segments[:3]:
-            print(f"      ⚠️ {cs['language']} → {cs['detected_as']}: '{cs['segment']}...'")
+            print(f"      {cs['language']} → {cs['detected_as']}: '{cs['segment']}...'")
         
         return results
     
     def step2_text_normalisation(self, texts: Dict[str, List[str]]) -> Dict[str, List[str]]:
         print("\n" + "="*70)
-        print("✍️ STEP 2: Text Normalisation")
+        print("STEP 2: Text Normalisation")
         print("="*70)
         
         normalized = {}
@@ -256,7 +256,7 @@ class MultilingualPreprocessor:
     
     def step3_tokenisation_analysis(self, texts: Dict[str, List[str]]) -> pd.DataFrame:
         print("\n" + "="*70)
-        print("🔤 STEP 3: Tokenisation Analysis (3 Tokenisers in Parallel)")
+        print("STEP 3: Tokenisation Analysis (3 Tokenisers in Parallel)")
         print("="*70)
         
         tokenisers = ['mBERT', 'XLM-R', 'AfriBERTa']
@@ -322,7 +322,7 @@ class MultilingualPreprocessor:
             lang_data = df[df['Language'] == lang]
             if not lang_data.empty:
                 lang_data = lang_data.iloc[0]
-                status = "⚠️ HIGH" if lang_data['TP_Flag'] else "✓ OK"
+                status = "HIGH" if lang_data['TP_Flag'] else "✓ OK"
                 print(f"      {lang}: {status} (TP={lang_data['Fertility_Penalty']:.2f}, best={lang_data['Best_Tokeniser']})")
         
         return df
@@ -345,7 +345,7 @@ class MultilingualPreprocessor:
     
     def step4_morphological_analysis(self, sample_words: Dict[str, List[str]]) -> Dict[str, pd.DataFrame]:
         print("\n" + "="*70)
-        print("🔍 STEP 4: Morphological Analysis")
+        print("STEP 4: Morphological Analysis")
         print("="*70)
         
         results = {}
@@ -411,13 +411,13 @@ class MultilingualPreprocessor:
                 self.labse_model = SentenceTransformer('sentence-transformers/LaBSE')
                 print("   ✓ LaBSE model loaded")
             except Exception as e:
-                print(f"   ⚠️ LaBSE model not available: {e}")
+                print(f"  LaBSE model not available: {e}")
                 self.labse_model = None
     
     def step5_generate_embeddings(self, texts: Dict[str, List[str]], 
                                     model_name: str = 'LaBSE') -> Dict[str, np.ndarray]:
         print("\n" + "="*70)
-        print(f"🧠 STEP 5: Sentence Embedding Generation ({model_name})")
+        print(f"STEP 5: Sentence Embedding Generation ({model_name})")
         print("="*70)
         
         embeddings_by_lang = {}
@@ -460,7 +460,7 @@ class MultilingualPreprocessor:
     
     def step6_create_joint_space(self, embeddings: Dict[str, np.ndarray]) -> Tuple[np.ndarray, List[str]]:
         print("\n" + "="*70)
-        print("🔗 STEP 6: Joint Embedding Space Creation")
+        print("STEP 6: Joint Embedding Space Creation")
         print("="*70)
         
         all_embeddings = []
@@ -476,8 +476,8 @@ class MultilingualPreprocessor:
         else:
             joint_embeddings = np.array([])
         
-        print(f"\n   Joint Embedding Space:")
-        print(f"      Shape: {joint_embeddings.shape}")
+        print(f"\n Joint Embedding Space:")
+        print(f" Shape: {joint_embeddings.shape}")
         
         self.step_results['joint_embeddings'] = joint_embeddings
         self.step_results['joint_labels'] = all_labels
@@ -531,7 +531,7 @@ class MultilingualPreprocessor:
                           answers: Dict[str, List[str]], 
                           languages: List[str]) -> Dict:
         print("\n" + "="*70)
-        print("🚀 PREPROCESSING PIPELINE - FULL EXECUTION")
+        print(" PREPROCESSING PIPELINE - FULL EXECUTION")
         print("="*70)
         
         metadata = self.step0_summarize_dataset(questions, answers, languages)

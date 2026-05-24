@@ -84,7 +84,7 @@ class StatisticalBiasAuditor:
             a_texts = answers.get(lang, [])
             
             if not q_texts:
-                print(f"   ⚠️ No questions found for {lang}")
+                print(f"   No questions found for {lang}")
                 continue
             
             # Combine texts for vocabulary analysis
@@ -160,7 +160,7 @@ class StatisticalBiasAuditor:
         Used for Information Specific Divergence (ISD) calculation
         """
         print("\n" + "="*60)
-        print("📈 Computing Frequency Distributions")
+        print(" Computing Frequency Distributions")
         print("="*60)
         
         for lang, text_list in texts.items():
@@ -241,7 +241,7 @@ class StatisticalBiasAuditor:
                 self.pairwise_isd.append(isd_result)
                 
                 print(f"   {lang1} ↔ {lang2}: ISD={isd_value:.4f} "
-                      f"({'⚠️' if needs_intervention else '✓'})")
+                      f"({' ' if needs_intervention else '✓'})")
         
         return self.pairwise_isd
     
@@ -293,7 +293,7 @@ class StatisticalBiasAuditor:
                     print(f"   {lang1} ↔ {lang2}: JSD={jsd:.4f} [{status}]")
                     
                 except Exception as e:
-                    print(f"   ⚠️ JSD calculation failed for {lang1}-{lang2}: {e}")
+                    print(f"   JSD calculation failed for {lang1}-{lang2}: {e}")
                     self.pairwise_jsd[f"{lang1}_vs_{lang2}"] = 0.0
         
         # Compute average JSD from valid values
@@ -341,7 +341,7 @@ class StatisticalBiasAuditor:
                         'interpretation': 'Different' if p_value < 0.05 else 'Similar'
                     }
                     
-                    status = "⚠️ DIFFERENT" if p_value < 0.05 else "✓ SIMILAR"
+                    status = " DIFFERENT" if p_value < 0.05 else "✓ SIMILAR"
                     print(f"   {lang1} vs {lang2}: KS={ks_stat:.3f}, p={p_value:.4f} [{status}]")
         
         return self.pairwise_ks
@@ -422,7 +422,7 @@ class StatisticalBiasAuditor:
             }
             
         except Exception as e:
-            print(f"   ⚠️ Chi-squared test failed: {e}")
+            print(f"   Chi-squared test failed: {e}")
             return {
                 'chi2_statistic': 0,
                 'p_value': 1.0,
@@ -548,7 +548,7 @@ class StatisticalBiasAuditor:
             Dictionary with all audit results
         """
         print("\n" + "="*70)
-        print("📊 STRATUM I: Statistical Bias Audit")
+        print(" STRATUM I: Statistical Bias Audit")
         print("="*70)
         
         # Compute corpus statistics
@@ -607,5 +607,5 @@ if __name__ == "__main__":
     
     results = auditor.run_full_audit(sample_questions, sample_answers)
     
-    print("\n✅ Statistical bias audit complete!")
+    print("\n Statistical bias audit complete!")
     print(f"   Flags generated: {len(results['flags'])}")

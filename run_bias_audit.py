@@ -91,7 +91,7 @@ Examples:
     
     # Override languages if specified
     if args.languages != config.PRIMARY_LANGUAGES:
-        print(f"📝 Using custom language set: {args.languages}")
+        print(f" Using custom language set: {args.languages}")
         config.PRIMARY_LANGUAGES = args.languages
     
     print("\n" + "="*70)
@@ -103,7 +103,7 @@ Examples:
     print("="*70)
     
     if args.full:
-        print("\n🚀 Running FULL bias audit pipeline...")
+        print("\n Running FULL bias audit pipeline...")
         pipeline = MaHealthBiasAuditPipeline(
             save_visuals=args.save_viz,
             show_visuals=args.show_viz
@@ -111,7 +111,7 @@ Examples:
         results = pipeline.run()
         
     elif args.preprocessing:
-        print("\n🔧 Running only PREPROCESSING...")
+        print("\n Running only PREPROCESSING...")
         from preprocessing import MultilingualPreprocessor
         
         # Load data using pipeline helper
@@ -125,13 +125,13 @@ Examples:
             data['languages']
         )
         
-        print("\n📊 Preprocessing Results:")
+        print("\n Preprocessing Results:")
         print(f"   Metadata: {results['metadata'].name}")
         print(f"   Tokenisation Parity: {results['tokenisation_parity'].shape}")
         print(f"   Joint Embeddings: {results['joint_embeddings'].shape}")
         
     elif args.statistical:
-        print("\n📊 Running STATISTICAL bias audit...")
+        print("\n Running STATISTICAL bias audit...")
         from stratum_i_statistical import StatisticalBiasAuditor
         from preprocessing import MultilingualPreprocessor
         
@@ -145,14 +145,14 @@ Examples:
         auditor = StatisticalBiasAuditor()
         results = auditor.run_full_audit(data['questions'], normalized)
         
-        print("\n📊 Statistical Audit Results:")
+        print("\n Statistical Audit Results:")
         print(f"   Flags: {len(results['flags'])}")
         if results.get('information_specific_divergence'):
             for isd in results['information_specific_divergence'][:3]:
                 print(f"   {isd.language_pair[0]} ↔ {isd.language_pair[1]}: ISD={isd.isd_value:.3f}")
         
     elif args.linguistic:
-        print("\n🔤 Running LINGUISTIC bias audit...")
+        print("\n Running LINGUISTIC bias audit...")
         from stratum_ii_linguistic import LinguisticBiasAuditor
         from preprocessing import MultilingualPreprocessor
         
@@ -186,14 +186,14 @@ Examples:
             sample_words, tokeniser_segmentations
         )
         
-        print("\n🔤 Linguistic Audit Results:")
+        print("\n Linguistic Audit Results:")
         print(f"   Flags: {len(results['flags'])}")
         if results.get('trust_aware_results'):
             for lang, trust in results['trust_aware_results'].items():
                 print(f"   {lang}: Trust Score={trust.trust_score:.2f}, Terms={len(trust.cultural_terms_found)}")
         
     elif args.model:
-        print("\n🤖 Running MODEL bias audit...")
+        print("\n Running MODEL bias audit...")
         from stratum_iii_model import ModelBiasAuditor
         
         temp_pipeline = MaHealthBiasAuditPipeline(save_visuals=False, show_visuals=False)
@@ -202,14 +202,14 @@ Examples:
         auditor = ModelBiasAuditor()
         results = auditor.run_full_audit(data['questions'], data['answers'])
         
-        print("\n🤖 Model Audit Results:")
+        print("\n Model Audit Results:")
         print(f"   Performance records: {len(results['performance_results'])}")
         print(f"   Flags: {len(results['flags'])}")
         if not results['bias_metrics'].empty:
             print(results['bias_metrics'].to_string(index=False))
         
     elif args.cross_lingual:
-        print("\n🌐 Running CROSS-LINGUAL evaluation...")
+        print("\n Running CROSS-LINGUAL evaluation...")
         from cross_lingual_evaluation import CrossLingualEvaluator
         from preprocessing import MultilingualPreprocessor
         
@@ -224,7 +224,7 @@ Examples:
         evaluator = CrossLingualEvaluator()
         results = evaluator.run_full_evaluation(embeddings, data['questions'], data['topics'])
         
-        print("\n🌐 Cross-Lingual Results:")
+        print("\n Cross-Lingual Results:")
         print(f"   SDI Matrix: {results['sdi_matrix'].shape}")
         print(f"   RCA cases: {len(results['rca_results'])}")
         print(f"   Flags: {len(results['flags'])}")
@@ -234,7 +234,7 @@ Examples:
             print(results['sdi_matrix'].to_string())
         
     elif args.report:
-        print("\n📋 Generating report from existing results...")
+        print("\n Generating report from existing results...")
         import json
         
         # Find latest report

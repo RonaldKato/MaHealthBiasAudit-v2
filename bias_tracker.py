@@ -74,7 +74,7 @@ class BiasTracker:
         if os.path.exists(save_path):
             self._load_history()
         
-        print(f"✅ BiasTracker initialized (save_path: {save_path})")
+        print(f"BiasTracker initialized (save_path: {save_path})")
     
     def take_snapshot(self, 
                       intervention_description: str,
@@ -176,7 +176,7 @@ class BiasTracker:
         self._save_history()
         
         # Print snapshot summary
-        print(f"\n📸 Bias Snapshot #{self.current_iteration}: {intervention_description}")
+        print(f"\n Bias Snapshot #{self.current_iteration}: {intervention_description}")
         print(f"   SDI: {avg_sdi:.3f} | F1 Disparity: {avg_f1_disparity:.3f} | "
               f"Lang Purity: {lang_purity:.3f}")
         print(f"   Fertility: {avg_fertility:.2f} | OOV: {avg_oov:.3f} | MAS: {avg_morph:.3f}")
@@ -272,8 +272,8 @@ class BiasTracker:
         self.interventions.append(result)
         self._save_history()
         
-        print(f"\n🔄 Intervention: {intervention_name}")
-        print(f"   Success: {'✅ YES' if success else '❌ NO'}")
+        print(f"\n Intervention: {intervention_name}")
+        print(f"   Success: {'YES' if success else 'NO'}")
         print(f"   Improvements: {', '.join([f'{k}: {v*100:+.1f}%' for k, v in improvement_scores.items()])}")
         
         return result
@@ -446,4 +446,4 @@ if __name__ == "__main__":
     )
     
     tracker.history.append(snapshot)
-    print("\n✅ BiasTracker test complete!")
+    print("\n BiasTracker test complete!")

@@ -50,7 +50,7 @@ class LinguisticBiasAuditor:
         TP(L) = mean_s [token_count(s_L) / token_count(s_en)]
         """
         print("\n" + "="*60)
-        print("🔤 Computing Tokenisation Parity")
+        print(" Computing Tokenisation Parity")
         print("="*60)
         
         rows = []
@@ -78,7 +78,7 @@ class LinguisticBiasAuditor:
             for lang in self.tokenisation_results['Language'].unique():
                 lang_data = self.tokenisation_results[self.tokenisation_results['Language'] == lang]
                 avg_fertility = lang_data['Fertility_Penalty'].mean()
-                status = "⚠️ HIGH" if avg_fertility > THRESHOLDS['tokenisation_parity'] else "✓ OK"
+                status = "HIGH" if avg_fertility > THRESHOLDS['tokenisation_parity'] else "✓ OK"
                 print(f"   {lang}: avg TP={avg_fertility:.2f} [{status}]")
         
         return self.tokenisation_results
@@ -90,7 +90,7 @@ class LinguisticBiasAuditor:
         Compute Morphological Alignment Score (MAS)
         """
         print("\n" + "="*60)
-        print("🔍 Computing Morphological Alignment")
+        print(" Computing Morphological Alignment")
         print("="*60)
         
         results = {}
@@ -127,7 +127,7 @@ class LinguisticBiasAuditor:
             
             if not results[lang].empty:
                 avg_f1 = results[lang]['boundary_f1'].mean()
-                status = "✓ GOOD" if avg_f1 > THRESHOLDS['mas_threshold'] else "⚠️ NEEDS IMPROVEMENT"
+                status = "✓ GOOD" if avg_f1 > THRESHOLDS['mas_threshold'] else " NEEDS IMPROVEMENT"
                 print(f"   {lang}: MAS={avg_f1:.3f} [{status}]")
         
         return results
@@ -247,7 +247,7 @@ class LinguisticBiasAuditor:
         self.trust_results[language] = result
         
         # Print summary
-        status = "✓ PRESERVE" if preservation_needed else "ℹ️ REVIEW"
+        status = "✓ PRESERVE" if preservation_needed else "REVIEW"
         print(f"      {status}: Trust Score={trust_score:.2f}, "
               f"Terms found={len(cultural_terms_found)}")
         
@@ -351,7 +351,7 @@ class LinguisticBiasAuditor:
         Run complete linguistic bias audit
         """
         print("\n" + "="*70)
-        print("🔤 STRATUM II: Linguistic Bias Audit")
+        print("STRATUM II: Linguistic Bias Audit")
         print("="*70)
         
         # Compute tokenisation parity
@@ -402,4 +402,4 @@ if __name__ == "__main__":
     
     inter_df = auditor.analyze_interrogative_structure(sample_questions)
     
-    print("\n✅ Linguistic bias audit test complete!")
+    print("\n Linguistic bias audit test complete!")

@@ -4,7 +4,7 @@ MaHealthBiasAudit v2 - Complete Bias Detection Pipeline
 Main entry point for the entire bias audit system
 
 This pipeline executes:
-1. Preprocessing (6 steps from FIGURE 2)
+1. Preprocessing 
 2. Stratum I: Statistical Bias Audit
 3. Stratum II: Linguistic Bias Audit
 4. Stratum III: Model Bias Audit
@@ -84,7 +84,7 @@ class MaHealthBiasAuditPipeline:
         # Storage for results
         self.results = {}
         
-        print("\n✅ All components initialized successfully")
+        print("\n All components initialized successfully")
         print(f"   Visualizations will be {'saved to ' + FIGURES_DIR if save_visuals else 'NOT saved'}")
     
     def load_data(self) -> Dict:
@@ -93,7 +93,7 @@ class MaHealthBiasAuditPipeline:
         Based on the provided data in the attachment
         """
         print("\n" + "="*60)
-        print("📂 Loading Dataset")
+        print(" Loading Dataset")
         print("="*60)
         
         # Core maternal health questions
@@ -144,7 +144,7 @@ class MaHealthBiasAuditPipeline:
         # Add topic classification for each question
         topics = [classify_maternal_topic(q) for q in maternal_health_questions]
         
-        print(f"\n📊 Data loaded:")
+        print(f"\n Data loaded:")
         print(f"   - {len(maternal_health_questions)} maternal health questions")
         print(f"   - {len(PRIMARY_LANGUAGES)} languages: {', '.join(PRIMARY_LANGUAGES)}")
         print(f"   - Topics: {', '.join(set(topics))}")
@@ -182,7 +182,7 @@ class MaHealthBiasAuditPipeline:
         self.results['tokenisation_parity'] = preproc_results['tokenisation_parity']
         self.results['corpus_statistics'] = preproc_results['corpus_statistics']
         
-        print(f"\n✅ Preprocessing complete!")
+        print(f"\n Preprocessing complete!")
         print(f"   Joint embedding space: {preproc_results['joint_embeddings'].shape}")
         
         return self.results
@@ -190,7 +190,7 @@ class MaHealthBiasAuditPipeline:
     def run_statistical_audit(self, data: Dict) -> Dict:
         """Run Stratum I: Statistical bias audit"""
         print("\n" + "="*70)
-        print("📊 STEP 2: Stratum I - Statistical Bias Audit")
+        print("STEP 2: Stratum I - Statistical Bias Audit")
         print("="*70)
         
         questions = data['questions']
@@ -201,7 +201,7 @@ class MaHealthBiasAuditPipeline:
         
         self.results['statistical'] = stat_results
         
-        print(f"\n✅ Statistical audit complete!")
+        print(f"\n Statistical audit complete!")
         print(f"   Flags generated: {len(stat_results['flags'])}")
         
         return self.results
@@ -209,7 +209,7 @@ class MaHealthBiasAuditPipeline:
     def run_linguistic_audit(self, data: Dict) -> Dict:
         """Run Stratum II: Linguistic bias audit"""
         print("\n" + "="*70)
-        print("🔤 STEP 3: Stratum II - Linguistic Bias Audit")
+        print("STEP 3: Stratum II - Linguistic Bias Audit")
         print("="*70)
         
         questions = data['questions']
@@ -245,7 +245,7 @@ class MaHealthBiasAuditPipeline:
         
         self.results['linguistic'] = ling_results
         
-        print(f"\n✅ Linguistic audit complete!")
+        print(f"\n Linguistic audit complete!")
         print(f"   Flags generated: {len(ling_results['flags'])}")
         
         return self.results
@@ -253,7 +253,7 @@ class MaHealthBiasAuditPipeline:
     def run_model_audit(self, data: Dict) -> Dict:
         """Run Stratum III: Model bias audit"""
         print("\n" + "="*70)
-        print("🤖 STEP 4: Stratum III - Model Bias Audit")
+        print("STEP 4: Stratum III - Model Bias Audit")
         print("="*70)
         
         questions = data['questions']
@@ -264,7 +264,7 @@ class MaHealthBiasAuditPipeline:
         
         self.results['model'] = model_results
         
-        print(f"\n✅ Model audit complete!")
+        print(f"\n Model audit complete!")
         print(f"   Flags generated: {len(model_results['flags'])}")
         
         return self.results
@@ -272,7 +272,7 @@ class MaHealthBiasAuditPipeline:
     def run_cross_lingual_evaluation(self, data: Dict) -> Dict:
         """Run cross-lingual evaluation engine"""
         print("\n" + "="*70)
-        print("🌐 STEP 5: Cross-Lingual Evaluation Engine")
+        print("STEP 5: Cross-Lingual Evaluation Engine")
         print("="*70)
         
         embeddings = self.results['embeddings']
@@ -284,7 +284,7 @@ class MaHealthBiasAuditPipeline:
         
         self.results['cross_lingual'] = cl_results
         
-        print(f"\n✅ Cross-lingual evaluation complete!")
+        print(f"\n Cross-lingual evaluation complete!")
         print(f"   RCA cases: {len(cl_results['rca_results'])}")
         print(f"   Flags generated: {len(cl_results['flags'])}")
         
@@ -293,7 +293,7 @@ class MaHealthBiasAuditPipeline:
     def create_visualizations(self, data: Dict) -> Dict:
         """Create all visualizations for the pipeline"""
         print("\n" + "="*70)
-        print("📈 STEP 6: Creating Visualizations")
+        print("STEP 6: Creating Visualizations")
         print("="*70)
         
         # Extract data for visualizations
@@ -347,13 +347,13 @@ class MaHealthBiasAuditPipeline:
             bias_patterns=bias_patterns
         )
         
-        print(f"\n✅ Visualizations complete! Saved to {FIGURES_DIR}")
+        print(f"\n Visualizations complete! Saved to {FIGURES_DIR}")
         
         return self.results
     
     def take_bias_snapshot(self, data: Dict, iteration_name: str):
         """Take a bias snapshot for tracking"""
-        print(f"\n📸 Taking bias snapshot: {iteration_name}")
+        print(f"\n Taking bias snapshot: {iteration_name}")
         
         # Extract metrics for snapshot
         sdi_matrix = self.results['cross_lingual'].get('sdi_matrix')
@@ -392,7 +392,7 @@ class MaHealthBiasAuditPipeline:
     def generate_final_report(self) -> Dict:
         """Generate comprehensive final bias report"""
         print("\n" + "="*70)
-        print("📋 Generating Final Report")
+        print("Generating Final Report")
         print("="*70)
         
         # Collect all flags
@@ -459,9 +459,9 @@ class MaHealthBiasAuditPipeline:
             for item in cultural_preserve[:3]:
                 print(f"   • {item[:80]}...")
         
-        print(f"\n📄 Full report saved to: {report_path}")
-        print(f"📁 Figures saved to: {FIGURES_DIR}")
-        print(f"📁 Output directory: {OUTPUT_DIR}")
+        print(f"\n Full report saved to: {report_path}")
+        print(f"Figures saved to: {FIGURES_DIR}")
+        print(f"Output directory: {OUTPUT_DIR}")
         
         return report
     
@@ -470,7 +470,7 @@ class MaHealthBiasAuditPipeline:
         Run the complete bias audit pipeline
         """
         print("\n" + "="*70)
-        print(f"🚀 Starting {EXPERIMENT_NAME} v{EXPERIMENT_VERSION}")
+        print(f" Starting {EXPERIMENT_NAME} v{EXPERIMENT_VERSION}")
         print("="*70)
         
         # Load data
@@ -491,7 +491,7 @@ class MaHealthBiasAuditPipeline:
             self.create_visualizations(data)
             
         except Exception as e:
-            print(f"\n⚠️ Warning during pipeline execution: {e}")
+            print(f"\n Warning during pipeline execution: {e}")
             import traceback
             traceback.print_exc()
         
@@ -499,7 +499,7 @@ class MaHealthBiasAuditPipeline:
         final_report = self.generate_final_report()
         
         print("\n" + "="*70)
-        print(f"✅ {EXPERIMENT_NAME} v{EXPERIMENT_VERSION} Complete!")
+        print(f"{EXPERIMENT_NAME} v{EXPERIMENT_VERSION} Complete!")
         print("="*70)
         
         return final_report
@@ -515,4 +515,4 @@ if __name__ == "__main__":
     
     results = pipeline.run()
     
-    print("\n🎉 Bias audit completed successfully!")
+    print("\n Bias audit completed successfully!")

@@ -53,7 +53,7 @@ class ModelBiasAuditor:
         self.performance_records: List[ModelPerformance] = []
         self.bias_metrics: List[BiasMetrics] = []
         
-        print(f"✅ Model Bias Auditor initialized (device: {device})")
+        print(f"Model Bias Auditor initialized (device: {device})")
     
     def simulate_fine_tuning(self, 
                               questions: Dict[str, List[str]],
@@ -188,9 +188,9 @@ class ModelBiasAuditor:
             DataFrame with all performance results
         """
         print("\n" + "="*70)
-        print("🤖 STRATUM III: Model-Level Bias Audit")
+        print("STRATUM III: Model-Level Bias Audit")
         print("="*70)
-        print("\n📊 Running 5x3 Experiment Matrix (15 experiments)")
+        print("\n Running 5x3 Experiment Matrix (15 experiments)")
         print("-" * 50)
         
         if models is None:
@@ -223,7 +223,7 @@ class ModelBiasAuditor:
         # Convert to DataFrame
         results_df = pd.DataFrame([vars(r) for r in all_results])
         
-        print(f"\n✅ Experiment complete! {len(results_df)} performance records")
+        print(f"\n Experiment complete! {len(results_df)} performance records")
         
         return results_df
     
@@ -234,7 +234,7 @@ class ModelBiasAuditor:
         - Transfer gain (improvement from language-specific training)
         """
         print("\n" + "="*60)
-        print("📊 Computing Model Bias Metrics")
+        print("Computing Model Bias Metrics")
         print("="*60)
         
         bias_metrics = []
@@ -291,7 +291,7 @@ class ModelBiasAuditor:
         # Print summary
         print(f"\n   Bias Metrics Summary:")
         for metric in bias_metrics:
-            status = "⚠️ NEEDS INTERVENTION" if metric.needs_intervention else "✓ OK"
+            status = "NEEDS INTERVENTION" if metric.needs_intervention else "✓ OK"
             print(f"      {metric.language}: F1 disparity={metric.f1_disparity:.3f}, "
                   f"transfer gain={metric.transfer_gain:.3f} [{status}]")
         
@@ -303,7 +303,7 @@ class ModelBiasAuditor:
         Measures how well knowledge transfers from English to other languages
         """
         print("\n" + "="*60)
-        print("🔄 Analyzing Cross-Lingual Transfer")
+        print(" Analyzing Cross-Lingual Transfer")
         print("="*60)
         
         transfer_issues = []
@@ -418,4 +418,4 @@ if __name__ == "__main__":
     
     results = auditor.run_full_audit(sample_questions, sample_answers)
     
-    print("\n✅ Model bias audit test complete!")
+    print("\n Model bias audit test complete!")

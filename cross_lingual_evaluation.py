@@ -60,7 +60,7 @@ class CrossLingualEvaluator:
         SDI > 0.4 = high bias, SDI > 0.2 = moderate bias
         """
         print("\n" + "="*60)
-        print("🌐 Computing Semantic Divergence Index (SDI)")
+        print("Computing Semantic Divergence Index (SDI)")
         print("="*60)
         
         languages = list(embeddings.keys())
@@ -129,7 +129,7 @@ class CrossLingualEvaluator:
         MRR < 0.5 indicates significant cross-lingual retrieval bias
         """
         print("\n" + "="*60)
-        print("🎯 Computing Mean Reciprocal Rank (MRR)")
+        print("Computing Mean Reciprocal Rank (MRR)")
         print("="*60)
         
         languages = list(embeddings.keys())
@@ -213,7 +213,7 @@ class CrossLingualEvaluator:
         
         print(f"\n   Cluster Purity Analysis:")
         print(f"      Language Cluster Purity: {purity:.3f}")
-        interpretation = "⚠️ BIAS: embeddings cluster by language" if purity > 0.6 else \
+        interpretation = "BIAS: embeddings cluster by language" if purity > 0.6 else \
                         "✓ Good cross-lingual alignment" if purity < 0.4 else \
                         "Moderate cross-lingual alignment"
         print(f"      Interpretation: {interpretation}")
@@ -228,7 +228,7 @@ class CrossLingualEvaluator:
         Distinguishes between technical bias and valid cultural knowledge
         """
         print("\n" + "="*60)
-        print("🔍 Root Cause Attribution (RCA) Cascade")
+        print("Root Cause Attribution (RCA) Cascade")
         print("="*60)
         
         self.rca_results = []
@@ -358,14 +358,14 @@ class CrossLingualEvaluator:
     def _generate_recommendation(self, root_cause: str, lang1: str, lang2: str, preserve: bool) -> str:
         """Generate recommendation based on root cause"""
         if preserve:
-            return f"✓ PRESERVE: Cultural knowledge in {lang1}/{lang2} - do NOT remove or normalize"
+            return f"PRESERVE: Cultural knowledge in {lang1}/{lang2} - do NOT remove or normalize"
         
         recommendations = {
-            'TOKENISATION': f"🔧 Implement MorphBPE or language-specific tokenisation for {lang1} and {lang2} to reduce fertility penalty",
-            'MORPHOLOGY': f"🔧 Improve morpheme-aware tokenisation for {lang1}/{lang2} - consider morphological analysis",
-            'QUERY_STRUCTURE': f"🔧 Adapt QA model for non-English interrogative patterns in {lang1}",
-            'CULTURAL': f"📚 Document and preserve cultural knowledge in {lang1}/{lang2} - add to knowledge base",
-            'UNKNOWN': f"🔍 Manual review needed for {lang1}/{lang2} question pair"
+            'TOKENISATION': f"Implement MorphBPE or language-specific tokenisation for {lang1} and {lang2} to reduce fertility penalty",
+            'MORPHOLOGY': f"Improve morpheme-aware tokenisation for {lang1}/{lang2} - consider morphological analysis",
+            'QUERY_STRUCTURE': f"Adapt QA model for non-English interrogative patterns in {lang1}",
+            'CULTURAL': f"Document and preserve cultural knowledge in {lang1}/{lang2} - add to knowledge base",
+            'UNKNOWN': f"Manual review needed for {lang1}/{lang2} question pair"
         }
         
         return recommendations.get(root_cause, recommendations['UNKNOWN'])
@@ -380,7 +380,7 @@ class CrossLingualEvaluator:
         Based on "Bias Patterns" requirement
         """
         print("\n" + "="*60)
-        print("📊 Detecting Bias Patterns by Topic")
+        print("Detecting Bias Patterns by Topic")
         print("="*60)
         
         patterns = []
@@ -523,7 +523,7 @@ class CrossLingualEvaluator:
             Dictionary with all evaluation results
         """
         print("\n" + "="*70)
-        print("🌐 Cross-Lingual Evaluation Engine")
+        print("Cross-Lingual Evaluation Engine")
         print("="*70)
         
         # Compute Semantic Divergence Index
@@ -573,4 +573,4 @@ if __name__ == "__main__":
     
     sdi = evaluator.compute_semantic_divergence_index(sample_embeddings, {})
     
-    print("\n✅ Cross-lingual evaluator test complete!")
+    print("\n Cross-lingual evaluator test complete!")

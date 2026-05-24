@@ -1,6 +1,6 @@
 """
 Utility functions for MaHealthBiasAudit v2
-Common helper functions used across all modules
+Common help (functions) used across all modules
 """
 
 import numpy as np
@@ -41,7 +41,7 @@ def set_seed(seed: int = RANDOM_SEED):
             torch.backends.cudnn.deterministic = True
             torch.backends.cudnn.benchmark = False
     
-    print(f"✅ Random seed set to {seed}")
+    print(f"Random seed set to {seed}")
 
 
 def normalize_text(text: str, lang: str = 'English', preserve_tones: bool = True) -> str:
@@ -518,4 +518,4 @@ def save_report(report: Dict, filepath: str):
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
     
-    print(f"📄 Report saved to: {filepath}")
+    print(f"Report saved to: {filepath}")

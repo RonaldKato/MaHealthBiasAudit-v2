@@ -48,7 +48,7 @@ class BiasVisualizationDashboard:
         self.generated_figures = []
         self.bias_patterns = None
         
-        print(f"✅ Visualization Dashboard initialized")
+        print(f"Visualization Dashboard initialized")
         print(f"   Save figures: {save_figures} → {output_dir}")
     
     def _save_and_show(self, fig, filename: str, dpi: int = 150):
@@ -613,7 +613,7 @@ class BiasVisualizationDashboard:
         summary_data = [
             ['Metric', 'Value', 'Status'],
             ['Average SDI', f'{avg_sdi:.3f}', '🔴 High' if avg_sdi > 0.4 else '🟡 Moderate' if avg_sdi > 0.2 else '🟢 Low'],
-            ['Cultural Terms to Preserve', str(sum(1 for r in rca_results if r.preserve) if rca_results else 0), '✅ Document'],
+            ['Cultural Terms to Preserve', str(sum(1 for r in rca_results if r.preserve) if rca_results else 0), 'Document'],
             ['RCA Cases Analyzed', str(len(rca_results) if rca_results else 0), 'Action Needed' if rca_results else 'None'],
             ['Languages with High Fertility', str(len(tp_df[tp_df['Fertility_Penalty'] > THRESHOLDS['tokenisation_parity']]['Language'].unique()) if tp_df is not None else 0), '⚠️ Needs Optimization']
         ]
@@ -649,4 +649,4 @@ if __name__ == "__main__":
     
     dashboard.plot_sdi_heatmap(sdi_matrix)
     
-    print("\n✅ Visualization dashboard test complete!")
+    print("\n Visualization dashboard test complete!")
