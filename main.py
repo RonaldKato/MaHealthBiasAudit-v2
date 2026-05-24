@@ -291,9 +291,9 @@ class MaHealthBiasAuditPipeline:
         return self.results
     
     def create_visualizations(self, data: Dict) -> Dict:
-        """Create all visualizations for the pipeline"""
+        """Create all enhanced visualizations for the pipeline"""
         print("\n" + "="*70)
-        print("STEP 6: Creating Visualizations")
+        print("STEP 6: Creating Enhanced Visualizations")
         print("="*70)
         
         # Extract data for visualizations
@@ -302,52 +302,25 @@ class MaHealthBiasAuditPipeline:
         trust_results = self.results['linguistic'].get('trust_aware_results')
         rca_results = self.results['cross_lingual'].get('rca_results')
         bias_patterns = self.results['cross_lingual'].get('bias_patterns')
-        performance_df = self.results['model'].get('performance_results')
-        
-        # Create visualizations
-        if sdi_matrix is not None:
-            self.viz_dashboard.plot_sdi_heatmap(sdi_matrix)
-        
-        if tp_df is not None:
-            self.viz_dashboard.plot_tokenisation_parity(tp_df)
-        
-        if trust_results:
-            self.viz_dashboard.plot_trust_aware_results(trust_results)
-        
-        if rca_results:
-            self.viz_dashboard.plot_rca_summary(rca_results)
-        
-        if bias_patterns is not None:
-            self.viz_dashboard.plot_bias_pattern_heatmap(bias_patterns)
-        
-        if performance_df is not None:
-            self.viz_dashboard.plot_performance_comparison(performance_df)
-        
-        # Create 3D embedding visualization
-        joint_embeddings = self.results['joint_embeddings']
-        joint_labels = self.results['joint_labels']
-        if len(joint_embeddings) > 0:
-            self.viz_dashboard.plot_3d_embedding_space(
-                joint_embeddings, joint_labels, 
-                title="Multilingual Maternal Health Answer Embeddings"
-            )
-        
-        # Create interrogative analysis visualization
         inter_df = self.results['linguistic'].get('interrogative_analysis')
-        if inter_df is not None:
-            self.viz_dashboard.plot_interrogative_analysis(inter_df)
+        embeddings = self.results['joint_embeddings']
+        labels = self.results['joint_labels']
         
-        # Create comprehensive dashboard
-        self.viz_dashboard.create_comprehensive_dashboard(
+        # Create all enhanced visualizations
+        viz_results = self.viz_dashboard.create_all_visualizations(
             sdi_matrix=sdi_matrix,
             tp_df=tp_df,
-            performance_df=performance_df,
             trust_results=trust_results,
             rca_results=rca_results,
-            bias_patterns=bias_patterns
+            bias_patterns=bias_patterns,
+            inter_df=inter_df,
+            embeddings=embeddings,
+            labels=labels
         )
         
-        print(f"\n Visualizations complete! Saved to {FIGURES_DIR}")
+        self.results['visualizations'] = viz_results
+        
+        print(f"\n Enhanced visualizations complete! Saved to {FIGURES_DIR}")
         
         return self.results
     
