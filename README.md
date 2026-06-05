@@ -16,10 +16,10 @@ Over 150 million people across East Africa speak Bantu languages, yet most healt
 1. Linguistically-Informed Metrics
 Unlike generic bias tools, our framework accounts for Bantu language morphology, including noun classes, prefix-suffix structures, and agglutinative patterns that cause 2-3x tokenization overhead.
 
-**2. Cultural Trust Scoring**
+2. Cultural Trust Scoring
 We don't just measure translation accuracy—we evaluate whether health information preserves cultural practices, traditional beliefs, and locally-relevant concepts essential for maternal care.
 
-**3. Explainable Root Causes**
+3. Explainable Root Causes
 Instead of opaque bias scores, we identify specific failure points: tokenization fertility penalties, out-of-vocabulary rates for health terms, and morphological misalignment.
 
 **Quick Start**
