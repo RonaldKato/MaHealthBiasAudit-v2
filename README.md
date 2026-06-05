@@ -1,4 +1,6 @@
 **Multilingual Bias Detection for Maternal Health AI in East Africa**
+<img width="1536" height="1024" alt="banner" src="https://github.com/user-attachments/assets/5b510872-86fb-4b9b-aa0f-a3426839a5e6" />
+
 **Overview**
 MaHealthBiasAudit v2 is the first comprehensive AI auditing framework designed to detect, quantify, and explain language bias in maternal health question-answering systems across four East African languages: English, Luganda, Runyankore, and Swahili. This toolkit addresses a critical gap in AI fairness evaluation for low-resource African languages in healthcare contexts.
 
