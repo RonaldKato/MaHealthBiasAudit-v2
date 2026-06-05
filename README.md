@@ -24,7 +24,7 @@ Instead of opaque bias scores, we identify specific failure points: tokenization
 
 **Quick Start**
 ------------------------------------------------------
-git clone https://github.com/yourlab/MaHealthBiasAudit
-cd MaHealthBiasAudit
-pip install -r requirements.txt
-python run_bias_audit.py --full --output-dir results
+1. git clone https://github.com/yourlab/MaHealthBiasAudit
+2. cd MaHealthBiasAudit
+3. pip install -r requirements.txt
+4. python run_bias_audit.py --full --output-dir results
