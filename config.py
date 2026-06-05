@@ -1,6 +1,6 @@
 """
 Configuration file for MaHealthBiasAudit v2
-Centralized configuration for the entire bias audit pipeline
+languages: English, Swahili, Luganda, Runyankore
 """
 
 import os
@@ -10,13 +10,15 @@ from datetime import datetime
 # EXPERIMENT METADATA
 # ============================================================================
 
-EXPERIMENT_NAME = "MaHealthBiasAudit_v2"
-EXPERIMENT_VERSION = "2.0.0"
+EXPERIMENT_NAME = "MaHealthBiasAudit"
+EXPERIMENT_VERSION = "1.0.0"
 EXECUTION_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # ============================================================================
-# LANGUAGES IN THE STUDY
+# LANGUAGES
 # ============================================================================
+
+PRIMARY_LANGUAGES = ['English', 'Swahili', 'Luganda', 'Runyankore']
 
 LANGUAGES = {
     'English': {
@@ -25,7 +27,8 @@ LANGUAGES = {
         'resource_level': 'high', 
         'script': 'Latin',
         'morphological_complexity': 1.0,
-        'has_tones': False
+        'has_tones': False,
+        'word_order': 'SVO'
     },
     'Swahili': {
         'code': 'sw', 
@@ -34,23 +37,8 @@ LANGUAGES = {
         'script': 'Latin',
         'morphological_complexity': 1.6,
         'has_tones': False,
-        'noun_classes': 18
-    },
-    'Yoruba': {
-        'code': 'yo', 
-        'family': 'Niger-Congo', 
-        'resource_level': 'low', 
-        'script': 'Latin',
-        'morphological_complexity': 1.8,
-        'has_tones': True
-    },
-    'Amharic': {
-        'code': 'am', 
-        'family': 'Semitic', 
-        'resource_level': 'low', 
-        'script': 'Ethiopic',
-        'morphological_complexity': 2.0,
-        'has_tones': False
+        'noun_classes': 18,
+        'word_order': 'SVO'
     },
     'Luganda': {
         'code': 'lg', 
@@ -59,7 +47,8 @@ LANGUAGES = {
         'script': 'Latin',
         'morphological_complexity': 2.2,
         'has_tones': True,
-        'noun_classes': 15
+        'noun_classes': 15,
+        'word_order': 'SVO'
     },
     'Runyankore': {
         'code': 'rn', 
@@ -68,99 +57,49 @@ LANGUAGES = {
         'script': 'Latin',
         'morphological_complexity': 2.5,
         'has_tones': True,
-        'noun_classes': 16
-    }
-}
-
-# Primary languages for detailed analysis
-PRIMARY_LANGUAGES = ['English', 'Swahili', 'Yoruba', 'Amharic']
-
-# Extended Bantu languages for comparative analysis
-BANTU_LANGUAGES = ['Swahili', 'Luganda', 'Runyankore']
-
-# ============================================================================
-# MATERNAL HEALTH TOPICS (WHO Categories)
-# ============================================================================
-
-MATERNAL_TOPICS = {
-    'antenatal_care': {
-        'keywords': ['pregnant', 'pregnancy', 'folic', 'iron', 'calcium', 'nutrients', 
-                    'fetus', 'baby', 'prenatal', 'antenatal', 'vitamins'],
-        'description': 'Care during pregnancy',
-        'color': '#3498db'
-    },
-    'labor_delivery': {
-        'keywords': ['labor', 'labour', 'contractions', 'delivery', 'birth', 'cervical', 
-                    'water breaking', 'dilation', 'childbirth'],
-        'description': 'Childbirth and delivery',
-        'color': '#e74c3c'
-    },
-    'postnatal_care': {
-        'keywords': ['postpartum', 'breastfeeding', 'new mother', 'recovery', 'after birth', 
-                    'postnatal', 'newborn'],
-        'description': 'Care after delivery',
-        'color': '#2ecc71'
-    },
-    'mental_health': {
-        'keywords': ['depression', 'mental health', 'counseling', 'support', 'anxiety', 
-                    'postpartum depression', 'psychological'],
-        'description': 'Maternal mental health',
-        'color': '#f39c12'
-    },
-    'child_health': {
-        'keywords': ['vaccinations', 'vaccines', 'child', 'infant', 'BCG', 'Polio', 
-                    'Measles', 'immunization', 'newborn health'],
-        'description': 'Newborn and child health',
-        'color': '#9b59b6'
-    },
-    'emergency_referral': {
-        'keywords': ['emergency', 'danger signs', 'referral', 'bleeding', 'convulsions', 
-                    'fever', 'severe', 'urgent'],
-        'description': 'Emergency obstetric care',
-        'color': '#e67e22'
-    },
-    'nutrition': {
-        'keywords': ['nutrients', 'diet', 'eat', 'food', 'nutrition', 'vitamins', 
-                    'supplements', 'malnutrition'],
-        'description': 'Maternal nutrition',
-        'color': '#1abc9c'
-    },
-    'family_planning': {
-        'keywords': ['contraception', 'birth control', 'family planning', 'spacing', 
-                    'pregnancy prevention'],
-        'description': 'Family planning services',
-        'color': '#34495e'
+        'noun_classes': 16,
+        'word_order': 'SVO'
     }
 }
 
 # ============================================================================
-# BIAS THRESHOLDS (Based on research proposal)
+# YOUR 8 CATEGORIES (Based on dataset)
+# ============================================================================
+
+DATASET_CATEGORIES = [
+    "about_healthcare_access",
+    "about_medical_history_lifestyle",
+    "about_mental_health_support",
+    "about_recovery_baby_care",
+    "about_recovery_health",
+    "about_symptoms_concerns",
+    "about_traditional_cultural_practices",
+    "community_cultural_considerations"
+]
+
+CATEGORY_TOPICS = {
+    "about_healthcare_access": "Healthcare Access",
+    "about_medical_history_lifestyle": "Medical History & Lifestyle",
+    "about_mental_health_support": "Mental Health & Support",
+    "about_recovery_baby_care": "Recovery & Baby Care",
+    "about_recovery_health": "Recovery & Health",
+    "about_symptoms_concerns": "Symptoms & Concerns",
+    "about_traditional_cultural_practices": "Traditional & Cultural Practices",
+    "community_cultural_considerations": "Community & Cultural Considerations"
+}
+
+# ============================================================================
+# BIAS THRESHOLDS
 # ============================================================================
 
 THRESHOLDS = {
-    # Semantic Divergence
     'sdi_high': 0.4,
     'sdi_moderate': 0.2,
-    
-    # Tokenisation
     'tokenisation_parity': 1.5,
     'oov_rate': 0.15,
-    
-    # Morphological
     'mas_threshold': 0.6,
-    
-    # Distributional
     'jsd_high': 0.5,
-    
-    # Performance
     'f1_disparity_high': 0.3,
-    'exact_match_threshold': 0.7,
-    
-    # Clustering
-    'language_purity_high': 0.7,
-    'topic_purity_target': 0.8,
-    
-    # Trust
     'trust_score_target': 0.7
 }
 
@@ -168,101 +107,69 @@ THRESHOLDS = {
 # MODEL CONFIGURATIONS
 # ============================================================================
 
-EMBEDDING_MODELS = {
-    'LaBSE': 'sentence-transformers/LaBSE',
-    'multilingual-e5': 'intfloat/multilingual-e5-large',
-    'LASER3': 'laser3'
-}
-
 MODEL_CONFIGS = {
-    'mBERT': {
-        'name': 'bert-base-multilingual-cased',
-        'type': 'encoder-only',
-        'max_length': 512,
-        'fertility_baseline': 1.0
-    },
-    'XLM-R': {
-        'name': 'xlm-roberta-base',
-        'type': 'encoder-only',
-        'max_length': 512,
-        'fertility_baseline': 0.9
-    },
-    'AfriBERTa': {
-        'name': 'castorini/afriberta_base',
-        'type': 'encoder-only',
-        'max_length': 512,
-        'fertility_baseline': 0.8
-    },
-    'SERENGETI': {
-        'name': 'Davlan/afro-xlmr-base',
-        'type': 'encoder-only',
-        'max_length': 512,
-        'fertility_baseline': 0.85
-    }
+    'mBERT': {'name': 'bert-base-multilingual-cased', 'fertility_baseline': 1.0},
+    'XLM-R': {'name': 'xlm-roberta-base', 'fertility_baseline': 0.9},
+    'AfriBERTa': {'name': 'castorini/afriberta_base', 'fertility_baseline': 0.8}
 }
-
-# Fine-tuning conditions (5x3 matrix)
-FINE_TUNE_CONDITIONS = ['FT-EN', 'FT-SW', 'FT-YO', 'FT-AM', 'FT-MULTI']
 
 # ============================================================================
-# LINGUISTIC PATTERNS
+# INTERROGATIVE PATTERNS 
 # ============================================================================
 
 INTERROGATIVE_PATTERNS = {
-    'English': {'pattern': r'^(what|when|where|why|how|which|who)', 'type': 'wh_fronted'},
-    'Swahili': {'pattern': r'(je|nini|gani|lini|wapi|kwa nini|vipi)', 'type': 'verb_internal'},
-    'Luganda': {'pattern': r'(ki|nya|li|wa)', 'type': 'verb_suffix', 'note': 'Interrogative suffix -ki attached to verb'},
-    'Runyankore': {'pattern': r'(ki|nya)', 'type': 'sentence_final', 'note': 'Interrogative at sentence-final position'},
-    'Yoruba': {'pattern': r'(kí|níbo|nígbà|kí ló|báwo|ta)', 'type': 'wh_fronted'},
-    'Amharic': {'pattern': r'(ምን|የት|መቼ|ለምን|እንዴት|ማን)', 'type': 'wh_fronted'}
+    'English': {'pattern': r'^(what|when|where|why|how|which|who|have|do|are|is|can|will)', 'type': 'wh_fronted'},
+    'Swahili': {'pattern': r'(je|nini|gani|lini|wapi|kwa nini|vipi|je|mbona)', 'type': 'mixed'},
+    'Luganda': {'pattern': r'(ki|nya|li|wa|ana|ali|kati)', 'type': 'verb_suffix'},
+    'Runyankore': {'pattern': r'(ki|nya|aha|obu|eki|nki)', 'type': 'sentence_final'}
 }
 
 # ============================================================================
-# CULTURAL TERMINOLOGY (Trust-Aware Module)
+# CULTURAL TERMINOLOGY 
 # ============================================================================
 
 CULTURAL_TERMINOLOGY = {
     'Luganda': {
-        'okuzaala': ('childbirth', 'to give birth', 0.95, True),
-        'omusawo gw\'ebisaayiro': ('traditional healer', 'herbalist', 0.85, False),
-        'eddagala ly\'ebisigire': ('herbal medicine', 'traditional medicine', 0.90, True),
-        'okulongoosa': ('postnatal care', 'traditional postpartum care', 0.88, True),
-        'essanyu ly\'omwana': ('child wellness', 'baby\'s joy/health', 0.80, False)
+        'yee': ('affirmation', 'yes', 0.70, False),
+        'omwana': ('child', 'baby', 0.85, True),
+        'namufiirwa': ('loss', 'lost the baby', 0.90, True),
+        'nsobola': ('ability', 'I can', 0.70, False),
+        'obutimba bw\'ensiri': ('mosquito nets', 'malaria prevention', 0.85, True),
+        'matooke': ('food', 'cooking bananas', 0.75, False),
+        'akawunga': ('food', 'maize flour/posho', 0.70, False),
+        'okusaba': ('practice', 'praying', 0.85, False),
+        'Katonda': ('deity', 'God', 0.80, False),
+        'omwami': ('family', 'husband', 0.75, False),
+        'eddagala': ('medicine', 'herbal remedy', 0.85, True),
+        'entangawuzzi': ('herb', 'ginger', 0.80, True)
     },
     'Runyankore': {
-        'okuzaara': ('childbirth', 'to give birth', 0.95, True),
-        'omugabe w\'ebijukano': ('traditional healer', 'herbal specialist', 0.85, False),
-        'ebibazi': ('herbal medicine', 'traditional remedies', 0.90, True),
-        'okwireeza': ('postnatal period', 'recovery period', 0.88, True),
-        'ekihango': ('ceremonial meal', 'postpartum celebration', 0.82, False)
+        'eego': ('affirmation', 'yes', 0.70, False),
+        'omwana': ('child', 'baby', 0.85, True),
+        'nkaferwa': ('loss', 'lost the baby', 0.90, True),
+        'nyine': ('possession', 'I have', 0.70, False),
+        'obutimba': ('nets', 'mosquito nets', 0.85, True),
+        'ebitookye': ('food', 'cooking bananas', 0.75, False),
+        'akahunga': ('food', 'maize flour', 0.70, False),
+        'okushaba': ('practice', 'praying', 0.85, False),
+        'Ruhanga': ('deity', 'God', 0.80, False),
+        'omushaija': ('family', 'husband', 0.75, False),
+        'ebibazi': ('medicine', 'herbal remedies', 0.85, True),
+        'entangawuuzi': ('herb', 'ginger', 0.80, True)
     },
     'Swahili': {
-        'majaliwa': ('blessed pregnancy', 'fortunate conception', 0.90, False),
-        'ugonjwa wa kusema': ('psychosomatic condition', 'illness from speech', 0.70, False),
-        'dawa za asili': ('herbal medicine', 'traditional medicine', 0.85, True),
-        'mganga': ('traditional healer', 'herbalist', 0.80, False),
-        'kitanda cha uzazi': ('birthing bed', 'traditional delivery bed', 0.88, True)
-    }
-}
-
-# ============================================================================
-# DIALECT MARKERS
-# ============================================================================
-
-DIALECT_MARKERS = {
-    'Swahili': {
-        'Coastal': ['sana', 'kabisa', 'kweli', 'hasa'],
-        'Standard': ['vizuri', 'safi', 'kamilifu', 'sahihi'],
-        'Ugandan': ['mzuri', 'bora', 'vizuri sana', 'sawa']
-    },
-    'Luganda': {
-        'Central': ['buli', 'nga', 'nnyo', 'ddene'],
-        'Rural': ['bwebwe', 'nti', 'nyo', 'nene'],
-        'Urban': ['baazi', 'ssebo', 'nyabo', 'kikulu']
-    },
-    'Runyankore': {
-        'Standard': ['nka', 'kandi', 'nibwe', 'omuntu'],
-        'Rural': ['eka', 'nibwo', 'omundu', 'bukuru']
+        'ndiyo': ('affirmation', 'yes', 0.70, False),
+        'mtoto': ('child', 'baby', 0.85, True),
+        'nilipoteza': ('loss', 'lost the baby', 0.90, True),
+        'ninaweza': ('ability', 'I can', 0.70, False),
+        'vyandalua': ('nets', 'mosquito nets', 0.85, True),
+        'matooke': ('food', 'cooking bananas', 0.75, False),
+        'posho': ('food', 'maize flour', 0.70, False),
+        'kusali': ('practice', 'praying', 0.85, False),
+        'Mungu': ('deity', 'God', 0.80, False),
+        'mume': ('family', 'husband', 0.75, False),
+        'dawa za asili': ('medicine', 'traditional medicine', 0.85, True),
+        'tangawizi': ('herb', 'ginger', 0.80, True)
     }
 }
 
@@ -272,36 +179,29 @@ DIALECT_MARKERS = {
 
 OUTPUT_DIR = "mahealth_bias_output"
 FIGURES_DIR = f"{OUTPUT_DIR}/figures"
+FIGURES_ENHANCED_DIR = f"{OUTPUT_DIR}/figures_enhanced"
 REPORTS_DIR = f"{OUTPUT_DIR}/reports"
-MODELS_DIR = f"{OUTPUT_DIR}/models"
-LOGS_DIR = f"{OUTPUT_DIR}/logs"
 
-# Create directories
-for dir_path in [OUTPUT_DIR, FIGURES_DIR, REPORTS_DIR, MODELS_DIR, LOGS_DIR]:
+for dir_path in [OUTPUT_DIR, FIGURES_DIR, FIGURES_ENHANCED_DIR, REPORTS_DIR]:
     os.makedirs(dir_path, exist_ok=True)
 
 # ============================================================================
-# VISUALIZATION SETTINGS
+# COLORS FOR VISUALIZATION
 # ============================================================================
 
-VIZ_SETTINGS = {
-    'color_palette': 'viridis',
-    'figure_dpi': 150,
-    'save_figures': True,
-    'interactive': True,
-    'font_family': 'sans-serif',
-    'font_size': 12
+LANG_COLORS = {
+    'English': '#2E86AB',
+    'Swahili': '#A23B72',
+    'Luganda': '#F18F01',
+    'Runyankore': '#C73E1D'
 }
 
-# ============================================================================
-# RANDOM SEED FOR REPRODUCIBILITY
-# ============================================================================
+RCA_COLORS = {
+    'TOKENISATION': '#3498DB',
+    'QUERY_STRUCTURE': '#F39C12',
+    'CULTURAL': '#27AE60',
+    'MORPHOLOGY': '#9B59B6',
+    'UNKNOWN': '#95A5A6'
+}
 
 RANDOM_SEED = 42
-
-# ============================================================================
-# API KEYS (Optional)
-# ============================================================================
-
-# For Gemini API integration (optional)
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', None)

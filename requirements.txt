@@ -21,3 +21,4 @@ tqdm>=4.64.0
 
 # Optional: For Google Colab integration
 google-generativeai>=0.3.0
+

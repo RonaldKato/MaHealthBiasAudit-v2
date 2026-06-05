@@ -1,0 +1,137 @@
+[
+  {
+    "timestamp": "2026-05-24T12:37:08.006198",
+    "iteration": 1,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8333333333333333,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T12:39:30.280328",
+    "iteration": 2,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.7645833333333333,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T12:58:52.802179",
+    "iteration": 3,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.7958333333333334,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T13:02:14.930432",
+    "iteration": 4,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8145833333333333,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T15:26:34.517129",
+    "iteration": 5,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8666666666666667,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T15:31:58.699494",
+    "iteration": 6,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8510416666666666,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T15:34:49.907992",
+    "iteration": 7,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8020833333333333,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T15:38:00.654456",
+    "iteration": 8,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.22410264213879905,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8072916666666666,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  },
+  {
+    "timestamp": "2026-05-24T15:53:42.114952",
+    "iteration": 9,
+    "intervention_description": "Baseline - Complete Audit",
+    "avg_sdi": 0.046045507987340285,
+    "avg_f1_disparity": 0.0,
+    "lang_cluster_purity": 0.25,
+    "topic_cluster_purity": 1.0,
+    "avg_fertility_penalty": 1.2306451612903226,
+    "avg_oov_rate": 0.9357141297511319,
+    "avg_morphological_alignment": 0.8614583333333332,
+    "flags": [
+      "HIGH_OOV_RATE"
+    ]
+  }
+]

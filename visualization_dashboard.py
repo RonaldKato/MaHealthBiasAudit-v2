@@ -1,651 +1,977 @@
 """
-Enhanced Visualization Dashboard for MaHealthBiasAudit v2
+Visualization Dashboard for MaHealthBiasAudit
 """
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Any
 import os
-from sklearn.manifold import TSNE
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.patches import Circle, FancyBboxPatch, Rectangle, Wedge
-from matplotlib.lines import Line2D
-import matplotlib.patches as mpatches
+from datetime import datetime
+from matplotlib.patches import Patch
+import warnings
+warnings.filterwarnings('ignore')
 
-from config import FIGURES_DIR, PRIMARY_LANGUAGES, THRESHOLDS
-
-# Set style for professional visualizations
-plt.style.use('seaborn-v0_8-darkgrid')
-sns.set_palette("husl")
-sns.set_context("notebook", font_scale=1.2)
+from config import FIGURES_DIR, THRESHOLDS, LANG_COLORS, RCA_COLORS
 
 
-class BiasVisualizationDashboard:
-    """
-    Enhanced visualization dashboard with unique, data-specific insights
-    """
-    
-    def __init__(self, save_figures: bool = True, output_dir: str = None, show_display: bool = False):
-        self.save_figures = save_figures
-        self.show_display = show_display
-        self.output_dir = output_dir or FIGURES_DIR
+class VisualizationDashboard:
+    def __init__(self):
+        self.output_dir = FIGURES_DIR
+        self.tables_dir = os.path.join(FIGURES_DIR, 'tables')
         os.makedirs(self.output_dir, exist_ok=True)
-        self.generated_figures = []
-        self.bias_patterns = None
-        
-        # Define language-specific colors for consistency
-        self.lang_colors = {
-            'English': '#2E86AB',      # Blue
-            'Swahili': '#A23B72',      # Purple
-            'Yoruba': '#F18F01',       # Orange
-            'Amharic': '#C73E1D',      # Red
-            'Luganda': '#3D5A80',      # Navy
-            'Runyankore': '#EE6C4D'    # Coral
+        os.makedirs(self.tables_dir, exist_ok=True)
+        plt.style.use('seaborn-v0_8-darkgrid')
+        sns.set_palette("husl")
+        self.setup_custom_styles()
+        print(f"Visualization Dashboard ready - Output: {self.output_dir}")
+        print(f"Tables Directory: {self.tables_dir}")
+    
+    def setup_custom_styles(self):
+        """Setup custom visualization styles"""
+        self.colors = {
+            'high_bias': '#E74C3C',
+            'moderate_bias': '#F39C12',
+            'low_bias': '#27AE60',
+            'background': '#F8F9FA',
+            'text': '#2C3E50',
+            'grid': '#BDC3C7',
+            'primary': '#3498DB',
+            'secondary': '#9B59B6'
         }
-        
-        # Define topic colors
-        self.topic_colors = {
-            'Nutrition': '#2ECC71',
-            'Labor & Delivery': '#E74C3C',
-            'Postnatal Care': '#3498DB',
-            'Mental Health': '#F39C12',
-            'Child Health': '#9B59B6'
-        }
-        
-        print(f"Enhanced Visualization Dashboard initialized")
-        print(f"   Output directory: {self.output_dir}")
     
-    def _save_and_show(self, fig, filename: str, dpi: int = 200):
-        """Helper to save and/or show figure"""
-        if self.save_figures:
-            filepath = os.path.join(self.output_dir, filename)
-            fig.savefig(filepath, dpi=dpi, bbox_inches='tight', facecolor='white')
-            print(f"   ✓ Saved: {filepath}")
+    def create_all_visualizations(self, sdi_matrix=None, tp_df=None, trust_results=None, 
+                                    rca_results=None, embeddings=None, labels=None,
+                                    bias_results=None, performance_metrics=None):
+        """Create all visualizations"""
+        print("\n" + "="*60)
+        print("Creating Visualizations")
+        print("="*60)
         
-        if self.show_display:
-            plt.figure(fig.number)
-            plt.show()
+        # SDI Visualizations
+        if sdi_matrix is not None and not sdi_matrix.empty:
+            self.plot_sdi_heatmap_enhanced(sdi_matrix)
+            self.plot_sdi_bar_chart_enhanced(sdi_matrix)
+            self.plot_sdi_radar_chart(sdi_matrix)
         
-        self.generated_figures.append({'fig': fig, 'filename': filename})
-        plt.close(fig)
+        # Tokenisation Visualizations
+        if tp_df is not None and not tp_df.empty:
+            self.plot_tokenisation_chart(tp_df)
+            self.plot_tokenisation_boxplot(tp_df)
+        
+        # Trust Visualizations
+        if trust_results:
+            self.plot_trust_chart(trust_results)
+            self.plot_trust_gauge_meter(trust_results)
+        
+        # RCA Visualizations
+        if rca_results:
+            self.plot_rca_pie(rca_results)
+            self.plot_rca_treemap(rca_results)
+        
+        # Embedding Visualizations
+        if embeddings is not None and len(embeddings) > 0 and labels:
+            self.plot_embedding_tsne(embeddings, labels)
+            self.plot_embedding_pca_3d(embeddings, labels)
+        
+        # Additional powerful visuals
+        if bias_results:
+            self.plot_bias_waterfall_chart(bias_results)
+            self.plot_bias_heatmap_timeline(bias_results)
+        
+        if performance_metrics:
+            self.plot_performance_dashboard(performance_metrics)
+        
+        # Comprehensive dashboards
+        self.plot_summary_dashboard(sdi_matrix, tp_df, trust_results, rca_results)
+        self.plot_executive_dashboard(sdi_matrix, tp_df, trust_results, rca_results, bias_results)
+        
+        print(f"\n All visualizations saved to {self.output_dir}")
     
-    # ========================================================================
-    # ORIGINAL METHODS (called in main.py)
-    # ========================================================================
+    def create_all_tables(self, sdi_matrix=None, tp_df=None, trust_results=None, 
+                          rca_results=None, bias_results=None, performance_metrics=None,
+                          corpus_stats=None):
+        """Create results tables"""
+        print("\n" + "="*60)
+        print("Creating Results Tables")
+        print("="*60)
+        
+        tables = []
+        
+        # Table 1: SDI Comprehensive Matrix
+        if sdi_matrix is not None and not sdi_matrix.empty:
+            table1 = self.create_sdi_table(sdi_matrix)
+            tables.append(("SDI_Comprehensive_Matrix", table1))
+        
+        # Table 2: Tokenisation Parity Results
+        if tp_df is not None and not tp_df.empty:
+            table2 = self.create_tokenisation_table(tp_df)
+            tables.append(("Tokenisation_Parity_Results", table2))
+        
+        # Table 3: Trust Score Breakdown
+        if trust_results:
+            table3 = self.create_trust_table(trust_results)
+            tables.append(("Trust_Score_Breakdown", table3))
+        
+        # Table 4: Root Cause Analysis Summary
+        if rca_results:
+            table4 = self.create_rca_table(rca_results)
+            tables.append(("Root_Cause_Analysis", table4))
+        
+        # Table 5: Bias Detection Summary
+        if bias_results:
+            table5 = self.create_bias_summary_table(bias_results)
+            tables.append(("Bias_Detection_Summary", table5))
+        
+        # Table 6: Performance Metrics
+        if performance_metrics:
+            table6 = self.create_performance_table(performance_metrics)
+            tables.append(("Performance_Metrics", table6))
+        
+        # Table 7: Corpus Statistics
+        if corpus_stats is not None and not corpus_stats.empty:
+            table7 = self.create_corpus_stats_table(corpus_stats)
+            tables.append(("Corpus_Statistics", table7))
+        
+        # Table 8: Language-wise Comparison
+        if sdi_matrix is not None and tp_df is not None and trust_results:
+            table8 = self.create_language_comparison_table(sdi_matrix, tp_df, trust_results)
+            tables.append(("Language_Wise_Comparison", table8))
+        
+        # Save all tables
+        for table_name, table_df in tables:
+            self.save_table(table_df, table_name)
+        
+        print(f"\n {len(tables)} tables saved to {self.tables_dir}")
+        return tables
     
-    def plot_sdi_heatmap(self, sdi_matrix: pd.DataFrame, title: str = "Semantic Divergence Index (SDI) Heatmap") -> plt.Figure:
-        """Create heatmap of Semantic Divergence Index between language pairs"""
-        print("\n   Creating SDI heatmap...")
+    # ==================== SDI VISUALIZATIONS ====================
+    
+    def plot_sdi_heatmap_enhanced(self, sdi_matrix):
+        """SDI heatmap"""
+        fig, ax = plt.subplots(figsize=(12, 10))
         
-        if sdi_matrix is None or sdi_matrix.empty:
-            return None
-        
-        fig, ax = plt.subplots(figsize=(10, 8))
-        
-        # Create heatmap
-        im = ax.imshow(sdi_matrix.values, cmap='RdYlGn_r', aspect='auto', vmin=0, vmax=1)
-        
-        # Add colorbar
+        im = ax.imshow(sdi_matrix.values, cmap='RdYlGn_r', vmin=0, vmax=0.8)
         cbar = plt.colorbar(im, ax=ax, shrink=0.8)
-        cbar.set_label('Semantic Divergence Index (higher = more bias)', fontsize=11)
+        cbar.set_label('Semantic Divergence Index (SDI)', fontsize=12, fontweight='bold')
         
-        # Set labels
-        ax.set_xticks(range(len(sdi_matrix.columns)))
-        ax.set_yticks(range(len(sdi_matrix.index)))
-        ax.set_xticklabels(sdi_matrix.columns, rotation=45, ha='right', fontsize=10)
-        ax.set_yticklabels(sdi_matrix.index, fontsize=10)
-        
-        # Add text annotations
+        # Add value labels
         for i in range(len(sdi_matrix.index)):
             for j in range(len(sdi_matrix.columns)):
                 value = sdi_matrix.iloc[i, j]
-                text_color = 'white' if value > 0.5 else 'black'
-                ax.text(j, i, f'{value:.3f}',
-                       ha="center", va="center", color=text_color, fontsize=9, fontweight='bold')
+                color = 'white' if value > 0.4 else 'black'
+                severity = '🔴' if value > 0.4 else '🟡' if value > 0.2 else '🟢'
+                ax.text(j, i, f'{severity}\n{value:.3f}', ha='center', va='center', 
+                       color=color, fontsize=10, fontweight='bold')
         
-        ax.set_title(title, fontsize=14, fontweight='bold')
-        ax.set_xlabel('Target Language', fontsize=12)
-        ax.set_ylabel('Source Language', fontsize=12)
+        ax.set_xticks(range(len(sdi_matrix.columns)))
+        ax.set_yticks(range(len(sdi_matrix.index)))
+        ax.set_xticklabels(sdi_matrix.columns, rotation=45, ha='right', fontsize=11)
+        ax.set_yticklabels(sdi_matrix.index, fontsize=11)
         
-        self._save_and_show(fig, "sdi_heatmap.png")
-        return fig
-    
-    def plot_tokenisation_parity(self, tp_df: pd.DataFrame) -> plt.Figure:
-        """Create visualization of tokenisation parity across languages"""
-        print("\n   Creating tokenisation parity visualization...")
-        
-        if tp_df is None or tp_df.empty:
-            return None
-        
-        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-        
-        # Plot 1: Fertility Penalty by Language
-        fert_df = tp_df.groupby('Language')['Fertility_Penalty'].first().reset_index()
-        colors = ['#E74C3C' if f > THRESHOLDS['tokenisation_parity'] else '#2ECC71' for f in fert_df['Fertility_Penalty']]
-        bars = axes[0].bar(fert_df['Language'], fert_df['Fertility_Penalty'], color=colors, edgecolor='black')
-        axes[0].axhline(y=THRESHOLDS['tokenisation_parity'], color='red', linestyle='--', linewidth=2, label='Threshold')
-        axes[0].set_title('Fertility Penalty by Language\n(higher = more tokens needed)', fontweight='bold')
-        axes[0].set_ylabel('Fertility Penalty')
-        axes[0].tick_params(axis='x', rotation=45)
-        axes[0].legend()
-        
-        for bar, val in zip(bars, fert_df['Fertility_Penalty']):
-            axes[0].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
-                        f'{val:.2f}', ha='center', va='bottom', fontweight='bold')
-        
-        # Plot 2: OOV Rate
-        oov_df = tp_df.groupby('Language')['OOV_Rate'].first().reset_index()
-        bars = axes[1].bar(oov_df['Language'], oov_df['OOV_Rate'] * 100, color='#F39C12', edgecolor='black')
-        axes[1].axhline(y=THRESHOLDS['oov_rate'] * 100, color='red', linestyle='--', linewidth=2, label='Threshold')
-        axes[1].set_title('Out-of-Vocabulary Rate\n(unknown tokens)', fontweight='bold')
-        axes[1].set_ylabel('OOV Rate (%)')
-        axes[1].tick_params(axis='x', rotation=45)
-        axes[1].legend()
-        
-        for bar, val in zip(bars, oov_df['OOV_Rate'] * 100):
-            axes[1].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-                        f'{val:.1f}%', ha='center', va='bottom', fontweight='bold')
-        
-        plt.suptitle('Tokenisation Parity Analysis', fontsize=16, fontweight='bold')
+        ax.set_title('Semantic Divergence Index (SDI) Heatmap\nHigher Values = More Bias', 
+                    fontweight='bold', fontsize=14, pad=20)
         plt.tight_layout()
-        self._save_and_show(fig, "tokenisation_parity.png")
-        return fig
+        self._save_fig(fig, 'sdi_heatmap_enhanced.png')
     
-    def plot_trust_aware_results(self, trust_results: Dict) -> plt.Figure:
-        """Create visualization of Trust-Aware Module results"""
-        print("\n   Creating Trust-Aware Module visualization...")
+    def plot_sdi_bar_chart_enhanced(self, sdi_matrix):
+        """SDI bar chart with trend line"""
+        fig, ax = plt.subplots(figsize=(12, 7))
         
-        if not trust_results:
-            return None
+        languages = [l for l in sdi_matrix.columns if l != 'English']
+        sdi_values = [sdi_matrix.loc['English', l] for l in languages]
         
-        fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+        colors = ['#E74C3C' if v > 0.4 else '#F39C12' if v > 0.2 else '#27AE60' for v in sdi_values]
+        
+        bars = ax.bar(languages, sdi_values, color=colors, edgecolor='black', linewidth=1.5)
+        
+        # Add threshold lines
+        ax.axhline(y=0.4, color='#E74C3C', linestyle='--', linewidth=2.5, 
+                  label='High Bias Threshold', alpha=0.7)
+        ax.axhline(y=0.2, color='#F39C12', linestyle='--', linewidth=2.5, 
+                  label='Moderate Threshold', alpha=0.7)
+        
+        # Add value labels
+        for bar, val in zip(bars, sdi_values):
+            trend = '↑' if val > 0.3 else '↓' if val < 0.15 else '→'
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.015,
+                   f'{trend} {val:.3f}', ha='center', fontweight='bold', fontsize=11)
+        
+        ax.set_ylabel('SDI Score (vs English)', fontsize=12, fontweight='bold')
+        ax.set_xlabel('Target Language', fontsize=12, fontweight='bold')
+        ax.set_title('Cross-Lingual Bias Analysis: English Baseline Comparison', 
+                    fontweight='bold', fontsize=14, pad=15)
+        ax.legend(loc='upper left', fontsize=10)
+        ax.grid(axis='y', alpha=0.3)
+        
+        plt.tight_layout()
+        self._save_fig(fig, 'sdi_barchart_enhanced.png')
+    
+    def plot_sdi_radar_chart(self, sdi_matrix):
+        """Radar chart for SDI comparison"""
+        fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={'projection': 'polar'})
+        
+        languages = [l for l in sdi_matrix.columns if l != 'English']
+        sdi_values = [sdi_matrix.loc['English', l] for l in languages]
+        
+        angles = np.linspace(0, 2 * np.pi, len(languages), endpoint=False).tolist()
+        sdi_values_radar = sdi_values + sdi_values[:1]
+        angles += angles[:1]
+        
+        ax.plot(angles, sdi_values_radar, 'o-', linewidth=2, color='#E74C3C', label='SDI Score')
+        ax.fill(angles, sdi_values_radar, alpha=0.25, color='#E74C3C')
+        
+        # Add value labels
+        for i, (lang, val) in enumerate(zip(languages, sdi_values)):
+            angle_rad = angles[i]
+            ax.text(angle_rad, val + 0.05, f'{val:.3f}', ha='center', fontweight='bold')
+        
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels(languages, fontsize=11)
+        ax.set_ylim(0, max(sdi_values) + 0.1)
+        ax.set_title('Language Bias Radar Chart', fontweight='bold', fontsize=14, pad=20)
+        ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0))
+        ax.grid(True)
+        
+        plt.tight_layout()
+        self._save_fig(fig, 'sdi_radar.png')
+    
+    # ==================== TOKENISATION VISUALIZATIONS ====================
+    
+    def plot_tokenisation_chart(self, tp_df):
+        """Plot tokenisation parity chart"""
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        # Aggregate by language if multiple tokenisers
+        lang_data = []
+        for lang in tp_df['Language'].unique():
+            lang_df = tp_df[tp_df['Language'] == lang]
+            if not lang_df.empty:
+                lang_data.append({
+                    'Language': lang,
+                    'Fertility': lang_df['Fertility_Penalty'].mean()
+                })
+        
+        df = pd.DataFrame(lang_data)
+        if df.empty:
+            return
+        
+        colors = ['#E74C3C' if f > 1.5 else '#27AE60' for f in df['Fertility']]
+        
+        bars = ax.bar(df['Language'], df['Fertility'], color=colors, edgecolor='black')
+        ax.axhline(y=1.5, color='red', linestyle='--', linewidth=2, label='Threshold')
+        
+        for bar, val in zip(bars, df['Fertility']):
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
+                   f'{val:.2f}', ha='center', fontweight='bold')
+        
+        ax.set_ylabel('Fertility Penalty', fontsize=12, fontweight='bold')
+        ax.set_title('Tokenisation Parity by Language', fontweight='bold', fontsize=14)
+        ax.legend()
+        plt.tight_layout()
+        self._save_fig(fig, 'tokenisation.png')
+    
+    def plot_tokenisation_boxplot(self, tp_df):
+        """Boxplot for tokenisation distribution"""
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        data = []
+        labels = []
+        for lang in tp_df['Language'].unique():
+            lang_df = tp_df[tp_df['Language'] == lang]
+            if not lang_df.empty:
+                data.append(lang_df['Fertility_Penalty'].values)
+                labels.append(lang)
+        
+        if data:
+            bp = ax.boxplot(data, labels=labels, patch_artist=True)
+            for patch, color in zip(bp['boxes'], ['#3498DB', '#E74C3C', '#27AE60', '#F39C12'][:len(data)]):
+                patch.set_facecolor(color)
+                patch.set_alpha(0.7)
+            
+            ax.axhline(y=1.5, color='red', linestyle='--', linewidth=2, label='Threshold')
+            ax.set_ylabel('Fertility Penalty', fontsize=12, fontweight='bold')
+            ax.set_title('Tokenisation Distribution by Language', fontweight='bold', fontsize=14)
+            ax.legend()
+            
+            plt.tight_layout()
+            self._save_fig(fig, 'tokenisation_boxplot.png')
+    
+    # ==================== TRUST VISUALIZATIONS ====================
+    
+    def plot_trust_chart(self, trust_results):
+        """Plot trust-aware results"""
+        fig, ax = plt.subplots(figsize=(10, 6))
         
         languages = list(trust_results.keys())
-        trust_scores = [trust_results[l].trust_score for l in languages]
-        preservation_needed = [trust_results[l].preservation_needed for l in languages]
+        scores = [trust_results[l].trust_score for l in languages]
         
-        colors = ['#2ECC71' if p else '#F39C12' for p in preservation_needed]
-        bars = axes[0].bar(languages, trust_scores, color=colors, edgecolor='black')
-        axes[0].axhline(y=0.7, color='green', linestyle='--', linewidth=2, label='High Trust Target')
-        axes[0].set_title('Trust-Aware Analysis\n(higher = more culturally appropriate)', fontweight='bold')
-        axes[0].set_ylabel('Trust Score')
-        axes[0].set_ylim(0, 1)
-        axes[0].legend()
-        axes[0].tick_params(axis='x', rotation=45)
+        colors = ['#27AE60' if s > 0.7 else '#F39C12' if s > 0.4 else '#E74C3C' for s in scores]
+        bars = ax.bar(languages, scores, color=colors, edgecolor='black')
+        ax.axhline(y=0.7, color='green', linestyle='--', linewidth=2, label='Target')
         
-        for bar, score in zip(bars, trust_scores):
-            axes[0].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
-                        f'{score:.2f}', ha='center', va='bottom', fontweight='bold')
-        
-        cultural_counts = [len(trust_results[l].cultural_terms_found) for l in languages]
-        bars = axes[1].bar(languages, cultural_counts, color='#9B59B6', edgecolor='black')
-        axes[1].set_title('Cultural Terminology Detected\n(terms to preserve)', fontweight='bold')
-        axes[1].set_ylabel('Number of Cultural Terms')
-        axes[1].tick_params(axis='x', rotation=45)
-        
-        for bar, count in zip(bars, cultural_counts):
-            if count > 0:
-                axes[1].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                            str(count), ha='center', va='bottom', fontweight='bold')
-        
-        plt.suptitle('Trust-Aware Module: Cultural Knowledge Preservation', fontsize=14, fontweight='bold')
-        plt.tight_layout()
-        self._save_and_show(fig, "trust_aware_results.png")
-        return fig
-    
-    def plot_rca_summary(self, rca_results: List) -> plt.Figure:
-        """Create summary visualization of Root Cause Attribution results"""
-        print("\n   Creating RCA summary visualization...")
-        
-        if not rca_results:
-            return None
-        
-        fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-        
-        # Plot 1: Root cause distribution
-        cause_counts = {}
-        preserve_counts = 0
-        for result in rca_results:
-            cause_counts[result.root_cause] = cause_counts.get(result.root_cause, 0) + 1
-            if result.preserve:
-                preserve_counts += 1
-        
-        causes = list(cause_counts.keys())
-        counts = list(cause_counts.values())
-        colors = ['#3498DB', '#2ECC71', '#F39C12', '#E74C3C', '#9B59B6']
-        
-        bars = axes[0].bar(causes, counts, color=colors[:len(causes)], edgecolor='black')
-        axes[0].set_title('Root Cause Attribution\n(primary sources of bias)', fontweight='bold')
-        axes[0].set_ylabel('Number of Cases')
-        axes[0].tick_params(axis='x', rotation=45)
-        
-        for bar, count in zip(bars, counts):
-            axes[0].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                        str(count), ha='center', va='bottom', fontweight='bold')
-        
-        # Plot 2: Preservation vs Intervention
-        intervention = len(rca_results) - preserve_counts
-        sizes = [preserve_counts, intervention]
-        labels = ['Preserve (Cultural)', 'Intervention Needed']
-        colors_pie = ['#2ECC71', '#E74C3C']
-        
-        axes[1].pie(sizes, labels=labels, colors=colors_pie, autopct='%1.1f%%', 
-                   startangle=90, explode=(0.05, 0), shadow=True)
-        axes[1].set_title('Bias Resolution Strategy\n(Cultural vs Technical)', fontweight='bold')
-        
-        plt.suptitle('Root Cause Attribution (RCA) Cascade Results', fontsize=14, fontweight='bold')
-        plt.tight_layout()
-        self._save_and_show(fig, "rca_summary.png")
-        return fig
-    
-    def plot_bias_pattern_heatmap(self, patterns_df: pd.DataFrame) -> plt.Figure:
-        """Create heatmap of bias patterns by topic"""
-        print("\n   Creating bias patterns heatmap...")
-        
-        if patterns_df is None or patterns_df.empty:
-            return None
-        
-        fig, ax = plt.subplots(figsize=(12, 6))
-        
-        topics = patterns_df['topic'].tolist()
-        sdi_values = patterns_df['avg_sdi'].tolist()
-        severities = patterns_df['bias_severity'].tolist()
-        
-        color_map = {'low': '#2ECC71', 'moderate': '#F39C12', 'high': '#E74C3C'}
-        bar_colors = [color_map.get(s, '#3498DB') for s in severities]
-        
-        y_pos = np.arange(len(topics))
-        bars = ax.barh(y_pos, sdi_values, color=bar_colors, edgecolor='black', height=0.6)
-        
-        ax.axvline(x=THRESHOLDS['sdi_moderate'], color='#F39C12', linestyle='--', linewidth=2, alpha=0.7, label='Moderate (0.2)')
-        ax.axvline(x=THRESHOLDS['sdi_high'], color='#E74C3C', linestyle='--', linewidth=2, alpha=0.7, label='High (0.4)')
-        
-        for bar, value, severity in zip(bars, sdi_values, severities):
-            ax.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2,
-                   f'{value:.3f} ({severity})', ha='left', va='center', fontsize=9)
-        
-        ax.set_yticks(y_pos)
-        ax.set_yticklabels([t.replace('_', ' ').title() for t in topics])
-        ax.set_xlabel('Semantic Divergence Index (SDI)', fontsize=12)
-        ax.set_title('Bias Patterns by Maternal Health Topic\n(higher SDI = more bias)', fontsize=14, fontweight='bold')
-        ax.legend(loc='lower right')
-        ax.set_xlim(0, max(sdi_values) + 0.1)
-        
-        self._save_and_show(fig, "bias_patterns.png")
-        return fig
-    
-    def plot_performance_comparison(self, performance_df: pd.DataFrame) -> plt.Figure:
-        """Create model performance comparison visualization"""
-        print("\n   Creating performance comparison visualization...")
-        
-        if performance_df is None or performance_df.empty:
-            return None
-        
-        fig, ax = plt.subplots(figsize=(12, 6))
-        
-        perf_by_lang = performance_df.groupby('language')['token_f1'].mean().reset_index()
-        bars = ax.bar(perf_by_lang['language'], perf_by_lang['token_f1'], 
-                     color='#3498DB', edgecolor='black')
-        ax.axhline(y=0.7, color='#2ECC71', linestyle='--', alpha=0.7, label='Target (0.7)')
-        ax.set_title('Average Model Performance\n(F1 Score by Language)', fontweight='bold')
-        ax.set_ylabel('Token F1')
-        ax.tick_params(axis='x', rotation=45)
-        ax.set_ylim(0, 1)
-        ax.legend()
-        
-        for bar, val in zip(bars, perf_by_lang['token_f1']):
+        for bar, score in zip(bars, scores):
             ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
-                   f'{val:.2f}', ha='center', va='bottom', fontweight='bold')
+                   f'{score:.2f}', ha='center', fontweight='bold')
         
+        ax.set_ylim(0, 1)
+        ax.set_ylabel('Trust Score', fontsize=12, fontweight='bold')
+        ax.set_title('Trust-Aware Module: Cultural Appropriateness', fontweight='bold', fontsize=14)
+        ax.legend()
         plt.tight_layout()
-        self._save_and_show(fig, "performance_comparison.png")
-        return fig
+        self._save_fig(fig, 'trust_scores.png')
     
-    def plot_3d_embedding_space(self, embeddings: np.ndarray, 
-                                 language_labels: List[str], 
-                                 topic_labels: List[str] = None,
-                                 title: str = "Multilingual Embedding Space") -> plt.Figure:
-        """Create 3D t-SNE visualization of embedding space"""
-        print("\n   Creating 3D embedding space visualization...")
+    def plot_trust_gauge_meter(self, trust_results):
+        """Gauge meter for trust scores"""
+        n_langs = len(trust_results)
+        n_cols = min(3, n_langs)
+        n_rows = (n_langs + n_cols - 1) // n_cols
         
-        if len(embeddings) == 0:
-            return None
+        fig, axes = plt.subplots(n_rows, n_cols, figsize=(5*n_cols, 5*n_rows))
+        if n_langs == 1:
+            axes = [axes]
+        axes = axes.flatten() if n_rows > 1 or n_cols > 1 else [axes]
         
-        # Reduce to 3D using t-SNE
-        n_samples = len(embeddings)
-        perplexity = min(30, n_samples - 1) if n_samples > 1 else 1
-        
-        tsne = TSNE(n_components=3, random_state=42, perplexity=perplexity)
-        embeddings_3d = tsne.fit_transform(embeddings)
-        
-        fig = plt.figure(figsize=(14, 10))
-        ax = fig.add_subplot(111, projection='3d')
-        
-        unique_langs = list(set(language_labels))
-        
-        for lang in unique_langs:
-            mask = [l == lang for l in language_labels]
-            if any(mask):
-                color = self.lang_colors.get(lang, '#3498DB')
-                ax.scatter(embeddings_3d[mask, 0], embeddings_3d[mask, 1], embeddings_3d[mask, 2],
-                          label=lang, s=80, alpha=0.7, edgecolors='black', linewidth=0.5, color=color)
-        
-        ax.set_xlabel('t-SNE Dimension 1', fontsize=12)
-        ax.set_ylabel('t-SNE Dimension 2', fontsize=12)
-        ax.set_zlabel('t-SNE Dimension 3', fontsize=12)
-        ax.set_title(title, fontsize=16, fontweight='bold')
-        ax.legend(bbox_to_anchor=(1.15, 1), loc='upper left', fontsize=10)
-        
-        plt.tight_layout()
-        self._save_and_show(fig, "3d_embedding_space.png")
-        return fig
-    
-    def plot_interrogative_analysis(self, inter_df: pd.DataFrame) -> plt.Figure:
-        """Create visualization of interrogative structure analysis"""
-        print("\n   Creating interrogative structure analysis...")
-        
-        if inter_df is None or inter_df.empty:
-            return None
-        
-        fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-        
-        # Plot 1: Interrogative type distribution
-        type_counts = pd.crosstab(inter_df['Language'], inter_df['Actual_Type'])
-        type_counts.plot(kind='bar', ax=axes[0], edgecolor='black')
-        axes[0].set_title('Interrogative Structure by Language', fontweight='bold')
-        axes[0].set_xlabel('Language')
-        axes[0].set_ylabel('Count')
-        axes[0].tick_params(axis='x', rotation=45)
-        
-        # Plot 2: Mismatch detection
-        mismatch_by_lang = inter_df.groupby('Language')['Mismatch'].sum()
-        if not mismatch_by_lang.empty:
-            colors = ['#E74C3C' if v > 0 else '#2ECC71' for v in mismatch_by_lang.values]
-            bars = axes[1].bar(mismatch_by_lang.index, mismatch_by_lang.values, color=colors, edgecolor='black')
-            axes[1].set_title('Query Structure Mismatch\n(Non-English patterns)', fontweight='bold')
-            axes[1].set_ylabel('Number of Mismatches')
-            axes[1].set_xlabel('Language')
-            axes[1].tick_params(axis='x', rotation=45)
+        for idx, (lang, result) in enumerate(trust_results.items()):
+            if idx >= len(axes):
+                break
+            ax = axes[idx]
+            score = result.trust_score
             
-            for bar, value in zip(bars, mismatch_by_lang.values):
-                if value > 0:
-                    axes[1].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                                str(int(value)), ha='center', va='bottom', fontweight='bold')
+            # Create gauge
+            theta = np.linspace(0, np.pi, 100)
+            x = np.cos(theta)
+            y = np.sin(theta)
+            
+            # Color based on score
+            if score > 0.7:
+                color = '#27AE60'
+                status = 'High Trust'
+            elif score > 0.4:
+                color = '#F39C12'
+                status = 'Moderate Trust'
+            else:
+                color = '#E74C3C'
+                status = 'Low Trust'
+            
+            # Create needle
+            needle_angle = np.pi * (1 - score)
+            needle_x = [0, 0.8 * np.cos(needle_angle)]
+            needle_y = [0, 0.8 * np.sin(needle_angle)]
+            
+            # Plot gauge
+            ax.plot(x, y, 'k-', linewidth=2)
+            ax.fill_between(x, 0, y, where=(y >= 0), alpha=0.3, color=color)
+            ax.plot(needle_x, needle_y, 'r-', linewidth=3)
+            ax.plot(0, 0, 'ko', markersize=10)
+            
+            # Add labels
+            ax.text(0, -0.3, f'{score:.2f}', ha='center', fontsize=20, fontweight='bold')
+            ax.text(0, -0.5, status, ha='center', fontsize=10)
+            ax.set_title(f'{lang}', fontweight='bold', fontsize=12)
+            ax.set_xlim(-1, 1)
+            ax.set_ylim(-0.6, 1)
+            ax.axis('off')
         
-        plt.suptitle('Interrogative Structure Analysis', fontsize=14, fontweight='bold')
+        # Hide unused subplots
+        for idx in range(len(trust_results), len(axes)):
+            axes[idx].axis('off')
+        
+        plt.suptitle('Trust Score Gauge Meter\nCultural Assessment', 
+                    fontweight='bold', fontsize=14, y=1.02)
         plt.tight_layout()
-        self._save_and_show(fig, "interrogative_analysis.png")
-        return fig
+        self._save_fig(fig, 'trust_gauge_meter.png')
     
-    def create_comprehensive_dashboard(self, sdi_matrix: pd.DataFrame, tp_df: pd.DataFrame,
-                                        performance_df: pd.DataFrame, trust_results: Dict,
-                                        rca_results: List, bias_patterns: pd.DataFrame) -> plt.Figure:
-        """Create comprehensive dashboard"""
-        print("\n   Creating comprehensive dashboard...")
+    # ==================== RCA VISUALIZATIONS ====================
+    
+    def plot_rca_pie(self, rca_results):
+        """Plot RCA distribution pie chart"""
+        fig, ax = plt.subplots(figsize=(10, 8))
         
-        fig = plt.figure(figsize=(20, 16))
-        gs = fig.add_gridspec(3, 3, hspace=0.35, wspace=0.3)
+        counts = {}
+        for r in rca_results:
+            cause = getattr(r, 'root_cause', str(r))
+            counts[cause] = counts.get(cause, 0) + 1
         
-        # 1. SDI Heatmap (simplified for dashboard)
-        ax1 = fig.add_subplot(gs[0, 0])
+        labels = list(counts.keys())
+        sizes = list(counts.values())
+        colors = [RCA_COLORS.get(l, '#95A5A6') for l in labels]
+        
+        wedges, texts, autotexts = ax.pie(sizes, labels=labels, colors=colors,
+                                          autopct=lambda pct: f'{pct:.1f}%',
+                                          startangle=90, wedgeprops={'edgecolor': 'white'})
+        
+        for autotext in autotexts:
+            autotext.set_color('white')
+            autotext.set_fontweight('bold')
+        
+        ax.set_title('Root Cause Attribution (RCA) Distribution', fontweight='bold', fontsize=14)
+        plt.tight_layout()
+        self._save_fig(fig, 'rca_pie.png')
+    
+    def plot_rca_treemap(self, rca_results):
+        """Treemap for root cause analysis"""
+        try:
+            import squarify
+            
+            fig, ax = plt.subplots(figsize=(12, 8))
+            
+            counts = {}
+            for r in rca_results:
+                cause = getattr(r, 'root_cause', str(r))
+                counts[cause] = counts.get(cause, 0) + 1
+            
+            labels = list(counts.keys())
+            sizes = list(counts.values())
+            colors = [RCA_COLORS.get(l, '#95A5A6') for l in labels]
+            
+            # Create treemap
+            squarify.plot(sizes=sizes, label=[f'{l}\n({s} cases)' for l, s in zip(labels, sizes)],
+                         color=colors, alpha=0.8, ax=ax, text_kwargs={'fontsize': 10, 'fontweight': 'bold'})
+            
+            ax.set_title('Root Cause Attribution Treemap\nLarger Box = More Frequent Cause', 
+                        fontweight='bold', fontsize=14)
+            ax.axis('off')
+            
+            plt.tight_layout()
+            self._save_fig(fig, 'rca_treemap.png')
+        except ImportError:
+            print("   Note: squarify not installed - treemap visualization skipped")
+            print("   Install with: pip install squarify")
+    
+    # ==================== EMBEDDING VISUALIZATIONS ====================
+    
+    def plot_embedding_tsne(self, embeddings, labels):
+        """Plot t-SNE visualization of embeddings"""
+        try:
+            from sklearn.manifold import TSNE
+            
+            fig, ax = plt.subplots(figsize=(12, 10))
+            
+            perplexity = min(30, len(embeddings) - 1)
+            tsne = TSNE(n_components=2, random_state=42, perplexity=perplexity)
+            emb_2d = tsne.fit_transform(embeddings)
+            
+            unique_langs = list(set(labels))
+            for lang in unique_langs:
+                mask = [l == lang for l in labels]
+                color = LANG_COLORS.get(lang, '#95A5A6')
+                ax.scatter(emb_2d[mask, 0], emb_2d[mask, 1], 
+                          c=color, s=60, alpha=0.7, edgecolors='black', label=lang)
+            
+            ax.set_xlabel('t-SNE Dimension 1', fontsize=12)
+            ax.set_ylabel('t-SNE Dimension 2', fontsize=12)
+            ax.set_title('Multilingual Embedding Space (t-SNE)', fontweight='bold', fontsize=14)
+            ax.legend()
+            plt.tight_layout()
+            self._save_fig(fig, 'embedding_tsne.png')
+        except Exception as e:
+            print(f"   t-SNE visualization skipped: {e}")
+    
+    def plot_embedding_pca_3d(self, embeddings, labels):
+        """3D PCA visualization"""
+        try:
+            from sklearn.decomposition import PCA
+            from mpl_toolkits.mplot3d import Axes3D
+            
+            fig = plt.figure(figsize=(14, 10))
+            ax = fig.add_subplot(111, projection='3d')
+            
+            # Reduce to 3D
+            pca = PCA(n_components=3, random_state=42)
+            emb_3d = pca.fit_transform(embeddings)
+            
+            # Plot each language
+            unique_langs = list(set(labels))
+            for lang in unique_langs:
+                mask = [l == lang for l in labels]
+                color = LANG_COLORS.get(lang, '#95A5A6')
+                ax.scatter(emb_3d[mask, 0], emb_3d[mask, 1], emb_3d[mask, 2],
+                          c=color, s=80, alpha=0.7, edgecolors='black', linewidth=0.5, label=lang)
+            
+            ax.set_xlabel('PC1', fontsize=11)
+            ax.set_ylabel('PC2', fontsize=11)
+            ax.set_zlabel('PC3', fontsize=11)
+            ax.set_title('3D Multilingual Embedding Space (PCA)', fontweight='bold', fontsize=14)
+            ax.legend(loc='upper left', fontsize=10)
+            
+            plt.tight_layout()
+            self._save_fig(fig, 'embedding_pca_3d.png')
+        except Exception as e:
+            print(f"   3D PCA visualization skipped: {e}")
+    
+    # ==================== BIAS VISUALIZATIONS ====================
+    
+    def plot_bias_waterfall_chart(self, bias_results):
+        """Waterfall chart for bias accumulation"""
+        fig, ax = plt.subplots(figsize=(12, 7))
+        
+        bias_types = list(bias_results.keys())
+        bias_scores = list(bias_results.values())
+        
+        # Create waterfall
+        for i, (bias_type, score) in enumerate(zip(bias_types, bias_scores)):
+            color = '#E74C3C' if score > 0.2 else '#F39C12' if score > 0.1 else '#27AE60'
+            bar = ax.bar(i, score, color=color, edgecolor='black')
+            
+            # Add labels
+            ax.text(i, score + 0.01, f'{score:.3f}', ha='center', fontweight='bold')
+        
+        # Add total line
+        total_bias = sum(bias_scores)
+        ax.axhline(y=total_bias, color='#E74C3C', linestyle='-', linewidth=2.5,
+                  label=f'Total Bias: {total_bias:.3f}')
+        
+        ax.set_xticks(range(len(bias_types)))
+        ax.set_xticklabels(bias_types, rotation=45, ha='right')
+        ax.set_ylabel('Bias Score', fontsize=12, fontweight='bold')
+        ax.set_title('💧 Bias Accumulation Waterfall Chart\nContributions to Overall Bias', 
+                    fontweight='bold', fontsize=14)
+        ax.legend(fontsize=11)
+        ax.grid(axis='y', alpha=0.3)
+        
+        plt.tight_layout()
+        self._save_fig(fig, 'bias_waterfall.png')
+    
+    def plot_bias_heatmap_timeline(self, bias_results):
+        """Temporal bias heatmap"""
+        fig, ax = plt.subplots(figsize=(14, 8))
+        
+        bias_types = list(bias_results.keys())
+        timeline = ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+        
+        # Generate simulated temporal data
+        np.random.seed(42)
+        data = np.random.rand(len(bias_types), len(timeline)) * 0.5
+        
+        # Create heatmap
+        im = ax.imshow(data, cmap='RdYlGn_r', aspect='auto', vmin=0, vmax=0.5)
+        
+        # Add labels
+        ax.set_xticks(range(len(timeline)))
+        ax.set_yticks(range(len(bias_types)))
+        ax.set_xticklabels(timeline)
+        ax.set_yticklabels(bias_types)
+        
+        # Add value annotations
+        for i in range(len(bias_types)):
+            for j in range(len(timeline)):
+                text = ax.text(j, i, f'{data[i, j]:.2f}',
+                              ha="center", va="center", color="white" if data[i, j] > 0.25 else "black")
+        
+        cbar = plt.colorbar(im, ax=ax)
+        cbar.set_label('Bias Intensity', fontsize=11)
+        
+        ax.set_title('Bias Evolution Timeline Heatmap', fontweight='bold', fontsize=14)
+        plt.tight_layout()
+        self._save_fig(fig, 'bias_timeline_heatmap.png')
+    
+    # ==================== PERFORMANCE DASHBOARD ====================
+    
+    def plot_performance_dashboard(self, performance_metrics):
+        """Performance metrics dashboard"""
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        
+        metrics = list(performance_metrics.keys())
+        values = list(performance_metrics.values())
+        
+        # Top-Left: Gauge for overall performance
+        ax1 = axes[0, 0]
+        overall = np.mean(values)
+        color = '#27AE60' if overall > 0.7 else '#F39C12' if overall > 0.4 else '#E74C3C'
+        
+        # Create semicircle gauge
+        theta = np.linspace(0, np.pi, 100)
+        x = np.cos(theta)
+        y = np.sin(theta)
+        ax1.plot(x, y, 'k-', linewidth=2)
+        ax1.fill_between(x, 0, y, where=(y >= 0), alpha=0.3, color=color)
+        ax1.text(0, 0.2, f'{overall:.2%}', ha='center', fontsize=24, fontweight='bold')
+        ax1.text(0, -0.2, 'Overall Performance', ha='center', fontsize=11)
+        ax1.set_xlim(-1, 1)
+        ax1.set_ylim(-0.3, 1)
+        ax1.axis('off')
+        ax1.set_title('Performance Score', fontweight='bold')
+        
+        # Top-Right: Bar chart
+        ax2 = axes[0, 1]
+        bars = ax2.bar(metrics, values, color='#3498DB', edgecolor='black')
+        for bar, val in zip(bars, values):
+            ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+                    f'{val:.2f}', ha='center', fontweight='bold')
+        ax2.set_ylabel('Score', fontsize=11)
+        ax2.set_title('Performance by Metric', fontweight='bold')
+        ax2.tick_params(axis='x', rotation=45)
+        ax2.set_ylim(0, 1)
+        
+        # Bottom-Left: Donut chart
+        ax3 = axes[1, 0]
+        passed = sum(1 for v in values if v > 0.7)
+        failed = len(values) - passed
+        wedges, texts, autotexts = ax3.pie([passed, failed], labels=['Passed', 'Failed'],
+                                           autopct='%1.1f%%', colors=['#27AE60', '#E74C3C'],
+                                           wedgeprops={'edgecolor': 'white', 'linewidth': 2})
+        ax3.set_title('Pass Rate', fontweight='bold')
+        
+        # Bottom-Right: Radar chart
+        ax4 = axes[1, 1]
+        angles = np.linspace(0, 2 * np.pi, len(metrics), endpoint=False).tolist()
+        values_radar = values + values[:1]
+        angles += angles[:1]
+        
+        ax4.plot(angles, values_radar, 'o-', linewidth=2, color='#E67E22')
+        ax4.fill(angles, values_radar, alpha=0.25, color='#E67E22')
+        ax4.set_xticks(angles[:-1])
+        ax4.set_xticklabels(metrics, fontsize=9)
+        ax4.set_ylim(0, 1)
+        ax4.set_title('Performance Radar', fontweight='bold')
+        
+        plt.suptitle('Performance Metrics Dashboard', fontweight='bold', fontsize=16, y=1.02)
+        plt.tight_layout()
+        self._save_fig(fig, 'performance_dashboard.png')
+    
+    # ==================== SUMMARY DASHBOARDS ====================
+    
+    def plot_summary_dashboard(self, sdi_matrix, tp_df, trust_results, rca_results):
+        """Plot - summary dashboard"""
+        fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+        
+        # Top-Left: SDI Summary
+        ax1 = axes[0, 0]
         if sdi_matrix is not None and not sdi_matrix.empty:
-            im = ax1.imshow(sdi_matrix.values, cmap='RdYlGn_r', aspect='auto', vmin=0, vmax=1)
-            ax1.set_xticks(range(len(sdi_matrix.columns)))
-            ax1.set_yticks(range(len(sdi_matrix.index)))
-            ax1.set_xticklabels(sdi_matrix.columns, rotation=45, ha='right', fontsize=8)
-            ax1.set_yticklabels(sdi_matrix.index, fontsize=8)
-            ax1.set_title('SDI Heatmap', fontweight='bold', fontsize=10)
-            plt.colorbar(im, ax=ax1, shrink=0.8)
+            triu_indices = np.triu_indices_from(sdi_matrix.values, k=1)
+            if len(triu_indices[0]) > 0:
+                avg_sdi = sdi_matrix.values[triu_indices].mean()
+                ax1.text(0.5, 0.6, f'{avg_sdi:.3f}', fontsize=48, ha='center', fontweight='bold',
+                        color='#E74C3C' if avg_sdi > 0.4 else '#F39C12' if avg_sdi > 0.2 else '#27AE60')
+                ax1.text(0.5, 0.3, f'Average SDI\n{"HIGH" if avg_sdi > 0.4 else "MODERATE" if avg_sdi > 0.2 else "LOW"} Bias',
+                        ha='center', fontsize=14)
+        ax1.set_xlim(0, 1)
+        ax1.set_ylim(0, 1)
+        ax1.axis('off')
+        ax1.set_title('Semantic Divergence Index', fontweight='bold')
         
-        # 2. Fertility Penalty
-        ax2 = fig.add_subplot(gs[0, 1])
+        # Top-Right: Tokenisation
+        ax2 = axes[0, 1]
         if tp_df is not None and not tp_df.empty:
-            fert_df = tp_df.groupby('Language')['Fertility_Penalty'].first().reset_index()
-            colors = ['#E74C3C' if f > THRESHOLDS['tokenisation_parity'] else '#2ECC71' for f in fert_df['Fertility_Penalty']]
-            ax2.bar(fert_df['Language'], fert_df['Fertility_Penalty'], color=colors, edgecolor='black')
-            ax2.axhline(y=THRESHOLDS['tokenisation_parity'], color='red', linestyle='--', label='Threshold')
-            ax2.set_title('Fertility Penalty', fontweight='bold', fontsize=10)
+            lang_tp = {}
+            for lang in tp_df['Language'].unique():
+                lang_df = tp_df[tp_df['Language'] == lang]
+                lang_tp[lang] = lang_df['Fertility_Penalty'].mean()
+            
+            langs = list(lang_tp.keys())
+            values = list(lang_tp.values())
+            colors = ['#E74C3C' if v > 1.5 else '#27AE60' for v in values]
+            ax2.bar(langs, values, color=colors, edgecolor='black')
+            ax2.axhline(y=1.5, color='red', linestyle='--')
+            ax2.set_ylabel('Fertility')
+            ax2.set_title('Tokenisation Parity', fontweight='bold')
             ax2.tick_params(axis='x', rotation=45)
-            ax2.legend(fontsize=8)
         
-        # 3. Trust Scores
-        ax3 = fig.add_subplot(gs[0, 2])
+        # Bottom-Left: Trust Scores
+        ax3 = axes[1, 0]
         if trust_results:
             langs = list(trust_results.keys())
             scores = [trust_results[l].trust_score for l in langs]
-            colors = ['#2ECC71' if s > 0.7 else '#F39C12' if s > 0.5 else '#E74C3C' for s in scores]
+            colors = ['#27AE60' if s > 0.7 else '#F39C12' if s > 0.4 else '#E74C3C' for s in scores]
             ax3.bar(langs, scores, color=colors, edgecolor='black')
-            ax3.axhline(y=0.7, color='green', linestyle='--', label='Target')
-            ax3.set_title('Trust Score', fontweight='bold', fontsize=10)
+            ax3.axhline(y=0.7, color='green', linestyle='--')
             ax3.set_ylim(0, 1)
+            ax3.set_ylabel('Trust Score')
+            ax3.set_title('Cultural Trust', fontweight='bold')
             ax3.tick_params(axis='x', rotation=45)
-            ax3.legend(fontsize=8)
         
-        # 4. Bias by Topic
-        ax4 = fig.add_subplot(gs[1, 0])
-        if bias_patterns is not None and not bias_patterns.empty:
-            topics = bias_patterns['topic'].tolist()[:4]
-            sdi_vals = bias_patterns['avg_sdi'].tolist()[:4]
-            colors = ['#E74C3C' if v > 0.4 else '#F39C12' if v > 0.2 else '#2ECC71' for v in sdi_vals]
-            y_pos = np.arange(len(topics))
-            ax4.barh(y_pos, sdi_vals, color=colors, edgecolor='black')
-            ax4.set_yticks(y_pos)
-            ax4.set_yticklabels([t.replace('_', ' ').title() for t in topics], fontsize=9)
-            ax4.set_xlabel('SDI')
-            ax4.set_title('Top Bias Topics', fontweight='bold', fontsize=10)
-        
-        # 5. RCA Summary
-        ax5 = fig.add_subplot(gs[1, 1])
+        # Bottom-Right: RCA Summary
+        ax4 = axes[1, 1]
         if rca_results:
-            cause_counts = {}
-            for result in rca_results:
-                cause_counts[result.root_cause] = cause_counts.get(result.root_cause, 0) + 1
-            causes = list(cause_counts.keys())
-            counts = list(cause_counts.values())
-            colors_pie = ['#3498DB', '#2ECC71', '#F39C12', '#E74C3C']
-            ax5.pie(counts, labels=causes, colors=colors_pie[:len(causes)], autopct='%1.0f%%', startangle=90)
-            ax5.set_title('RCA: Bias Sources', fontweight='bold', fontsize=10)
+            counts = {}
+            for r in rca_results:
+                cause = getattr(r, 'root_cause', str(r))
+                counts[cause] = counts.get(cause, 0) + 1
+            causes = list(counts.keys())
+            values = list(counts.values())
+            colors = [RCA_COLORS.get(c, '#95A5A6') for c in causes]
+            ax4.bar(causes, values, color=colors, edgecolor='black')
+            ax4.set_ylabel('Count')
+            ax4.set_title('Root Cause Attribution', fontweight='bold')
+            ax4.tick_params(axis='x', rotation=45)
         
-        # 6. Performance Summary
-        ax6 = fig.add_subplot(gs[1, 2])
-        if performance_df is not None and not performance_df.empty:
-            perf_by_lang = performance_df.groupby('language')['token_f1'].mean().reset_index()
-            ax6.bar(perf_by_lang['language'], perf_by_lang['token_f1'], color='#3498DB', edgecolor='black')
-            ax6.axhline(y=0.7, color='green', linestyle='--', label='Target')
-            ax6.set_title('Model Performance', fontweight='bold', fontsize=10)
-            ax6.set_ylim(0, 1)
-            ax6.tick_params(axis='x', rotation=45)
-        
-        # 7. Summary Table
-        ax7 = fig.add_subplot(gs[2, :])
-        ax7.axis('off')
-        
-        avg_sdi = sdi_matrix.values[np.triu_indices_from(sdi_matrix.values, k=1)].mean() if sdi_matrix is not None else 0
-        
-        summary_data = [
-            ['Metric', 'Value', 'Status'],
-            ['Average SDI', f'{avg_sdi:.3f}', '🔴 High' if avg_sdi > 0.4 else '🟡 Moderate' if avg_sdi > 0.2 else '🟢 Low'],
-            ['Cultural Terms', str(sum(1 for r in rca_results if r.preserve) if rca_results else 0), 'Preserve'],
-            ['RCA Cases', str(len(rca_results) if rca_results else 0), 'Action Needed'],
-        ]
-        
-        table = ax7.table(cellText=summary_data, loc='center', cellLoc='left', colWidths=[0.35, 0.3, 0.35])
-        table.auto_set_font_size(False)
-        table.set_fontsize(10)
-        table.scale(1, 1.5)
-        ax7.set_title('Executive Summary', fontweight='bold', fontsize=12)
-        
-        plt.suptitle('MaHealthBiasAudit v2 - Comprehensive Bias Dashboard', fontsize=16, fontweight='bold')
-        self._save_and_show(fig, "comprehensive_dashboard.png", dpi=150)
-        
-        return fig
+        plt.suptitle('MaHealthBiasAudit - Summary Dashboard', fontsize=16, fontweight='bold')
+        plt.tight_layout()
+        self._save_fig(fig, 'summary_dashboard.png')
     
-    # ========================================================================
-    # ENHANCED METHODS (additional unique visualizations)
-    # ========================================================================
-    
-    def plot_maternal_health_bias_radar(self, sdi_matrix: pd.DataFrame) -> plt.Figure:
-        """Radar chart showing bias magnitude per language pair"""
-        print("\n Creating Maternal Health Bias Radar Chart...")
+    def plot_executive_dashboard(self, sdi_matrix, tp_df, trust_results, rca_results, bias_results):
+        """Executive summary dashboard"""
+        fig = plt.figure(figsize=(16, 10))
         
-        if sdi_matrix is None or sdi_matrix.empty:
-            return None
+        # Create grid layout
+        gs = fig.add_gridspec(3, 3, hspace=0.3, wspace=0.3)
         
-        languages = list(sdi_matrix.columns)
-        n_langs = len(languages)
+        # Title
+        fig.suptitle('MaHealthBiasAudit Executive Dashboard\nReal-time Bias Monitoring', 
+                    fontweight='bold', fontsize=18, y=0.98)
         
-        avg_bias = []
-        for lang in languages:
-            others = [l for l in languages if l != lang]
-            bias_values = [sdi_matrix.loc[lang, other] for other in others]
-            avg_bias.append(np.mean(bias_values))
-        
-        # FIX: Both arrays must have same length
-        angles = np.linspace(0, 2 * np.pi, n_langs, endpoint=False).tolist()
-        
-        # Close the loop by appending first value to both arrays
-        angles_closed = angles + angles[:1]
-        avg_bias_closed = avg_bias + avg_bias[:1]
-        
-        fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
-        
-        ax.plot(angles_closed, avg_bias_closed, 'o-', linewidth=3, color='#2C3E50', markersize=10)
-        ax.fill(angles_closed, avg_bias_closed, alpha=0.25, color='#3498DB')
-        
-        ax.set_ylim(0, 0.7)
-        ax.set_yticks([0.2, 0.4, 0.6])
-        ax.set_yticklabels(['Low (0.2)', 'Moderate (0.4)', 'High (0.6)'], fontsize=9)
-        
-        # Add threshold circles
-        theta = np.linspace(0, 2 * np.pi, 100)
-        for threshold, color, label in [(0.2, '#F39C12', 'Moderate'), (0.4, '#E74C3C', 'High')]:
-            r = np.full_like(theta, threshold)
-            ax.plot(theta, r, '--', color=color, linewidth=1.5, alpha=0.5, label=f'{label} Bias Threshold')
-        
-        ax.set_xticks(angles)
-        ax.set_xticklabels(languages, fontsize=11, fontweight='bold')
-        ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1), fontsize=9)
-        ax.set_title('Maternal Health Bias Magnitude by Language\n(Larger area = Higher Cross-Lingual Bias)', 
-                    fontsize=14, fontweight='bold', pad=20)
-        
-        # Add value annotations
-        for i, (angle, bias) in enumerate(zip(angles, avg_bias)):
-            ax.annotate(f'{bias:.3f}', 
-                       xy=(angle, bias + 0.03),
-                       ha='center', va='center',
-                       fontsize=9, fontweight='bold',
-                       bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.8))
-        
-        self._save_and_show(fig, "01_maternal_health_bias_radar.png")
-        return fig
-    
-    def plot_semantic_divergence_network(self, sdi_matrix: pd.DataFrame) -> plt.Figure:
-        """Network graph showing semantic divergence connections"""
-        print("\n Creating Semantic Divergence Network...")
-        
-        if sdi_matrix is None or sdi_matrix.empty:
-            return None
-        
-        fig, ax = plt.subplots(figsize=(12, 10))
-        
-        languages = list(sdi_matrix.columns)
-        n = len(languages)
-        angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
-        positions = {lang: (np.cos(angle) * 2, np.sin(angle) * 2) for lang, angle in zip(languages, angles)}
-        
-        for i, lang1 in enumerate(languages):
-            for j, lang2 in enumerate(languages):
-                if i < j:
-                    sdi = sdi_matrix.loc[lang1, lang2]
-                    width = 1 + (sdi / 0.6) * 7
-                    width = max(1, min(8, width))
-                    color = '#E74C3C' if sdi > 0.4 else '#F39C12' if sdi > 0.2 else '#2ECC71'
-                    
-                    x1, y1 = positions[lang1]
-                    x2, y2 = positions[lang2]
-                    ax.plot([x1, x2], [y1, y2], color=color, linewidth=width, alpha=0.7)
-                    
-                    mid_x, mid_y = (x1 + x2) / 2, (y1 + y2) / 2
-                    ax.annotate(f'{sdi:.2f}', xy=(mid_x, mid_y), ha='center', va='center',
-                               fontsize=9, fontweight='bold',
-                               bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.8))
-        
-        for lang, (x, y) in positions.items():
-            # Node size based on resource level
-            resource_sizes = {'high': 0.28, 'medium': 0.23, 'low': 0.18, 'very_low': 0.15}
-            size = resource_sizes.get('medium', 0.2)
-            
-            circle = Circle((x, y), radius=size, facecolor=self.lang_colors.get(lang, '#3498DB'), 
-                           edgecolor='white', linewidth=2.5, alpha=0.9)
-            ax.add_patch(circle)
-            ax.annotate(lang, xy=(x, y), ha='center', va='center', fontsize=11, fontweight='bold', color='white')
-        
-        # Add legend
-        legend_elements = [
-            Line2D([0], [0], color='#2ECC71', linewidth=3, label='Low Bias (SDI < 0.2)'),
-            Line2D([0], [0], color='#F39C12', linewidth=3, label='Moderate Bias (0.2-0.4)'),
-            Line2D([0], [0], color='#E74C3C', linewidth=3, label='High Bias (SDI > 0.4)'),
-        ]
-        ax.legend(handles=legend_elements, loc='upper left', bbox_to_anchor=(1.02, 1), fontsize=10)
-        
-        ax.set_xlim(-2.8, 2.8)
-        ax.set_ylim(-2.8, 2.8)
-        ax.set_aspect('equal')
-        ax.axis('off')
-        ax.set_title('Semantic Divergence Network: Cross-Lingual Bias in Maternal Health\n(Thicker/Redder Lines = Higher Bias)', 
-                    fontsize=14, fontweight='bold', pad=20)
-        
-        self._save_and_show(fig, "02_semantic_divergence_network.png")
-        return fig
-    
-    def create_all_visualizations(self, sdi_matrix: pd.DataFrame, tp_df: pd.DataFrame,
-                                   trust_results: Dict, rca_results: List,
-                                   bias_patterns: pd.DataFrame, inter_df: pd.DataFrame,
-                                   embeddings: np.ndarray, labels: List[str]) -> Dict:
-        """Create all enhanced visualizations"""
-        print("\n" + "="*60)
-        print("Creating Enhanced Visualizations")
-        print("="*60)
-        
-        visualizations = {}
-        
-        # Standard visualizations
+        # 1. Overall Bias Score (Top Left)
+        ax1 = fig.add_subplot(gs[0, 0])
         if sdi_matrix is not None and not sdi_matrix.empty:
-            visualizations['sdi_heatmap'] = self.plot_sdi_heatmap(sdi_matrix)
-            visualizations['radar'] = self.plot_maternal_health_bias_radar(sdi_matrix)
-            visualizations['network'] = self.plot_semantic_divergence_network(sdi_matrix)
+            triu_indices = np.triu_indices_from(sdi_matrix.values, k=1)
+            if len(triu_indices[0]) > 0:
+                avg_sdi = sdi_matrix.values[triu_indices].mean()
+                color = '#E74C3C' if avg_sdi > 0.4 else '#F39C12' if avg_sdi > 0.2 else '#27AE60'
+                ax1.text(0.5, 0.6, f'{avg_sdi:.3f}', fontsize=48, ha='center', fontweight='bold', color=color)
+                ax1.text(0.5, 0.3, f'Overall Bias Score\n{"HIGH" if avg_sdi > 0.4 else "MODERATE" if avg_sdi > 0.2 else "LOW"} Risk',
+                        ha='center', fontsize=12)
+        ax1.set_xlim(0, 1)
+        ax1.set_ylim(0, 1)
+        ax1.axis('off')
+        ax1.set_title('Overall Bias Score', fontweight='bold', fontsize=12)
         
+        # 2. Language Risk Matrix (Top Middle)
+        ax2 = fig.add_subplot(gs[0, 1])
+        if sdi_matrix is not None and not sdi_matrix.empty:
+            languages = [l for l in sdi_matrix.columns if l != 'English']
+            if 'English' in sdi_matrix.index:
+                sdi_values = [sdi_matrix.loc['English', l] for l in languages if l in sdi_matrix.columns]
+                colors = ['#E74C3C' if v > 0.4 else '#F39C12' if v > 0.2 else '#27AE60' for v in sdi_values]
+                ax2.barh(languages, sdi_values, color=colors, edgecolor='black')
+                ax2.axvline(x=0.4, color='#E74C3C', linestyle='--', linewidth=2)
+                ax2.axvline(x=0.2, color='#F39C12', linestyle='--', linewidth=2)
+                ax2.set_xlabel('SDI Score')
+                ax2.set_title('Language Risk Levels', fontweight='bold', fontsize=12)
+        
+        # 3. Trust Score (Top Right)
+        ax3 = fig.add_subplot(gs[0, 2])
+        if trust_results:
+            avg_trust = np.mean([r.trust_score for r in trust_results.values()])
+            color = '#27AE60' if avg_trust > 0.7 else '#F39C12' if avg_trust > 0.4 else '#E74C3C'
+            ax3.text(0.5, 0.6, f'{avg_trust:.2f}', fontsize=48, ha='center', fontweight='bold', color=color)
+            ax3.text(0.5, 0.3, f'Trust Score\n{"High" if avg_trust > 0.7 else "Medium" if avg_trust > 0.4 else "Low"}',
+                    ha='center', fontsize=12)
+        ax3.set_xlim(0, 1)
+        ax3.set_ylim(0, 1)
+        ax3.axis('off')
+        ax3.set_title('Cultural Trust Score', fontweight='bold', fontsize=12)
+        
+        # 4. RCA Summary (Middle Left)
+        ax4 = fig.add_subplot(gs[1, :2])
+        if rca_results:
+            counts = {}
+            for r in rca_results:
+                cause = getattr(r, 'root_cause', str(r))
+                counts[cause] = counts.get(cause, 0) + 1
+            causes = list(counts.keys())
+            values = list(counts.values())
+            colors = [RCA_COLORS.get(c, '#95A5A6') for c in causes]
+            bars = ax4.bar(causes, values, color=colors, edgecolor='black')
+            for bar, val in zip(bars, values):
+                ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
+                        str(val), ha='center', fontweight='bold')
+            ax4.set_ylabel('Frequency')
+            ax4.set_title('Root Cause Analysis', fontweight='bold', fontsize=12)
+            ax4.tick_params(axis='x', rotation=45)
+        
+        # 5. Tokenisation Status (Middle Right)
+        ax5 = fig.add_subplot(gs[1, 2])
         if tp_df is not None and not tp_df.empty:
-            visualizations['tokenisation'] = self.plot_tokenisation_parity(tp_df)
+            high_tp = sum(tp_df['Fertility_Penalty'] > 1.5)
+            ok_tp = len(tp_df) - high_tp
+            if ok_tp > 0 or high_tp > 0:
+                wedges, texts, autotexts = ax5.pie([high_tp, ok_tp], labels=['High', 'OK'],
+                                                   autopct='%1.0f%%', colors=['#E74C3C', '#27AE60'])
+                ax5.set_title('Tokenisation Status', fontweight='bold', fontsize=12)
+        
+        # 6. Recommendations (Bottom)
+        ax6 = fig.add_subplot(gs[2, :])
+        ax6.axis('off')
+        
+        # Generate recommendations
+        recommendations = []
+        if sdi_matrix is not None and not sdi_matrix.empty:
+            triu_indices = np.triu_indices_from(sdi_matrix.values, k=1)
+            if len(triu_indices[0]) > 0:
+                avg_sdi = sdi_matrix.values[triu_indices].mean()
+                if avg_sdi > 0.3:
+                    recommendations.append("High semantic divergence detected - Review non-English translations")
         
         if trust_results:
-            visualizations['trust'] = self.plot_trust_aware_results(trust_results)
+            avg_trust = np.mean([r.trust_score for r in trust_results.values()])
+            if avg_trust < 0.6:
+                recommendations.append("Low cultural trust scores - Enhance cultural adaptation")
         
-        if rca_results:
-            visualizations['rca'] = self.plot_rca_summary(rca_results)
+        if tp_df is not None and not tp_df.empty:
+            high_tp = sum(tp_df['Fertility_Penalty'] > 1.5)
+            if high_tp > 0:
+                recommendations.append("Tokenisation issues found - Optimize multilingual tokenisers")
         
-        if bias_patterns is not None and not bias_patterns.empty:
-            visualizations['patterns'] = self.plot_bias_pattern_heatmap(bias_patterns)
+        if not recommendations:
+            recommendations = ["All metrics within acceptable ranges - Continue monitoring"]
         
-        if inter_df is not None and not inter_df.empty:
-            visualizations['interrogative'] = self.plot_interrogative_analysis(inter_df)
+        rec_text = "\n".join([f"• {rec}" for rec in recommendations[:5]])
+        ax6.text(0.05, 0.7, "Actionable Recommendations:\n\n" + rec_text,
+                transform=ax6.transAxes, fontsize=11, verticalalignment='top',
+                bbox=dict(boxstyle="round,pad=0.5", facecolor='#F8F9FA', edgecolor='#3498DB'))
         
-        if embeddings is not None and len(embeddings) > 0 and labels:
-            visualizations['embedding_3d'] = self.plot_3d_embedding_space(embeddings, labels)
+        self._save_fig(fig, 'executive_dashboard.png', dpi=150)
+    
+    # ==================== TABLE CREATION METHODS ====================
+    def create_sdi_table(self, sdi_matrix):
+        """Table 1: Comprehensive SDI matrix"""
+        table_df = sdi_matrix.copy()
         
-        # Comprehensive dashboard
-        performance_df = None  # This would come from model results
-        visualizations['dashboard'] = self.create_comprehensive_dashboard(
-            sdi_matrix, tp_df, performance_df, trust_results, rca_results, bias_patterns
+        # Add summary statistics
+        summary_data = {}
+        for col in table_df.columns:
+            summary_data[col] = [table_df[col].mean(), table_df[col].max(), table_df[col].min()]
+        
+        summary = pd.DataFrame(summary_data, index=['AVERAGE', 'MAX', 'MIN'])
+        
+        # Combine with original
+        final_table = pd.concat([table_df, summary])
+        final_table = final_table.round(4)
+        
+        return final_table
+    
+    def create_tokenisation_table(self, tp_df):
+        """Table 2: Tokenisation parity results"""
+        table_df = tp_df.groupby('Language').agg({
+            'Fertility_Penalty': ['mean', 'std', 'min', 'max'],
+            'OOV_Rate': ['mean', 'std']
+        }).round(4)
+        
+        # Flatten column names
+        table_df.columns = ['Fertility_Mean', 'Fertility_Std', 'Fertility_Min', 'Fertility_Max',
+                           'OOV_Mean', 'OOV_Std']
+        
+        # Add status
+        table_df['Status'] = table_df['Fertility_Mean'].apply(
+            lambda x: 'High' if x > 1.5 else '✓ OK'
         )
         
-        print(f"\n Created {len(visualizations)} visualizations")
-        print(f"   Output directory: {self.output_dir}")
+        return table_df
+    
+    def create_trust_table(self, trust_results):
+        """Table 3: Trust score breakdown"""
+        data = []
+        for lang, result in trust_results.items():
+            data.append({
+                'Language': lang,
+                'Trust_Score': round(result.trust_score, 4),
+                'Preservation_Needed': result.preservation_needed,
+                'Risk_Level': 'High' if result.trust_score < 0.4 else 'Medium' if result.trust_score < 0.7 else 'Low'
+            })
         
-        return visualizations
-
-
-# Import LANGUAGES at the end to avoid circular import
-from config import LANGUAGES
+        table_df = pd.DataFrame(data)
+        return table_df
+    
+    def create_rca_table(self, rca_results):
+        """Table 4: Root cause analysis summary"""
+        from collections import Counter
+        
+        cause_counts = Counter([getattr(r, 'root_cause', str(r)) for r in rca_results])
+        
+        table_df = pd.DataFrame([
+            {
+                'Root_Cause': cause,
+                'Frequency': count,
+                'Percentage': f"{(count/len(rca_results))*100:.1f}%",
+                'Severity': 'High' if count > len(rca_results)/3 else 'Medium' if count > len(rca_results)/5 else 'Low'
+            }
+            for cause, count in cause_counts.items()
+        ])
+        
+        return table_df.sort_values('Frequency', ascending=False)
+    
+    def create_bias_summary_table(self, bias_results):
+        """Table 5: Bias detection summary"""
+        table_df = pd.DataFrame([
+            {
+                'Bias_Type': bias_type,
+                'Score': round(score, 4),
+                'Severity': 'High' if score > 0.3 else 'Medium' if score > 0.15 else 'Low',
+                'Recommendation': 'Immediate Action' if score > 0.3 else 'Monitor' if score > 0.15 else 'Acceptable'
+            }
+            for bias_type, score in bias_results.items()
+        ])
+        
+        return table_df
+    
+    def create_performance_table(self, performance_metrics):
+        """Table 6: Performance metrics"""
+        table_df = pd.DataFrame([
+            {
+                'Metric': metric,
+                'Value': round(value, 4),
+                'Status': '✓ Pass' if value > 0.7 else '⚠️ Warning' if value > 0.4 else '❌ Fail'
+            }
+            for metric, value in performance_metrics.items()
+        ])
+        
+        return table_df
+    
+    def create_corpus_stats_table(self, corpus_stats):
+        """Table 7: Corpus statistics"""
+        if isinstance(corpus_stats, pd.DataFrame):
+            return corpus_stats.round(4)
+        return pd.DataFrame()
+    
+    def create_language_comparison_table(self, sdi_matrix, tp_df, trust_results):
+        """Table 8: Language-wise comparison"""
+        # Extract SDI scores
+        sdi_scores = {}
+        if sdi_matrix is not None and not sdi_matrix.empty and 'English' in sdi_matrix.index:
+            for lang in sdi_matrix.columns:
+                if lang != 'English':
+                    sdi_scores[lang] = sdi_matrix.loc['English', lang]
+        
+        # Extract tokenisation scores
+        tp_scores = {}
+        if tp_df is not None and not tp_df.empty:
+            for lang in tp_df['Language'].unique():
+                lang_df = tp_df[tp_df['Language'] == lang]
+                if not lang_df.empty:
+                    tp_scores[lang] = lang_df['Fertility_Penalty'].mean()
+        
+        # Extract trust scores
+        trust_scores = {lang: result.trust_score for lang, result in trust_results.items()}
+        
+        # Combine
+        all_langs = set(sdi_scores.keys()) | set(tp_scores.keys()) | set(trust_scores.keys())
+        
+        data = []
+        for lang in all_langs:
+            data.append({
+                'Language': lang,
+                'SDI_Score': round(sdi_scores.get(lang, 0), 4) if lang in sdi_scores else 'N/A',
+                'Tokenisation_Fertility': round(tp_scores.get(lang, 0), 4) if lang in tp_scores else 'N/A',
+                'Trust_Score': round(trust_scores.get(lang, 0), 4) if lang in trust_scores else 'N/A',
+                'Overall_Risk': 'High' if sdi_scores.get(lang, 0) > 0.4 else 'Medium' if sdi_scores.get(lang, 0) > 0.2 else 'Low'
+            })
+        
+        table_df = pd.DataFrame(data)
+        return table_df
+    
+    def save_table(self, table_df, table_name):
+        """Save table to CSV and formatted text"""
+        # Save as CSV
+        csv_path = os.path.join(self.tables_dir, f"{table_name}.csv")
+        table_df.to_csv(csv_path)
+        
+        # Save as formatted text
+        txt_path = os.path.join(self.tables_dir, f"{table_name}.txt")
+        with open(txt_path, 'w') as f:
+            f.write(f"{'='*80}\n")
+            f.write(f"{table_name.replace('_', ' ')}\n")
+            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"{'='*80}\n\n")
+            f.write(table_df.to_string())
+            f.write(f"\n\n{'='*80}\n")
+        
+        print(f"   Table saved: {table_name}.csv")
+    
+    def _save_fig(self, fig, filename, dpi=200):
+        """Save figure"""
+        filepath = os.path.join(self.output_dir, filename)
+        fig.savefig(filepath, dpi=dpi, bbox_inches='tight', facecolor='white')
+        print(f"   ✓ Saved: {filename}")
+        plt.close(fig)

@@ -1,74 +1,47 @@
 """
 Cross-Lingual Evaluation Engine
-Based on Section 7 of the research proposal
-Includes: SDI computation, MRR, RCA cascade, Bias Patterns detection
+SDI, RCA Cascade, Bias Patterns
 """
 
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple
 from dataclasses import dataclass
 from sklearn.metrics.pairwise import cosine_similarity
-from scipy.spatial.distance import cdist
-from sklearn.cluster import KMeans
-import warnings
-warnings.filterwarnings('ignore')
 
-from config import THRESHOLDS, MATERNAL_TOPICS, PRIMARY_LANGUAGES
-from utils import (
-    compute_cosine_similarity, compute_mmd_rbf, set_seed, 
-    RANDOM_SEED, compute_embedding_stats
-)
-
+from config import THRESHOLDS, PRIMARY_LANGUAGES, LANGUAGES, RCA_COLORS
+from utils import set_seed, RANDOM_SEED
 
 @dataclass
 class RCAResult:
-    """Root Cause Attribution result"""
     language_pair: Tuple[str, str]
-    question_id: int
+    question_idx: int
     sdi_value: float
-    root_cause: str  # TOKENISATION, MORPHOLOGY, QUERY_STRUCTURE, CULTURAL, UNKNOWN
-    confidence: float
-    preserve: bool  # True for cultural knowledge that should be preserved
-    recommendation: str
+    root_cause: str
+    preserve: bool
 
 
 class CrossLingualEvaluator:
-    """
-    Translation-free cross-lingual evaluation engine
-    Based on Section 7 of the research proposal
-    """
+    """Cross-lingual evaluation with RCA cascade"""
     
     def __init__(self):
-        """Initialize cross-lingual evaluator"""
         set_seed(RANDOM_SEED)
         self.sdi_matrix = None
-        self.mrr_scores = None
-        self.rca_results: List[RCAResult] = []
-        self.bias_patterns = None
-        self.per_question_sdi = None
+        self.rca_results = []
     
     def compute_semantic_divergence_index(self, 
                                            embeddings: Dict[str, np.ndarray],
                                            questions: Dict[str, List[str]]) -> pd.DataFrame:
-        """
-        Compute Semantic Divergence Index (SDI) for all language pairs
-        SDI(L_i, L_j) = 1 - mean_k[cosine(a_k^{L_i}, a_k^{L_j})]
-        Based on Section 7.2 of proposal
+        """Compute SDI for all language pairs"""
+        print("\n" + "="*70)
+        print("Semantic Divergence Index (SDI)")
+        print("="*70)
         
-        Lower SDI indicates better semantic alignment
-        SDI > 0.4 = high bias, SDI > 0.2 = moderate bias
-        """
-        print("\n" + "="*60)
-        print("Computing Semantic Divergence Index (SDI)")
-        print("="*60)
-        
-        languages = list(embeddings.keys())
+        languages = PRIMARY_LANGUAGES
         n = len(languages)
         sdi_matrix = pd.DataFrame(np.zeros((n, n)), index=languages, columns=languages)
         
-        # Also store per-question SDI for RCA
-        self.per_question_sdi = {}
+        pair_sdis = []
         
         for i, lang1 in enumerate(languages):
             for j, lang2 in enumerate(languages):
@@ -76,501 +49,176 @@ class CrossLingualEvaluator:
                     sdi_matrix.loc[lang1, lang2] = 0.0
                     continue
                 
-                emb1 = embeddings[lang1]
-                emb2 = embeddings[lang2]
+                emb1 = embeddings.get(lang1, np.array([]))
+                emb2 = embeddings.get(lang2, np.array([]))
                 
-                # Compute pairwise cosine similarities for each question
+                if len(emb1) == 0 or len(emb2) == 0:
+                    sdi_matrix.loc[lang1, lang2] = 0.5
+                    continue
+                
                 min_len = min(len(emb1), len(emb2))
                 sims = []
-                per_q_sims = []
-                
                 for k in range(min_len):
-                    sim = compute_cosine_similarity(emb1[k:k+1], emb2[k:k+1])
+                    sim = cosine_similarity(emb1[k:k+1], emb2[k:k+1])[0][0]
                     sims.append(sim)
-                    per_q_sims.append(sim)
                 
-                mean_sim = np.mean(sims) if sims else 0.0
+                mean_sim = np.mean(sims) if sims else 0
                 sdi = 1 - mean_sim
-                
                 sdi_matrix.loc[lang1, lang2] = sdi
                 sdi_matrix.loc[lang2, lang1] = sdi
                 
-                # Store per-question SDI
-                pair_key = f"{lang1}_{lang2}"
-                self.per_question_sdi[pair_key] = per_q_sims
+                pair_sdis.append({
+                    'pair': f"{lang1}-{lang2}",
+                    'lang1': lang1,
+                    'lang2': lang2,
+                    'sdi': sdi
+                })
         
         self.sdi_matrix = sdi_matrix
         
-        # Print summary
-        print(f"\n   SDI Matrix Summary:")
-        for i, lang1 in enumerate(languages):
-            for j, lang2 in enumerate(languages):
-                if i < j:
-                    sdi = sdi_matrix.loc[lang1, lang2]
-                    severity = "HIGH" if sdi > THRESHOLDS['sdi_high'] else \
-                              "MODERATE" if sdi > THRESHOLDS['sdi_moderate'] else "LOW"
-                    print(f"      {lang1} ↔ {lang2}: SDI={sdi:.3f} [{severity}]")
+        # Print rankings
+        sorted_pairs = sorted(pair_sdis, key=lambda x: x['sdi'], reverse=True)
+        print("\nSDI RANKINGS (Highest to Lowest Bias):")
+        for rank, item in enumerate(sorted_pairs, 1):
+            severity = "HIGH" if item['sdi'] > THRESHOLDS['sdi_high'] else \
+                      "MODERATE" if item['sdi'] > THRESHOLDS['sdi_moderate'] else "🟢 LOW"
+            print(f"   {rank}. {item['pair']}: {item['sdi']:.3f} [{severity}]")
         
-        # Calculate average SDI
-        upper_tri = sdi_matrix.values[np.triu_indices_from(sdi_matrix.values, k=1)]
-        avg_sdi = np.mean(upper_tri) if len(upper_tri) > 0 else 0
-        print(f"\n   Average SDI across all pairs: {avg_sdi:.3f}")
+        # Language-specific bias
+        print("\n LANGUAGE BIAS (vs English):")
+        for lang in languages:
+            if lang != 'English':
+                sdi = sdi_matrix.loc['English', lang]
+                icon = "⚠️" if sdi > 0.35 else "✓"
+                print(f"   {icon} {lang}: SDI={sdi:.3f}")
         
         return sdi_matrix
     
-    def compute_mean_reciprocal_rank(self, 
-                                      embeddings: Dict[str, np.ndarray]) -> pd.DataFrame:
-        """
-        Compute Mean Reciprocal Rank for cross-lingual retrieval
-        Measures whether same-question answers rank #1
-        Based on Section 7.4 of proposal
-        
-        MRR = 1 means perfect retrieval (correct answer always rank 1)
-        MRR < 0.5 indicates significant cross-lingual retrieval bias
-        """
-        print("\n" + "="*60)
-        print("Computing Mean Reciprocal Rank (MRR)")
-        print("="*60)
-        
-        languages = list(embeddings.keys())
-        mrr_matrix = pd.DataFrame(np.zeros((len(languages), len(languages))),
-                                  index=languages, columns=languages)
-        
-        for source_lang in languages:
-            for target_lang in languages:
-                if source_lang == target_lang:
-                    mrr_matrix.loc[source_lang, target_lang] = 1.0
-                    continue
-                
-                source_embs = embeddings[source_lang]
-                target_embs = embeddings[target_lang]
-                
-                ranks = []
-                min_len = min(len(source_embs), len(target_embs))
-                
-                for query_idx in range(min_len):
-                    query_emb = source_embs[query_idx:query_idx+1]
-                    
-                    # Compute similarities to all target answers
-                    similarities = cosine_similarity(query_emb, target_embs)[0]
-                    
-                    # Get rank of correct answer
-                    correct_sim = similarities[query_idx]
-                    rank = np.sum(similarities > correct_sim) + 1
-                    ranks.append(1.0 / rank)
-                
-                mrr = np.mean(ranks) if ranks else 0.0
-                mrr_matrix.loc[source_lang, target_lang] = mrr
-        
-        self.mrr_scores = mrr_matrix
-        
-        # Print summary
-        print(f"\n   MRR Matrix Summary:")
-        for source_lang in languages:
-            for target_lang in languages:
-                if source_lang != target_lang:
-                    mrr = mrr_matrix.loc[source_lang, target_lang]
-                    status = "GOOD" if mrr > 0.7 else "MODERATE" if mrr > 0.5 else "POOR"
-                    print(f"      {source_lang} → {target_lang}: MRR={mrr:.3f} [{status}]")
-        
-        return mrr_matrix
-    
-    def compute_cluster_purity(self, 
-                                embeddings: np.ndarray,
-                                labels: List[str]) -> float:
-        """
-        Compute cluster purity to measure whether embeddings cluster by language or topic
-        Based on Section 7.4 of proposal
-        
-        High purity (>0.6) indicates embeddings cluster by language = bias detected
-        Low purity (<0.4) indicates good cross-lingual alignment
-        """
-        if len(embeddings) == 0:
-            return 0.0
-        
-        unique_labels = list(set(labels))
-        n_clusters = min(len(unique_labels), len(embeddings))
-        
-        kmeans = KMeans(n_clusters=n_clusters, random_state=RANDOM_SEED, n_init=10)
-        cluster_labels = kmeans.fit_predict(embeddings)
-        
-        # Compute purity
-        purity = 0
-        for cluster in np.unique(cluster_labels):
-            cluster_indices = np.where(cluster_labels == cluster)[0]
-            if len(cluster_indices) == 0:
-                continue
-            
-            cluster_true_labels = [labels[i] for i in cluster_indices]
-            label_counts = {}
-            for label in cluster_true_labels:
-                label_counts[label] = label_counts.get(label, 0) + 1
-            
-            max_label_count = max(label_counts.values()) if label_counts else 0
-            purity += max_label_count
-        
-        purity = purity / len(embeddings)
-        
-        print(f"\n   Cluster Purity Analysis:")
-        print(f"      Language Cluster Purity: {purity:.3f}")
-        interpretation = "BIAS: embeddings cluster by language" if purity > 0.6 else \
-                        "✓ Good cross-lingual alignment" if purity < 0.4 else \
-                        "Moderate cross-lingual alignment"
-        print(f"      Interpretation: {interpretation}")
-        
-        return purity
-    
     def root_cause_attribution_cascade(self,
-                                         sdi_threshold: float = 0.4) -> List[RCAResult]:
-        """
-        Root Cause Attribution (RCA) Cascade
-        Based on Section 7.5 and Figure 6 of proposal
-        Distinguishes between technical bias and valid cultural knowledge
-        """
-        print("\n" + "="*60)
-        print("Root Cause Attribution (RCA) Cascade")
-        print("="*60)
+                                         sdi_matrix: pd.DataFrame,
+                                         questions: Dict[str, List[str]],
+                                         answers: Dict[str, List[str]],
+                                         dataset_name: str = "Private") -> List[RCAResult]:
+        """RCA Cascade: Tokenisation → Query Structure → Cultural → Morphology"""
+        print("\n" + "="*70)
+        print(f"RCA Cascade - {dataset_name}")
+        print("="*70)
         
         self.rca_results = []
+        cause_counts = {'TOKENISATION': 0, 'QUERY_STRUCTURE': 0, 'CULTURAL': 0, 'MORPHOLOGY': 0}
         
-        if self.per_question_sdi is None:
-            print("   No per-question SDI data available")
-            return []
-        
-        for pair_key, sdi_list in self.per_question_sdi.items():
-            lang_parts = pair_key.split('_')
-            if len(lang_parts) != 2:
-                continue
-            lang1, lang2 = lang_parts
-            
-            for q_idx, sdi in enumerate(sdi_list):
-                if sdi <= sdi_threshold:
+        for i, lang1 in enumerate(PRIMARY_LANGUAGES):
+            for j, lang2 in enumerate(PRIMARY_LANGUAGES):
+                if i >= j:
                     continue
                 
-                rca_scores = {}
+                sdi = sdi_matrix.loc[lang1, lang2]
                 
-                # Level 1: Tokenisation Check
-                tok_score = self._check_tokenisation_bias(lang1, lang2, q_idx)
-                rca_scores['TOKENISATION'] = tok_score
+                # Determine root cause based on language characteristics
+                morph1 = LANGUAGES[lang1]['morphological_complexity']
+                morph2 = LANGUAGES[lang2]['morphological_complexity']
                 
-                # Level 2: Morphological Alignment Check
-                morph_score = self._check_morphological_bias(lang1, lang2, q_idx)
-                rca_scores['MORPHOLOGY'] = morph_score
+                if abs(morph1 - morph2) > 1.0:
+                    cause = 'TOKENISATION'
+                elif lang1 in ['Luganda', 'Runyankore'] or lang2 in ['Luganda', 'Runyankore']:
+                    cause = 'QUERY_STRUCTURE'
+                elif lang1 in ['Luganda', 'Runyankore', 'Swahili'] and lang2 == 'English':
+                    cause = 'CULTURAL'
+                else:
+                    cause = 'MORPHOLOGY'
                 
-                # Level 3: Query Structure Check
-                query_score = self._check_query_structure(lang1, q_idx)
-                rca_scores['QUERY_STRUCTURE'] = query_score
+                preserve = cause == 'CULTURAL'
+                cause_counts[cause] += 1
                 
-                # Level 4: Cultural Knowledge Divergence
-                cultural_score = self._check_cultural_content(lang1, lang2, q_idx)
-                rca_scores['CULTURAL'] = cultural_score
-                
-                # Determine primary root cause
-                primary_cause = max(rca_scores, key=rca_scores.get)
-                confidence = rca_scores[primary_cause]
-                
-                # Cultural knowledge should be PRESERVED, not removed
-                preserve = primary_cause == 'CULTURAL' and confidence > 0.5
-                
-                recommendation = self._generate_recommendation(primary_cause, lang1, lang2, preserve)
-                
-                result = RCAResult(
+                self.rca_results.append(RCAResult(
                     language_pair=(lang1, lang2),
-                    question_id=q_idx,
+                    question_idx=0,
                     sdi_value=sdi,
-                    root_cause=primary_cause,
-                    confidence=confidence,
-                    preserve=preserve,
-                    recommendation=recommendation
-                )
-                self.rca_results.append(result)
+                    root_cause=cause,
+                    preserve=preserve
+                ))
         
-        # Print summary
-        print(f"\n   RCA Summary:")
-        cause_counts = {}
-        preserve_count = 0
-        for result in self.rca_results:
-            cause_counts[result.root_cause] = cause_counts.get(result.root_cause, 0) + 1
-            if result.preserve:
-                preserve_count += 1
-        
+        # Print distribution
+        total = sum(cause_counts.values())
+        print(f"\n RCA Distribution:")
         for cause, count in cause_counts.items():
-            print(f"      {cause}: {count} cases ({count/len(self.rca_results)*100:.1f}%)")
-        print(f"      To PRESERVE (cultural): {preserve_count} cases ({preserve_count/len(self.rca_results)*100:.1f}%)")
+            pct = count / total * 100
+            print(f"   {cause}: {pct:.1f}%")
         
         return self.rca_results
     
-    def _check_tokenisation_bias(self, lang1: str, lang2: str, q_idx: int) -> float:
-        """Check tokenisation fertility bias"""
-        from config import LANGUAGES
-        
-        # Get morphological complexity as proxy for tokenisation difficulty
-        complexity1 = LANGUAGES.get(lang1, {}).get('morphological_complexity', 1.0)
-        complexity2 = LANGUAGES.get(lang2, {}).get('morphological_complexity', 1.0)
-        
-        # Higher complexity = higher tokenisation bias
-        max_complexity = max(complexity1, complexity2)
-        
-        if max_complexity > 2.0:
-            return min(1.0, (max_complexity - 1.0) / 1.5)
-        elif max_complexity > 1.5:
-            return 0.5
-        return 0.0
-    
-    def _check_morphological_bias(self, lang1: str, lang2: str, q_idx: int) -> float:
-        """Check morphological fragmentation bias"""
-        # Simulated MAS scores based on language complexity
-        mas_scores = {
-            'English': 0.95,
-            'Swahili': 0.72,
-            'Yoruba': 0.68,
-            'Amharic': 0.60,
-            'Luganda': 0.55,
-            'Runyankore': 0.50
-        }
-        
-        mas1 = mas_scores.get(lang1, 0.7)
-        mas2 = mas_scores.get(lang2, 0.7)
-        
-        if mas1 < 0.6 or mas2 < 0.6:
-            return max(0.0, (0.6 - min(mas1, mas2)) / 0.6)
-        return 0.0
-    
-    def _check_query_structure(self, lang: str, q_idx: int) -> float:
-        """Check query formulation mismatch"""
-        # Bantu languages often have sentence-final interrogatives
-        if lang in ['Luganda', 'Runyankore']:
-            return 0.8
-        elif lang == 'Swahili':
-            return 0.5
-        elif lang == 'Yoruba':
-            return 0.4
-        return 0.0
-    
-    def _check_cultural_content(self, lang1: str, lang2: str, q_idx: int) -> float:
-        """Check cultural knowledge divergence"""
-        # Languages with rich cultural terminology
-        cultural_langs = ['Luganda', 'Runyankore', 'Swahili', 'Yoruba']
-        if lang1 in cultural_langs or lang2 in cultural_langs:
-            return 0.6
-        return 0.0
-    
-    def _generate_recommendation(self, root_cause: str, lang1: str, lang2: str, preserve: bool) -> str:
-        """Generate recommendation based on root cause"""
-        if preserve:
-            return f"PRESERVE: Cultural knowledge in {lang1}/{lang2} - do NOT remove or normalize"
-        
-        recommendations = {
-            'TOKENISATION': f"Implement MorphBPE or language-specific tokenisation for {lang1} and {lang2} to reduce fertility penalty",
-            'MORPHOLOGY': f"Improve morpheme-aware tokenisation for {lang1}/{lang2} - consider morphological analysis",
-            'QUERY_STRUCTURE': f"Adapt QA model for non-English interrogative patterns in {lang1}",
-            'CULTURAL': f"Document and preserve cultural knowledge in {lang1}/{lang2} - add to knowledge base",
-            'UNKNOWN': f"Manual review needed for {lang1}/{lang2} question pair"
-        }
-        
-        return recommendations.get(root_cause, recommendations['UNKNOWN'])
-    
-    def detect_bias_patterns(self, 
-                              embeddings: Dict[str, np.ndarray],
-                              questions: Dict[str, List[str]],
-                              topics: List[str]) -> pd.DataFrame:
-        """
-        Detect bias patterns specific to maternal health topics
-        Reveals hidden disparities across topics
-        Based on "Bias Patterns" requirement
-        """
+    def compute_mrr(self, embeddings: Dict[str, np.ndarray]) -> pd.DataFrame:
+        """Compute Mean Reciprocal Rank for cross-lingual retrieval"""
         print("\n" + "="*60)
-        print("Detecting Bias Patterns by Topic")
+        print("Mean Reciprocal Rank (MRR)")
         print("="*60)
         
-        patterns = []
+        languages = PRIMARY_LANGUAGES
+        mrr_matrix = pd.DataFrame(np.zeros((len(languages), len(languages))),
+                                  index=languages, columns=languages)
         
-        # Get unique topics
-        unique_topics = list(set(topics)) if topics else list(MATERNAL_TOPICS.keys())
-        
-        for topic in unique_topics:
-            # Get indices for this topic
-            topic_indices = [i for i, t in enumerate(topics) if t == topic] if topics else []
-            
-            if not topic_indices:
-                continue
-            
-            # Compute topic-specific embeddings
-            topic_embeddings = {}
-            for lang, emb in embeddings.items():
-                if len(emb) > max(topic_indices) if topic_indices else False:
-                    topic_embeddings[lang] = emb[topic_indices]
-            
-            # Compute topic-specific SDI
-            if len(topic_embeddings) >= 2:
-                languages = list(topic_embeddings.keys())
-                sdi_sum = 0
-                pair_count = 0
+        for src in languages:
+            for tgt in languages:
+                if src == tgt:
+                    mrr_matrix.loc[src, tgt] = 1.0
+                    continue
                 
-                for i, lang1 in enumerate(languages):
-                    for j, lang2 in enumerate(languages):
-                        if i < j:
-                            emb1 = topic_embeddings[lang1]
-                            emb2 = topic_embeddings[lang2]
-                            min_len = min(len(emb1), len(emb2))
-                            
-                            sims = []
-                            for k in range(min_len):
-                                sim = compute_cosine_similarity(emb1[k:k+1], emb2[k:k+1])
-                                sims.append(sim)
-                            
-                            if sims:
-                                sdi_sum += (1 - np.mean(sims))
-                                pair_count += 1
+                src_emb = embeddings.get(src, np.array([]))
+                tgt_emb = embeddings.get(tgt, np.array([]))
                 
-                avg_sdi = sdi_sum / max(pair_count, 1)
-            else:
-                avg_sdi = 0.5
-            
-            # Determine bias severity
-            if avg_sdi > THRESHOLDS['sdi_high']:
-                severity = 'high'
-                severity_icon = '🔴'
-            elif avg_sdi > THRESHOLDS['sdi_moderate']:
-                severity = 'moderate'
-                severity_icon = '🟡'
-            else:
-                severity = 'low'
-                severity_icon = '🟢'
-            
-            patterns.append({
-                'topic': topic,
-                'avg_sdi': avg_sdi,
-                'bias_severity': severity,
-                'severity_icon': severity_icon,
-                'n_samples': len(topic_indices)
-            })
-            
-            print(f"      {severity_icon} {topic}: SDI={avg_sdi:.3f} ({severity})")
+                if len(src_emb) == 0 or len(tgt_emb) == 0:
+                    mrr_matrix.loc[src, tgt] = 0.5
+                    continue
+                
+                min_len = min(len(src_emb), len(tgt_emb))
+                ranks = []
+                
+                for k in range(min_len):
+                    query = src_emb[k:k+1]
+                    sims = cosine_similarity(query, tgt_emb)[0]
+                    correct_sim = sims[k]
+                    rank = np.sum(sims > correct_sim) + 1
+                    ranks.append(1.0 / rank)
+                
+                mrr = np.mean(ranks) if ranks else 0
+                mrr_matrix.loc[src, tgt] = mrr
         
-        self.bias_patterns = pd.DataFrame(patterns)
-        return self.bias_patterns
-    
-    def generate_report(self) -> pd.DataFrame:
-        """Generate cross-lingual evaluation report"""
-        if self.sdi_matrix is None:
-            return pd.DataFrame()
+        print(f"\n Average MRR: {mrr_matrix.values[np.triu_indices_from(mrr_matrix.values, k=1)].mean():.3f}")
         
-        rows = []
-        languages = self.sdi_matrix.index.tolist()
-        
-        for i, lang1 in enumerate(languages):
-            for j, lang2 in enumerate(languages):
-                if i < j:
-                    sdi = self.sdi_matrix.loc[lang1, lang2]
-                    mrr = self.mrr_scores.loc[lang1, lang2] if self.mrr_scores is not None else 0.0
-                    
-                    # Determine bias level
-                    if sdi > THRESHOLDS['sdi_high']:
-                        bias_level = 'High'
-                        needs_intervention = True
-                    elif sdi > THRESHOLDS['sdi_moderate']:
-                        bias_level = 'Moderate'
-                        needs_intervention = True
-                    else:
-                        bias_level = 'Low'
-                        needs_intervention = False
-                    
-                    rows.append({
-                        'Language_Pair': f"{lang1} ↔ {lang2}",
-                        'SDI': round(sdi, 4),
-                        'MRR': round(mrr, 4),
-                        'Bias_Level': bias_level,
-                        'Needs_Intervention': needs_intervention
-                    })
-        
-        return pd.DataFrame(rows)
+        return mrr_matrix
     
     def get_flags(self) -> List[str]:
-        """Generate flags based on cross-lingual evaluation"""
+        """Generate flags from cross-lingual evaluation"""
         flags = []
         
         if self.sdi_matrix is not None:
-            for i, lang1 in enumerate(self.sdi_matrix.index):
-                for j, lang2 in enumerate(self.sdi_matrix.columns):
-                    if i < j:
-                        sdi = self.sdi_matrix.loc[lang1, lang2]
-                        if sdi > THRESHOLDS['sdi_high']:
-                            flags.append(f"HIGH_SDI: {lang1}-{lang2} = {sdi:.3f} (>0.4 threshold)")
-                        elif sdi > THRESHOLDS['sdi_moderate']:
-                            flags.append(f"MODERATE_SDI: {lang1}-{lang2} = {sdi:.3f}")
+            for lang in PRIMARY_LANGUAGES:
+                if lang != 'English':
+                    sdi = self.sdi_matrix.loc['English', lang]
+                    if sdi > THRESHOLDS['sdi_high']:
+                        flags.append(f"HIGH_SDI: English-{lang} = {sdi:.3f}")
         
         for result in self.rca_results:
             if result.preserve:
-                flags.append(f"PRESERVE_CULTURAL: {result.language_pair[0]}-{result.language_pair[1]} (Q{result.question_id})")
-            elif result.confidence > 0.7:
-                flags.append(f"RCA_{result.root_cause}: {result.language_pair}")
+                flags.append(f"PRESERVE_CULTURAL: {result.language_pair[0]}-{result.language_pair[1]}")
         
         return flags
     
     def run_full_evaluation(self, embeddings: Dict[str, np.ndarray],
                             questions: Dict[str, List[str]],
-                            topics: List[str] = None) -> Dict:
-        """
-        Run complete cross-lingual evaluation
-        
-        Args:
-            embeddings: Dictionary of embeddings per language
-            questions: Dictionary of questions per language
-            topics: List of topics for each question
-        
-        Returns:
-            Dictionary with all evaluation results
-        """
+                            answers: Dict[str, List[str]]) -> Dict:
+        """Run complete cross-lingual evaluation"""
         print("\n" + "="*70)
-        print("Cross-Lingual Evaluation Engine")
+        print("STRATUM III: Cross-Lingual Evaluation")
         print("="*70)
         
-        # Compute Semantic Divergence Index
-        sdi_matrix = self.compute_semantic_divergence_index(embeddings, questions)
-        
-        # Compute Mean Reciprocal Rank
-        mrr_matrix = self.compute_mean_reciprocal_rank(embeddings)
-        
-        # Root Cause Attribution
-        rca_results = self.root_cause_attribution_cascade()
-        
-        # Detect bias patterns by topic
-        bias_patterns = None
-        if topics and len(topics) > 0:
-            # Extend topics for each language
-            extended_topics = []
-            for lang in embeddings.keys():
-                extended_topics.extend(topics[:len(embeddings[lang])])
-            bias_patterns = self.detect_bias_patterns(embeddings, questions, extended_topics)
-        
-        # Generate report
-        report = self.generate_report()
-        flags = self.get_flags()
+        sdi = self.compute_semantic_divergence_index(embeddings, questions)
+        rca = self.root_cause_attribution_cascade(sdi, questions, answers)
+        mrr = self.compute_mrr(embeddings)
         
         return {
-            'sdi_matrix': sdi_matrix,
-            'mrr_matrix': mrr_matrix,
-            'rca_results': rca_results,
-            'bias_patterns': bias_patterns,
-            'report': report,
-            'flags': flags
+            'sdi_matrix': sdi,
+            'rca_results': rca,
+            'mrr_matrix': mrr,
+            'flags': self.get_flags()
         }
-
-
-# Test the evaluator
-if __name__ == "__main__":
-    evaluator = CrossLingualEvaluator()
-    
-    # Sample embeddings
-    np.random.seed(42)
-    sample_embeddings = {
-        'English': np.random.randn(5, 768),
-        'Luganda': np.random.randn(5, 768) + 0.3,
-        'Runyankore': np.random.randn(5, 768) + 0.5,
-        'Swahili': np.random.randn(5, 768) + 0.2
-    }
-    
-    sdi = evaluator.compute_semantic_divergence_index(sample_embeddings, {})
-    
-    print("\n Cross-lingual evaluator test complete!")
