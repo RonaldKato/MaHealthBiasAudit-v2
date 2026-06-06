@@ -1,0 +1,834 @@
+2026-06-06 13:44:18,681 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 13:44:18,698 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 13:44:18,698 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 13:44:18,700 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 13:44:18,701 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 13:44:18,702 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 13:44:18,702 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 13:44:18,703 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 13:44:18,723 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 13:44:18,742 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 13:44:18,755 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 13:44:18,766 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 13:44:18,767 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 13:44:18,769 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:44:18,772 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:44:18,775 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 13:44:18,777 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 13:44:18,777 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 13:44:18,780 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:44:18,783 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:44:18,786 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 13:44:18,789 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 13:44:18,790 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 13:44:18,792 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 13:44:18,793 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 13:44:18,795 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 13:44:18,797 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 13:44:18,797 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 13:44:18,807 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 13:44:18,816 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 13:44:18,827 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 13:44:18,836 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 13:44:18,836 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 13:44:18,838 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 13:44:18,839 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 13:44:18,840 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 13:44:18,841 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 13:44:18,841 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 13:44:18,860 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 13:44:18,878 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 13:44:18,899 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 13:44:18,915 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 13:51:27,596 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 13:51:27,605 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 13:51:27,605 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 13:51:27,607 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 13:51:27,608 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 13:51:27,609 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 13:51:27,610 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 13:51:27,610 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 13:51:27,619 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 13:51:27,627 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 13:51:27,635 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 13:51:27,642 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 13:51:27,642 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 13:51:27,644 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:51:27,646 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:51:27,648 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 13:51:27,650 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 13:51:27,650 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 13:51:27,652 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:51:27,654 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:51:27,657 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 13:51:27,659 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 13:51:27,659 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 13:51:27,660 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 13:51:27,661 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 13:51:27,663 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 13:51:27,664 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 13:51:27,664 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 13:51:27,671 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 13:51:27,679 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 13:51:27,687 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 13:51:27,694 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 13:51:27,694 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 13:51:27,695 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 13:51:27,696 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 13:51:27,697 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 13:51:27,697 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 13:51:27,697 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 13:51:27,711 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 13:51:27,726 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 13:51:27,742 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 13:51:27,754 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 13:59:18,583 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 13:59:18,589 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 13:59:18,589 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 13:59:18,590 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 13:59:18,590 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 13:59:18,591 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 13:59:18,591 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 13:59:18,591 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 13:59:18,599 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 13:59:18,606 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 13:59:18,613 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 13:59:18,620 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 13:59:18,620 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 13:59:18,622 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:59:18,624 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:59:18,625 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 13:59:18,627 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 13:59:18,627 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 13:59:18,629 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 13:59:18,631 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 13:59:18,633 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 13:59:18,634 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 13:59:18,634 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 13:59:18,636 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 13:59:18,637 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 13:59:18,638 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 13:59:18,639 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 13:59:18,639 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 13:59:18,646 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 13:59:18,653 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 13:59:18,660 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 13:59:18,666 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 13:59:18,666 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 13:59:18,667 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 13:59:18,668 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 13:59:18,668 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 13:59:18,669 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 13:59:18,669 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 13:59:18,682 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 13:59:18,695 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 13:59:18,709 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 13:59:18,721 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:04:08,042 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:04:08,048 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:04:08,048 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:04:08,049 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:04:08,050 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:04:08,051 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:04:08,051 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:04:08,051 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:04:08,059 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:04:08,069 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:04:08,078 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:04:08,086 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:04:08,086 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:04:08,088 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:04:08,091 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:04:08,093 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:04:08,095 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:04:08,095 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:04:08,097 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:04:08,099 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:04:08,101 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:04:08,103 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:04:08,104 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:04:08,105 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:04:08,107 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:04:08,108 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:04:08,109 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:04:08,109 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:04:08,117 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:04:08,125 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:04:08,133 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:04:08,141 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:04:08,141 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:04:08,141 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:04:08,142 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:04:08,143 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:04:08,144 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:04:08,144 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:04:08,158 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:04:08,173 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:04:08,189 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:04:08,203 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:08:06,980 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:08:06,987 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:08:06,987 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:08:06,988 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:08:06,989 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:08:06,990 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:08:06,990 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:08:06,990 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:08:06,999 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:08:07,007 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:08:07,019 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:08:07,029 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:08:07,029 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:08:07,046 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:08:07,060 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:08:07,062 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:08:07,064 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:08:07,064 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:08:07,066 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:08:07,068 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:08:07,070 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:08:07,071 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:08:07,072 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:08:07,073 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:08:07,074 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:08:07,075 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:08:07,076 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:08:07,076 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:08:07,084 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:08:07,092 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:08:07,100 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:08:07,107 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:08:07,108 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:08:07,109 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:08:07,110 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:08:07,110 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:08:07,111 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:08:07,111 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:08:07,126 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:08:07,141 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:08:07,156 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:08:07,168 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:12:07,036 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:12:07,046 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:12:07,046 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:12:07,047 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:12:07,048 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:12:07,048 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:12:07,049 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:12:07,049 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:12:07,056 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:12:07,063 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:12:07,072 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:12:07,080 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:12:07,080 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:12:07,082 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:12:07,083 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:12:07,085 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:12:07,088 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:12:07,088 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:12:07,090 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:12:07,093 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:12:07,095 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:12:07,097 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:12:07,097 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:12:07,098 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:12:07,099 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:12:07,100 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:12:07,101 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:12:07,101 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:12:07,109 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:12:07,115 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:12:07,123 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:12:07,130 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:12:07,130 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:12:07,131 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:12:07,132 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:12:07,132 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:12:07,133 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:12:07,133 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:12:07,147 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:12:07,160 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:12:07,175 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:12:07,187 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:16:56,788 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:16:56,795 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:16:56,795 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:16:56,796 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:16:56,796 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:16:56,797 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:16:56,797 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:16:56,797 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:16:56,804 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:16:56,812 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:16:56,819 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:16:56,825 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:16:56,826 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:16:56,827 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:16:56,829 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:16:56,831 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:16:56,832 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:16:56,833 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:16:56,834 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:16:56,837 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:16:56,839 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:16:56,840 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:16:56,840 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:16:56,842 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:16:56,843 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:16:56,844 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:16:56,845 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:16:56,845 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:16:56,852 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:16:56,861 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:16:56,870 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:16:56,878 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:16:56,878 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:16:56,878 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:16:56,879 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:16:56,880 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:16:56,881 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:16:56,881 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:16:56,897 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:16:56,912 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:16:56,928 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:16:56,943 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:17:29,346 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:17:29,352 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:17:29,352 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:17:29,353 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:17:29,353 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:17:29,354 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:17:29,354 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:17:29,354 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:17:29,361 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:17:29,368 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:17:29,377 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:17:29,384 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:17:29,384 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:17:29,386 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:17:29,388 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:17:29,389 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:17:29,391 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:17:29,391 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:17:29,393 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:17:29,395 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:17:29,397 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:17:29,399 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:17:29,399 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:17:29,400 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:17:29,401 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:17:29,402 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:17:29,403 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:17:29,403 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:17:29,410 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:17:29,417 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:17:29,425 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:17:29,432 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:17:29,432 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:17:29,433 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:17:29,434 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:17:29,434 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:17:29,435 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:17:29,435 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:17:29,449 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:17:29,462 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:17:29,477 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:17:29,488 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:21:26,266 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:21:26,276 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:21:26,276 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:21:26,278 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:21:26,278 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:21:26,278 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:21:26,279 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:21:26,279 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:21:26,289 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:21:26,298 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:21:26,306 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:21:26,314 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:21:26,314 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:21:26,316 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:21:26,318 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:21:26,320 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:21:26,322 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:21:26,322 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:21:26,325 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:21:26,327 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:21:26,330 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:21:26,332 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:21:26,332 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:21:26,333 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:21:26,334 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:21:26,336 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:21:26,337 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:21:26,337 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:21:26,344 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:21:26,352 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:21:26,360 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:21:26,367 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:21:26,367 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:21:26,368 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:21:26,369 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:21:26,370 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:21:26,371 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:21:26,371 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:21:26,386 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:21:26,400 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:21:26,417 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:21:26,431 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:21:26,448 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 14:22:55,806 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 14:22:56,096 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 14:37:49,103 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:39:49,578 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:43:11,297 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:46:42,667 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 14:46:42,675 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 14:46:42,675 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 14:46:42,676 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 14:46:42,677 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 14:46:42,677 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 14:46:42,677 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 14:46:42,677 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 14:46:42,685 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 14:46:42,692 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 14:46:42,699 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 14:46:42,707 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 14:46:42,707 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 14:46:42,709 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:46:42,710 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:46:42,712 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 14:46:42,714 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 14:46:42,714 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 14:46:42,717 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 14:46:42,719 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 14:46:42,722 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 14:46:42,724 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 14:46:42,724 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 14:46:42,726 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 14:46:42,727 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 14:46:42,728 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 14:46:42,729 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 14:46:42,729 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 14:46:42,736 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 14:46:42,743 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 14:46:42,751 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 14:46:42,757 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 14:46:42,758 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 14:46:42,758 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 14:46:42,759 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 14:46:42,760 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 14:46:42,761 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 14:46:42,761 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 14:46:42,775 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 14:46:42,789 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 14:46:42,804 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 14:46:42,817 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 14:46:42,830 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 14:47:58,032 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 14:47:58,829 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 16:34:34,355 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 16:34:34,368 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 16:34:34,368 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 16:34:34,370 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 16:34:34,370 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 16:34:34,371 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 16:34:34,371 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 16:34:34,371 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 16:34:34,379 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 16:34:34,387 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 16:34:34,396 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 16:34:34,404 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 16:34:34,404 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 16:34:34,406 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 16:34:34,409 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 16:34:34,412 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 16:34:34,414 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 16:34:34,414 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 16:34:34,417 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 16:34:34,420 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 16:34:34,423 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 16:34:34,426 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 16:34:34,426 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 16:34:34,428 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 16:34:34,429 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 16:34:34,431 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 16:34:34,433 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 16:34:34,433 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 16:34:34,444 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 16:34:34,453 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 16:34:34,464 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 16:34:34,475 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 16:34:34,475 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 16:34:34,476 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 16:34:34,478 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 16:34:34,479 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 16:34:34,480 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 16:34:34,481 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 16:34:34,501 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 16:34:34,523 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 16:34:34,544 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 16:34:34,562 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 16:34:34,580 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 16:36:14,834 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 16:36:15,177 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 17:00:53,431 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 17:00:53,447 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 17:00:53,447 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 17:00:53,449 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 17:00:53,449 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 17:00:53,450 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 17:00:53,450 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 17:00:53,450 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 17:00:53,458 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 17:00:53,467 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 17:00:53,476 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 17:00:53,484 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 17:00:53,484 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 17:00:53,486 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:00:53,488 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:00:53,490 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 17:00:53,491 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 17:00:53,492 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 17:00:53,494 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:00:53,496 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:00:53,498 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 17:00:53,501 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 17:00:53,501 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 17:00:53,503 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 17:00:53,504 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 17:00:53,505 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 17:00:53,507 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 17:00:53,507 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 17:00:53,515 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 17:00:53,522 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 17:00:53,530 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 17:00:53,537 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 17:00:53,537 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 17:00:53,538 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 17:00:53,540 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 17:00:53,541 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 17:00:53,542 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 17:00:53,542 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 17:00:53,558 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 17:00:53,571 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 17:00:53,585 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 17:00:53,597 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 17:00:53,613 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 17:02:08,730 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 17:02:08,942 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 17:21:44,516 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 17:21:44,528 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 17:21:44,528 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 17:21:44,531 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 17:21:44,532 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 17:21:44,532 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 17:21:44,533 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 17:21:44,533 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 17:21:44,542 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 17:21:44,551 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 17:21:44,564 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 17:21:44,574 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 17:21:44,574 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 17:21:44,576 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:21:44,579 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:21:44,582 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 17:21:44,584 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 17:21:44,584 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 17:21:44,587 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:21:44,590 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:21:44,594 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 17:21:44,598 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 17:21:44,598 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 17:21:44,600 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 17:21:44,602 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 17:21:44,604 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 17:21:44,605 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 17:21:44,606 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 17:21:44,617 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 17:21:44,627 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 17:21:44,638 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 17:21:44,647 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 17:21:44,647 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 17:21:44,648 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 17:21:44,649 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 17:21:44,650 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 17:21:44,651 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 17:21:44,651 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 17:21:44,668 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 17:21:44,684 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 17:21:44,703 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 17:21:44,719 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 17:21:44,737 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 17:22:58,955 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 17:22:59,165 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 17:37:38,162 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 17:37:38,171 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 17:37:38,171 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 17:37:38,172 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 17:37:38,173 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 17:37:38,173 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 17:37:38,173 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 17:37:38,173 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 17:37:38,180 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 17:37:38,187 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 17:37:38,195 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 17:37:38,201 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 17:37:38,201 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 17:37:38,203 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:37:38,205 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:37:38,207 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 17:37:38,208 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 17:37:38,208 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 17:37:38,210 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 17:37:38,212 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 17:37:38,214 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 17:37:38,216 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 17:37:38,216 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 17:37:38,217 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 17:37:38,218 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 17:37:38,220 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 17:37:38,221 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 17:37:38,221 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 17:37:38,229 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 17:37:38,236 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 17:37:38,243 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 17:37:38,250 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 17:37:38,250 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 17:37:38,251 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 17:37:38,251 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 17:37:38,252 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 17:37:38,253 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 17:37:38,253 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 17:37:38,265 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 17:37:38,278 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 17:37:38,294 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 17:37:38,306 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 17:37:38,316 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 17:38:56,854 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 17:38:57,030 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 20:02:29,089 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 20:02:29,431 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 20:02:29,431 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 20:02:29,433 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 20:02:29,433 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 20:02:29,434 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 20:02:29,434 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 20:02:29,434 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 20:02:29,441 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 20:02:29,448 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 20:02:29,455 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 20:02:29,463 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 20:02:29,463 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 20:02:29,465 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:02:29,466 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:02:29,468 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 20:02:29,470 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 20:02:29,470 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 20:02:29,472 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:02:29,474 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:02:29,476 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 20:02:29,478 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 20:02:29,479 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 20:02:29,480 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 20:02:29,481 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 20:02:29,482 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 20:02:29,483 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 20:02:29,483 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 20:02:29,490 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 20:02:29,497 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 20:02:29,506 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 20:02:29,514 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 20:02:29,514 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 20:02:29,515 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 20:02:29,515 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 20:02:29,516 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 20:02:29,517 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 20:02:29,517 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 20:02:29,530 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 20:02:29,542 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 20:02:29,556 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 20:02:29,569 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 20:02:29,582 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 20:03:53,923 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 20:03:54,093 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 20:18:42,564 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 20:18:42,588 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 20:18:42,588 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 20:18:42,590 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 20:18:42,591 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 20:18:42,592 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 20:18:42,593 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 20:18:42,593 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 20:18:42,606 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 20:18:42,619 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 20:18:42,635 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 20:18:42,652 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 20:18:42,653 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 20:18:42,659 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:18:42,664 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:18:42,670 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 20:18:42,691 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 20:18:42,692 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 20:18:42,761 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:18:42,768 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:18:42,773 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 20:18:42,777 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 20:18:42,777 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 20:18:42,779 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 20:18:42,782 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 20:18:42,785 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 20:18:42,788 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 20:18:42,788 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 20:18:42,803 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 20:18:42,816 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 20:18:42,828 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 20:18:42,838 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 20:18:42,839 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 20:18:42,840 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 20:18:42,841 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 20:18:42,842 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 20:18:42,843 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 20:18:42,843 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 20:18:42,864 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 20:18:42,883 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 20:18:42,902 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 20:18:42,922 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 20:18:42,946 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 20:20:49,148 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 20:20:49,359 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 20:39:15,187 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 20:39:15,200 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 20:39:15,200 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 20:39:15,203 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 20:39:15,203 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 20:39:15,204 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 20:39:15,204 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 20:39:15,204 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 20:39:15,211 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 20:39:15,218 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 20:39:15,225 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 20:39:15,231 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 20:39:15,232 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 20:39:15,233 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:39:15,235 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:39:15,237 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 20:39:15,238 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 20:39:15,238 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 20:39:15,240 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:39:15,242 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:39:15,244 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 20:39:15,246 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 20:39:15,246 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 20:39:15,247 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 20:39:15,248 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 20:39:15,249 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 20:39:15,250 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 20:39:15,250 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 20:39:15,257 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 20:39:15,263 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 20:39:15,270 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 20:39:15,276 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 20:39:15,276 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 20:39:15,277 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 20:39:15,278 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 20:39:15,278 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 20:39:15,279 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 20:39:15,279 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 20:39:15,291 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 20:39:15,304 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 20:39:15,317 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 20:39:15,329 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 20:39:15,361 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 20:40:37,194 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 20:40:37,360 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 20:54:37,615 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 20:54:37,625 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 20:54:37,625 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 20:54:37,626 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 20:54:37,627 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 20:54:37,627 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 20:54:37,627 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 20:54:37,628 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 20:54:37,635 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 20:54:37,642 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 20:54:37,649 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 20:54:37,656 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 20:54:37,657 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 20:54:37,659 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:54:37,660 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:54:37,662 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 20:54:37,664 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 20:54:37,664 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 20:54:37,666 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 20:54:37,668 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 20:54:37,671 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 20:54:37,673 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 20:54:37,673 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 20:54:37,674 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 20:54:37,675 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 20:54:37,676 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 20:54:37,677 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 20:54:37,677 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 20:54:37,685 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 20:54:37,692 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 20:54:37,702 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 20:54:37,712 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 20:54:37,712 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 20:54:37,713 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 20:54:37,714 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 20:54:37,714 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 20:54:37,715 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 20:54:37,715 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 20:54:37,729 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 20:54:37,743 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 20:54:37,758 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 20:54:37,771 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 20:54:37,797 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 20:55:50,046 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 20:55:50,210 - preprocessing - INFO - Preprocessing pipeline completed
+2026-06-06 21:13:31,462 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-06 21:13:31,476 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-06 21:13:31,476 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-06 21:13:31,478 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-06 21:13:31,478 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-06 21:13:31,479 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-06 21:13:31,479 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-06 21:13:31,479 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-06 21:13:31,486 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-06 21:13:31,521 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-06 21:13:31,529 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-06 21:13:31,535 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-06 21:13:31,535 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-06 21:13:31,537 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 21:13:31,539 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 21:13:31,541 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-06 21:13:31,542 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-06 21:13:31,542 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-06 21:13:31,544 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-06 21:13:31,546 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-06 21:13:31,548 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-06 21:13:31,550 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-06 21:13:31,550 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-06 21:13:31,551 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-06 21:13:31,552 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-06 21:13:31,554 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-06 21:13:31,555 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-06 21:13:31,555 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-06 21:13:31,561 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-06 21:13:31,568 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-06 21:13:31,575 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-06 21:13:31,582 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-06 21:13:31,582 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-06 21:13:31,582 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-06 21:13:31,583 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-06 21:13:31,584 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-06 21:13:31,584 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-06 21:13:31,584 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-06 21:13:31,597 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-06 21:13:31,609 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-06 21:13:31,623 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-06 21:13:31,635 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-06 21:13:31,661 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-06 21:14:44,133 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-06 21:14:44,336 - preprocessing - INFO - Preprocessing pipeline completed

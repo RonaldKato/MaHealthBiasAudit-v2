@@ -1,0 +1,174 @@
+{
+  "experiment": "MaHealthBiasAudit",
+  "timestamp": "20260606_144627",
+  "languages": [
+    "English",
+    "Swahili",
+    "Luganda",
+    "Runyankore"
+  ],
+  "total_questions": 16,
+  "total_answers": 14431,
+  "key_metrics": {
+    "average_sdi": 0.7517,
+    "bias_level": "HIGH",
+    "total_flags": 20
+  },
+  "sdi_ranking": {
+    "Swahili": 0.918801061809063,
+    "Luganda": 0.98571309261024,
+    "Runyankore": 0.976372379809618
+  },
+  "rca_distribution": {
+    "Content Omission": 3,
+    "Translation Length Disparity": 2
+  },
+  "flags": [
+    {
+      "Type": "Length_Bias",
+      "Language": "Runyankore",
+      "Severity": "Moderate",
+      "Description": "Responses are 70.5% of English length (12 vs 17 words)",
+      "Recommendation": "Consider if content loss is occurring"
+    },
+    {
+      "Type": "Statistical_Bias",
+      "Comparison": "English vs Runyankore",
+      "Severity": "High",
+      "Description": "Large effect: English responses are significantly longer",
+      "Recommendation": "Investigate potential systematic differences"
+    },
+    {
+      "Type": "High_SDI",
+      "Severity": "High",
+      "Description": "Average SDI of 0.752 indicates strong cross-lingual bias",
+      "Recommendation": "Review translation quality and cultural adaptation across all languages"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Swahili vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.919 indicates high bias between Swahili vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Swahili vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.585 indicates high bias between Swahili vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Swahili vs Runyankore",
+      "Severity": "High",
+      "Description": "SDI of 0.558 indicates high bias between Swahili vs Runyankore",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Swahili",
+      "Severity": "High",
+      "Description": "SDI of 0.919 indicates high bias between English vs Swahili",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.986 indicates high bias between English vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Runyankore",
+      "Severity": "High",
+      "Description": "SDI of 0.976 indicates high bias between English vs Runyankore",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs Swahili",
+      "Severity": "High",
+      "Description": "SDI of 0.585 indicates high bias between Luganda vs Swahili",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.986 indicates high bias between Luganda vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs Runyankore",
+      "Severity": "High",
+      "Description": "SDI of 0.485 indicates high bias between Luganda vs Runyankore",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Runyankore vs Swahili",
+      "Severity": "High",
+      "Description": "SDI of 0.558 indicates high bias between Runyankore vs Swahili",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Runyankore vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.976 indicates high bias between Runyankore vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Runyankore vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.485 indicates high bias between Runyankore vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "Luganda vs English",
+      "Severity": "High",
+      "Description": "Root cause identified: Content Omission (SDI: 0.986)",
+      "Recommendation": "Address content omission in translation process"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "Root cause identified: Translation Length Disparity (SDI: 0.986)",
+      "Recommendation": "Address translation length disparity in translation process"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "English vs Runyankore",
+      "Severity": "High",
+      "Description": "Root cause identified: Translation Length Disparity (SDI: 0.976)",
+      "Recommendation": "Address translation length disparity in translation process"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "Runyankore vs English",
+      "Severity": "High",
+      "Description": "Root cause identified: Content Omission (SDI: 0.976)",
+      "Recommendation": "Address content omission in translation process"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "Swahili vs English",
+      "Severity": "High",
+      "Description": "Root cause identified: Content Omission (SDI: 0.919)",
+      "Recommendation": "Address content omission in translation process"
+    }
+  ],
+  "recommendations": [
+    "High semantic distance detected. Consider improving translation quality and cultural adaptation across all languages.",
+    "Focus on improving translation quality for: Swahili, Luganda, Runyankore",
+    "Address root cause 'Content Omission' affecting 3 language pairs.",
+    "Address root cause 'Translation Length Disparity' affecting 2 language pairs."
+  ],
+  "output_directory": "/Users/ronaldkato/Downloads/MaHealthBias/output"
+}

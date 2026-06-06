@@ -1,0 +1,22 @@
+2026-06-06 14:22:56,098 - statistical - INFO - Starting statistical bias audit
+2026-06-06 14:22:56,864 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 14:47:58,830 - statistical - INFO - Starting statistical bias audit
+2026-06-06 14:48:00,545 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 16:36:15,181 - statistical - INFO - Starting statistical bias audit
+2026-06-06 16:36:16,500 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 17:02:08,942 - statistical - INFO - Starting statistical bias audit
+2026-06-06 17:02:09,719 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 17:22:59,166 - statistical - INFO - Starting statistical bias audit
+2026-06-06 17:22:59,916 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 17:38:57,031 - statistical - INFO - Starting statistical bias audit
+2026-06-06 17:38:57,707 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 20:03:54,094 - statistical - INFO - Starting statistical bias audit
+2026-06-06 20:03:54,781 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 20:20:49,361 - statistical - INFO - Starting statistical bias audit
+2026-06-06 20:20:51,266 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 20:40:37,360 - statistical - INFO - Starting statistical bias audit
+2026-06-06 20:40:38,039 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 20:55:50,211 - statistical - INFO - Starting statistical bias audit
+2026-06-06 20:55:50,920 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}
+2026-06-06 21:14:44,336 - statistical - INFO - Starting statistical bias audit
+2026-06-06 21:14:45,039 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}

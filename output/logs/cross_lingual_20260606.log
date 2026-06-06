@@ -1,0 +1,22 @@
+2026-06-06 14:31:52,856 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 14:31:56,230 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Luganda', 'English', 'Swahili'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 14:53:32,673 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 14:53:34,829 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'English', 'Luganda', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 16:47:03,529 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 16:47:07,104 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'English', 'Luganda', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 17:11:04,953 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 17:11:08,303 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Luganda', 'Runyankore', 'English'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 17:32:13,730 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 17:32:17,252 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 17:47:45,613 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 17:47:49,794 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 20:13:33,630 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 20:13:37,960 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'English', 'Runyankore', 'Swahili'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 20:30:11,349 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 20:30:16,811 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 20:50:00,485 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 20:50:04,030 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 21:04:52,718 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 21:04:56,190 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Swahili', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-06 21:23:35,820 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-06 21:23:39,149 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}

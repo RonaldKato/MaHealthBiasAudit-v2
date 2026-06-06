@@ -1,0 +1,72 @@
+2026-06-06 13:44:11,435 - runner - INFO - Starting bias audit at 2026-06-06 13:44:11.435299
+2026-06-06 13:44:11,435 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 13:49:12,099 - runner - ERROR - Error during bias audit: Converting from SentencePiece and Tiktoken failed, if a converter for SentencePiece is available, provide a model path with a SentencePiece tokenizer.model file.Currently available slow->fast converters: ['AlbertTokenizer', 'BartTokenizer', 'BarthezTokenizer', 'BertTokenizer', 'BigBirdTokenizer', 'BlenderbotTokenizer', 'CamembertTokenizer', 'CLIPTokenizer', 'CodeGenTokenizer', 'ConvBertTokenizer', 'DebertaTokenizer', 'DebertaV2Tokenizer', 'DistilBertTokenizer', 'DPRReaderTokenizer', 'DPRQuestionEncoderTokenizer', 'DPRContextEncoderTokenizer', 'ElectraTokenizer', 'FNetTokenizer', 'FunnelTokenizer', 'GPT2Tokenizer', 'HerbertTokenizer', 'LayoutLMTokenizer', 'LayoutLMv2Tokenizer', 'LayoutLMv3Tokenizer', 'LayoutXLMTokenizer', 'LongformerTokenizer', 'LEDTokenizer', 'LxmertTokenizer', 'MarkupLMTokenizer', 'MBartTokenizer', 'MBart50Tokenizer', 'MPNetTokenizer', 'MobileBertTokenizer', 'MvpTokenizer', 'NllbTokenizer', 'OpenAIGPTTokenizer', 'PegasusTokenizer', 'Qwen2Tokenizer', 'RealmTokenizer', 'ReformerTokenizer', 'RemBertTokenizer', 'RetriBertTokenizer', 'RobertaTokenizer', 'RoFormerTokenizer', 'SeamlessM4TTokenizer', 'SqueezeBertTokenizer', 'T5Tokenizer', 'UdopTokenizer', 'WhisperTokenizer', 'XLMRobertaTokenizer', 'XLNetTokenizer', 'SplinterTokenizer', 'XGLMTokenizer', 'LlamaTokenizer', 'CodeLlamaTokenizer', 'GemmaTokenizer', 'Phi3Tokenizer']
+2026-06-06 13:51:22,111 - runner - INFO - Starting bias audit at 2026-06-06 13:51:22.111197
+2026-06-06 13:51:22,111 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 13:56:31,432 - runner - ERROR - Error during bias audit: Converting from SentencePiece and Tiktoken failed, if a converter for SentencePiece is available, provide a model path with a SentencePiece tokenizer.model file.Currently available slow->fast converters: ['AlbertTokenizer', 'BartTokenizer', 'BarthezTokenizer', 'BertTokenizer', 'BigBirdTokenizer', 'BlenderbotTokenizer', 'CamembertTokenizer', 'CLIPTokenizer', 'CodeGenTokenizer', 'ConvBertTokenizer', 'DebertaTokenizer', 'DebertaV2Tokenizer', 'DistilBertTokenizer', 'DPRReaderTokenizer', 'DPRQuestionEncoderTokenizer', 'DPRContextEncoderTokenizer', 'ElectraTokenizer', 'FNetTokenizer', 'FunnelTokenizer', 'GPT2Tokenizer', 'HerbertTokenizer', 'LayoutLMTokenizer', 'LayoutLMv2Tokenizer', 'LayoutLMv3Tokenizer', 'LayoutXLMTokenizer', 'LongformerTokenizer', 'LEDTokenizer', 'LxmertTokenizer', 'MarkupLMTokenizer', 'MBartTokenizer', 'MBart50Tokenizer', 'MPNetTokenizer', 'MobileBertTokenizer', 'MvpTokenizer', 'NllbTokenizer', 'OpenAIGPTTokenizer', 'PegasusTokenizer', 'Qwen2Tokenizer', 'RealmTokenizer', 'ReformerTokenizer', 'RemBertTokenizer', 'RetriBertTokenizer', 'RobertaTokenizer', 'RoFormerTokenizer', 'SeamlessM4TTokenizer', 'SqueezeBertTokenizer', 'T5Tokenizer', 'UdopTokenizer', 'WhisperTokenizer', 'XLMRobertaTokenizer', 'XLNetTokenizer', 'SplinterTokenizer', 'XGLMTokenizer', 'LlamaTokenizer', 'CodeLlamaTokenizer', 'GemmaTokenizer', 'Phi3Tokenizer']
+2026-06-06 13:59:12,415 - runner - INFO - Starting bias audit at 2026-06-06 13:59:12.415145
+2026-06-06 13:59:12,415 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:04:02,067 - runner - INFO - Starting bias audit at 2026-06-06 14:04:02.067952
+2026-06-06 14:04:02,068 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:08:00,998 - runner - INFO - Starting bias audit at 2026-06-06 14:08:00.998005
+2026-06-06 14:08:00,998 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:12:01,001 - runner - INFO - Starting bias audit at 2026-06-06 14:12:01.001616
+2026-06-06 14:12:01,001 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:16:44,155 - runner - INFO - Starting bias audit at 2026-06-06 14:16:44.155081
+2026-06-06 14:16:44,155 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:16:44,155 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:17:18,177 - runner - INFO - Starting bias audit at 2026-06-06 14:17:18.177187
+2026-06-06 14:17:18,177 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:17:18,177 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:21:13,294 - runner - INFO - Starting bias audit at 2026-06-06 14:21:13.294016
+2026-06-06 14:21:13,294 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:21:13,294 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:31:59,371 - runner - ERROR - Error during bias audit: 'MaHealthBiasAudit' object has no attribute 'generate_report'
+2026-06-06 14:37:33,569 - runner - INFO - Starting bias audit at 2026-06-06 14:37:33.569302
+2026-06-06 14:37:33,569 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:37:33,569 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:37:49,110 - runner - ERROR - Error during bias audit: 'MaHealthBiasAudit' object has no attribute 'run'
+2026-06-06 14:39:36,513 - runner - INFO - Starting bias audit at 2026-06-06 14:39:36.513230
+2026-06-06 14:39:36,513 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:39:36,513 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:39:49,586 - runner - ERROR - Error during bias audit: 'MaHealthBiasAudit' object has no attribute 'run'
+2026-06-06 14:42:57,917 - runner - INFO - Starting bias audit at 2026-06-06 14:42:57.917101
+2026-06-06 14:42:57,917 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:42:57,917 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:43:11,303 - runner - ERROR - Error during bias audit: 'MaHealthBiasAudit' object has no attribute 'run'
+2026-06-06 14:46:29,839 - runner - INFO - Starting bias audit at 2026-06-06 14:46:29.839508
+2026-06-06 14:46:29,839 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 14:46:29,840 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 14:53:35,715 - runner - INFO - Bias audit completed successfully
+2026-06-06 14:53:35,716 - runner - INFO - Report saved to: /Users/ronaldkato/Downloads/MaHealthBias/output/reports
+2026-06-06 14:53:35,716 - runner - INFO - Figures saved to: /Users/ronaldkato/Downloads/MaHealthBias/output/figures
+2026-06-06 16:34:18,151 - runner - INFO - Starting bias audit at 2026-06-06 16:34:18.151916
+2026-06-06 16:34:18,152 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 16:34:18,152 - runner - INFO - Environment: TOKENIZERS_PARALLELISM=false, OMP_NUM_THREADS=1
+2026-06-06 16:47:08,761 - runner - INFO - Bias audit completed successfully
+2026-06-06 16:47:08,762 - runner - INFO - Report saved to: /Users/ronaldkato/Downloads/MaHealthBias/output/reports
+2026-06-06 16:47:08,762 - runner - INFO - Figures saved to: /Users/ronaldkato/Downloads/MaHealthBias/output/figures
+2026-06-06 17:00:38,755 - runner - INFO - Starting bias audit at 2026-06-06 17:00:38.755432
+2026-06-06 17:00:38,755 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 17:11:09,057 - runner - INFO - Bias audit completed successfully
+2026-06-06 17:21:27,853 - runner - INFO - Starting bias audit at 2026-06-06 17:21:27.853176
+2026-06-06 17:21:27,853 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 17:32:18,278 - runner - INFO - Bias audit completed successfully
+2026-06-06 17:37:22,589 - runner - INFO - Starting bias audit at 2026-06-06 17:37:22.589103
+2026-06-06 17:37:22,589 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 17:47:53,428 - runner - INFO - Bias audit completed successfully
+2026-06-06 20:02:15,719 - runner - INFO - Starting bias audit at 2026-06-06 20:02:15.719843
+2026-06-06 20:02:15,720 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 20:13:37,979 - runner - ERROR - Error during bias audit: name 'audit' is not defined
+2026-06-06 20:18:27,566 - runner - INFO - Starting bias audit at 2026-06-06 20:18:27.566858
+2026-06-06 20:18:27,567 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 20:30:19,889 - runner - INFO - Bias audit completed successfully
+2026-06-06 20:38:59,411 - runner - INFO - Starting bias audit at 2026-06-06 20:38:59.411464
+2026-06-06 20:38:59,411 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 20:50:07,694 - runner - INFO - Bias audit completed successfully
+2026-06-06 20:54:24,522 - runner - INFO - Starting bias audit at 2026-06-06 20:54:24.522632
+2026-06-06 20:54:24,523 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 21:04:59,483 - runner - ERROR - Error during bias audit: "['Num Answers', 'Avg Length', 'Std Length', 'Min', 'Max', 'Avg Sentence Length'] not in index"
+2026-06-06 21:13:18,120 - runner - INFO - Starting bias audit at 2026-06-06 21:13:18.120103
+2026-06-06 21:13:18,120 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-06 21:23:44,862 - runner - INFO - Bias audit completed successfully
