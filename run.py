@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 MaHealthBiasAudit - Runner Script
-Execute the complete bias audit pipeline
+Execute the bias audit pipeline
 """
 
 import sys

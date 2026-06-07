@@ -1,6 +1,6 @@
 """
 MaHealthBiasAudit - Visualization Dashboard
-Saves all 18 visualizations as PNG files with clear labels
+Saves all Visualizations
 """
 
 import os
@@ -64,7 +64,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '1_sdi_heatmap.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 1_sdi_heatmap.png")
+        print(f"Saved: 1_sdi_heatmap.png")
     
     # ============================================================
     # VISUALIZATION 2: Response Length by Language
@@ -91,7 +91,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '2_response_length.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 2_response_length.png")
+        print(f"Saved: 2_response_length.png")
     
     # ============================================================
     # VISUALIZATION 3: Tokeniser Performance
@@ -175,7 +175,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '4_vocabulary_richness.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 4_vocabulary_richness.png")
+        print(f"Saved: 4_vocabulary_richness.png")
     
     # ============================================================
     # VISUALIZATION 5: SDI Ranking
@@ -208,7 +208,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '5_sdi_ranking.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 5_sdi_ranking.png")
+        print(f"Saved: 5_sdi_ranking.png")
     
     # ============================================================
     # VISUALIZATION 6: Root Cause Pie Chart
@@ -233,7 +233,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '6_root_cause_pie.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 6_root_cause_pie.png")
+        print(f"Saved: 6_root_cause_pie.png")
     
     # ============================================================
     # VISUALIZATION 7: Trust-Aware Metrics
@@ -377,9 +377,9 @@ class VisualizationDashboard:
             plt.tight_layout()
             plt.savefig(os.path.join(self.figures_dir, '10_category_summary_table.png'), dpi=FIGURE_DPI, bbox_inches='tight')
             plt.close()
-            print(f"  ✓ Saved: 10_category_summary_table.png")
+            print(f"Saved: 10_category_summary_table.png")
         except Exception as e:
-            print(f"  ⚠ Could not save category summary table: {e}")
+            print(f"Could not save category summary table: {e}")
     
     # ============================================================
     # VISUALIZATION 11: Dataset Statistics Table
@@ -420,7 +420,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '11_dataset_statistics_table.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 11_dataset_statistics_table.png")
+        print(f"Saved: 11_dataset_statistics_table.png")
     
     # ============================================================
     # VISUALIZATION 12: Flag Details Table
@@ -464,7 +464,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '12_flag_details_table.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 12_flag_details_table.png")
+        print(f"Saved: 12_flag_details_table.png")
     
     # ============================================================
     # VISUALIZATION 13: Recommendations Table
@@ -490,7 +490,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '13_recommendations_table.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 13_recommendations_table.png")
+        print(f"Saved: 13_recommendations_table.png")
     
     # ============================================================
     # VISUALIZATION 14: Response Length Violin Plot
@@ -521,7 +521,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '14_violin_plot.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 14_violin_plot.png")
+        print(f"Saved: 14_violin_plot.png")
     
     # ============================================================
     # VISUALIZATION 15: Overall Bias Gauge
@@ -557,7 +557,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '15_bias_gauge.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 15_bias_gauge.png")
+        print(f"Saved: 15_bias_gauge.png")
     
     # ============================================================
     # VISUALIZATION 16: Outliers Analysis
@@ -591,7 +591,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '16_outliers_chart.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 16_outliers_chart.png")
+        print(f"Saved: 16_outliers_chart.png")
     
     # ============================================================
     # VISUALIZATION 17: N-gram Analysis Heatmap
@@ -636,7 +636,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '17_ngram_heatmap.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 17_ngram_heatmap.png")
+        print(f"Saved: 17_ngram_heatmap.png")
     
     # ============================================================
     # VISUALIZATION 18: Executive Dashboard
@@ -743,7 +743,7 @@ class VisualizationDashboard:
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, '18_executive_dashboard.png'), dpi=FIGURE_DPI, bbox_inches='tight')
         plt.close()
-        print(f"  ✓ Saved: 18_executive_dashboard.png")
+        print(f"Saved: 18_executive_dashboard.png")
     
     # ============================================================
     # Main method to save all visualizations
@@ -848,5 +848,5 @@ class VisualizationDashboard:
             self.save_executive_dashboard(report)
         
         print("\n" + "=" * 70)
-        print(f"✓ All 18 visualizations saved to: {self.figures_dir}")
+        print(f"visualizations saved to: {self.figures_dir}")
         print("=" * 70)
