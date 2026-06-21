@@ -1,0 +1,5 @@
+sample_size,avg_sdi,sdi_percentage,bias_level,total_flags,critical_flags,execution_time,avg_response_length,vocabulary_richness,fertility_penalty
+10,0.755,75.5%,HIGH,33,28,0.6,8.34,0.7118,1.736
+100,0.755,75.5%,HIGH,33,28,0.45,8.34,0.7118,1.736
+1000,0.755,75.5%,HIGH,33,28,0.45,8.34,0.7118,1.736
+10000,0.755,75.5%,HIGH,33,28,0.51,8.34,0.7118,1.736

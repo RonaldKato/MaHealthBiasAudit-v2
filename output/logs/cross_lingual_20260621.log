@@ -1,0 +1,1050 @@
+2026-06-21 11:54:29,341 - cross_lingual - INFO - ==================================================
+2026-06-21 11:54:29,341 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 11:54:29,341 - cross_lingual - INFO - ==================================================
+2026-06-21 11:54:29,341 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 11:54:29,341 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 11:54:29,341 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 11:54:29,341 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 11:54:29,341 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 11:54:29,342 - cross_lingual - INFO - Language distribution: {'English': 24, 'Swahili': 24, 'Luganda': 24, 'Runyankore': 24}
+2026-06-21 11:54:29,342 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 11:54:29,342 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 11:54:29,356 - cross_lingual - INFO - SDI matrix:
+             English   Swahili   Luganda  Runyankore
+English     0.000000  0.860192  0.968948    0.963874
+Swahili     0.860192  0.000000  0.639420    0.611919
+Luganda     0.968948  0.639420  0.000000    0.485778
+Runyankore  0.963874  0.611919  0.485778    0.000000
+2026-06-21 11:54:29,358 - cross_lingual - INFO - SDI matrix values:
+             English   Swahili   Luganda  Runyankore
+English     0.000000  0.860192  0.968948    0.963874
+Swahili     0.860192  0.000000  0.639420    0.611919
+Luganda     0.968948  0.639420  0.000000    0.485778
+Runyankore  0.963874  0.611919  0.485778    0.000000
+2026-06-21 11:54:29,358 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 11:54:29,359 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 11:54:29,359 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 11:54:29,359 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 11:54:29,366 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 11:54:29,366 - cross_lingual - INFO - Generating flags...
+2026-06-21 11:54:29,367 - cross_lingual - INFO - ==================================================
+2026-06-21 11:54:29,367 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 11:54:29,367 - cross_lingual - INFO -   Languages: ['English', 'Swahili', 'Luganda', 'Runyankore']
+2026-06-21 11:54:29,367 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 11:54:29,367 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 11:54:29,367 - cross_lingual - INFO - ==================================================
+2026-06-21 11:59:22,063 - cross_lingual - INFO - ==================================================
+2026-06-21 11:59:22,063 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 11:59:22,063 - cross_lingual - INFO - ==================================================
+2026-06-21 11:59:22,063 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 11:59:22,063 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 11:59:22,063 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 11:59:22,063 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 11:59:22,063 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 11:59:22,064 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Runyankore': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 11:59:22,064 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 11:59:22,064 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 11:59:22,081 - cross_lingual - INFO - SDI matrix:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 11:59:22,084 - cross_lingual - INFO - SDI matrix values:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 11:59:22,084 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 11:59:22,084 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 11:59:22,084 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 11:59:22,085 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 11:59:22,088 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 11:59:22,088 - cross_lingual - INFO - Generating flags...
+2026-06-21 11:59:22,088 - cross_lingual - INFO - ==================================================
+2026-06-21 11:59:22,088 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 11:59:22,089 - cross_lingual - INFO -   Languages: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 11:59:22,089 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 11:59:22,089 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 11:59:22,089 - cross_lingual - INFO - ==================================================
+2026-06-21 12:01:52,128 - cross_lingual - INFO - ==================================================
+2026-06-21 12:01:52,129 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 12:01:52,129 - cross_lingual - INFO - ==================================================
+2026-06-21 12:01:52,129 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 12:01:52,129 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Language distribution: {'English': 24, 'Luganda': 24, 'Runyankore': 24, 'Swahili': 24}
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 12:01:52,130 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 12:01:52,145 - cross_lingual - INFO - SDI matrix:
+             English   Luganda  Runyankore   Swahili
+English     0.000000  0.968948    0.963874  0.860192
+Luganda     0.968948  0.000000    0.485778  0.639420
+Runyankore  0.963874  0.485778    0.000000  0.611919
+Swahili     0.860192  0.639420    0.611919  0.000000
+2026-06-21 12:01:52,148 - cross_lingual - INFO - SDI matrix values:
+             English   Luganda  Runyankore   Swahili
+English     0.000000  0.968948    0.963874  0.860192
+Luganda     0.968948  0.000000    0.485778  0.639420
+Runyankore  0.963874  0.485778    0.000000  0.611919
+Swahili     0.860192  0.639420    0.611919  0.000000
+2026-06-21 12:01:52,148 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 12:01:52,149 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 12:01:52,149 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 12:01:52,149 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 12:01:52,154 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 12:01:52,154 - cross_lingual - INFO - Generating flags...
+2026-06-21 12:01:52,154 - cross_lingual - INFO - ==================================================
+2026-06-21 12:01:52,154 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 12:01:52,154 - cross_lingual - INFO -   Languages: ['English', 'Luganda', 'Runyankore', 'Swahili']
+2026-06-21 12:01:52,154 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 12:01:52,154 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 12:01:52,154 - cross_lingual - INFO - ==================================================
+2026-06-21 12:23:41,468 - cross_lingual - INFO - ==================================================
+2026-06-21 12:23:41,469 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 12:23:41,469 - cross_lingual - INFO - ==================================================
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'English': 24, 'Runyankore': 24, 'Swahili': 24}
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 12:23:41,469 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 12:23:41,479 - cross_lingual - INFO - SDI matrix:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 12:23:41,481 - cross_lingual - INFO - SDI matrix values:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 12:23:41,481 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 12:23:41,482 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 12:23:41,482 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 12:23:41,483 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 12:23:41,486 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 12:23:41,486 - cross_lingual - INFO - Generating flags...
+2026-06-21 12:23:41,486 - cross_lingual - INFO - ==================================================
+2026-06-21 12:23:41,486 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 12:23:41,486 - cross_lingual - INFO -   Languages: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 12:23:41,486 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 12:23:41,486 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 12:23:41,486 - cross_lingual - INFO - ==================================================
+2026-06-21 12:25:40,979 - cross_lingual - INFO - ==================================================
+2026-06-21 12:25:40,979 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 12:25:40,979 - cross_lingual - INFO - ==================================================
+2026-06-21 12:25:40,979 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 12:25:40,980 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Luganda': 24, 'Runyankore': 24, 'English': 24}
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 12:25:40,981 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 12:25:41,013 - cross_lingual - INFO - SDI matrix:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 12:25:41,020 - cross_lingual - INFO - SDI matrix values:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 12:25:41,021 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 12:25:41,021 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 12:25:41,022 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 12:25:41,023 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 12:25:41,026 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 12:25:41,026 - cross_lingual - INFO - Generating flags...
+2026-06-21 12:25:41,027 - cross_lingual - INFO - ==================================================
+2026-06-21 12:25:41,027 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 12:25:41,027 - cross_lingual - INFO -   Languages: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 12:25:41,027 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 12:25:41,027 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 12:25:41,027 - cross_lingual - INFO - ==================================================
+2026-06-21 13:34:01,081 - cross_lingual - INFO - ==================================================
+2026-06-21 13:34:01,081 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 13:34:01,081 - cross_lingual - INFO - ==================================================
+2026-06-21 13:34:01,081 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'Luganda': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 13:34:01,082 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 13:34:01,083 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 13:34:01,099 - cross_lingual - INFO - SDI matrix:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 13:34:01,102 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 13:34:01,102 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 13:34:01,103 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 13:34:01,103 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 13:34:01,104 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 13:34:01,109 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 13:34:01,110 - cross_lingual - INFO - Generating flags...
+2026-06-21 13:34:01,111 - cross_lingual - INFO - ==================================================
+2026-06-21 13:34:01,111 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 13:34:01,111 - cross_lingual - INFO -   Languages: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 13:34:01,111 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 13:34:01,111 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 13:34:01,111 - cross_lingual - INFO - ==================================================
+2026-06-21 14:31:22,017 - cross_lingual - INFO - ==================================================
+2026-06-21 14:31:22,017 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 14:31:22,017 - cross_lingual - INFO - ==================================================
+2026-06-21 14:31:22,017 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 14:31:22,017 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'Luganda': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 14:31:22,018 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 14:31:22,031 - cross_lingual - INFO - SDI matrix:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 14:31:22,034 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 14:31:22,034 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 14:31:22,034 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 14:31:22,034 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 14:31:22,035 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 14:31:22,037 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 14:31:22,038 - cross_lingual - INFO - Generating flags...
+2026-06-21 14:31:22,038 - cross_lingual - INFO - ==================================================
+2026-06-21 14:31:22,038 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 14:31:22,038 - cross_lingual - INFO -   Languages: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 14:31:22,038 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 14:31:22,038 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 14:31:22,038 - cross_lingual - INFO - ==================================================
+2026-06-21 14:41:24,326 - cross_lingual - INFO - ==================================================
+2026-06-21 14:41:24,326 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 14:41:24,326 - cross_lingual - INFO - ==================================================
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Runyankore': 24, 'Swahili': 24, 'English': 24}
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 14:41:24,326 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 14:41:24,332 - cross_lingual - INFO - SDI matrix:
+             Luganda  Runyankore   Swahili   English
+Luganda     0.000000    0.485778  0.639420  0.968948
+Runyankore  0.485778    0.000000  0.611919  0.963874
+Swahili     0.639420    0.611919  0.000000  0.860192
+English     0.968948    0.963874  0.860192  0.000000
+2026-06-21 14:41:24,334 - cross_lingual - INFO - SDI matrix values:
+             Luganda  Runyankore   Swahili   English
+Luganda     0.000000    0.485778  0.639420  0.968948
+Runyankore  0.485778    0.000000  0.611919  0.963874
+Swahili     0.639420    0.611919  0.000000  0.860192
+English     0.968948    0.963874  0.860192  0.000000
+2026-06-21 14:41:24,334 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 14:41:24,335 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 14:41:24,335 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 14:41:24,335 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 14:41:24,337 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 14:41:24,337 - cross_lingual - INFO - Generating flags...
+2026-06-21 14:41:24,337 - cross_lingual - INFO - ==================================================
+2026-06-21 14:41:24,337 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 14:41:24,337 - cross_lingual - INFO -   Languages: ['Luganda', 'Runyankore', 'Swahili', 'English']
+2026-06-21 14:41:24,337 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 14:41:24,337 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 14:41:24,337 - cross_lingual - INFO - ==================================================
+2026-06-21 14:57:03,076 - cross_lingual - INFO - ==================================================
+2026-06-21 14:57:03,077 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 14:57:03,077 - cross_lingual - INFO - ==================================================
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Swahili': 24, 'English': 24, 'Runyankore': 24}
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 14:57:03,077 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 14:57:03,084 - cross_lingual - INFO - SDI matrix:
+             Luganda   Swahili   English  Runyankore
+Luganda     0.000000  0.639420  0.968948    0.485778
+Swahili     0.639420  0.000000  0.860192    0.611919
+English     0.968948  0.860192  0.000000    0.963874
+Runyankore  0.485778  0.611919  0.963874    0.000000
+2026-06-21 14:57:03,085 - cross_lingual - INFO - SDI matrix values:
+             Luganda   Swahili   English  Runyankore
+Luganda     0.000000  0.639420  0.968948    0.485778
+Swahili     0.639420  0.000000  0.860192    0.611919
+English     0.968948  0.860192  0.000000    0.963874
+Runyankore  0.485778  0.611919  0.963874    0.000000
+2026-06-21 14:57:03,085 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 14:57:03,086 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 14:57:03,086 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 14:57:03,086 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 14:57:03,088 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 14:57:03,088 - cross_lingual - INFO - Generating flags...
+2026-06-21 14:57:03,088 - cross_lingual - INFO - ==================================================
+2026-06-21 14:57:03,088 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 14:57:03,088 - cross_lingual - INFO -   Languages: ['Luganda', 'Swahili', 'English', 'Runyankore']
+2026-06-21 14:57:03,088 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 14:57:03,088 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 14:57:03,088 - cross_lingual - INFO - ==================================================
+2026-06-21 15:01:25,730 - cross_lingual - INFO - ==================================================
+2026-06-21 15:01:25,731 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:01:25,731 - cross_lingual - INFO - ==================================================
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'English': 24, 'Runyankore': 24, 'Swahili': 24}
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:01:25,731 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:01:25,738 - cross_lingual - INFO - SDI matrix:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 15:01:25,740 - cross_lingual - INFO - SDI matrix values:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 15:01:25,740 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:01:25,740 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:01:25,740 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:01:25,740 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:01:25,742 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:01:25,742 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:01:25,742 - cross_lingual - INFO - ==================================================
+2026-06-21 15:01:25,742 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:01:25,742 - cross_lingual - INFO -   Languages: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 15:01:25,742 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:01:25,742 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:01:25,742 - cross_lingual - INFO - ==================================================
+2026-06-21 15:02:13,741 - cross_lingual - INFO - ==================================================
+2026-06-21 15:02:13,746 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:02:13,746 - cross_lingual - INFO - ==================================================
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'Luganda': 24, 'Swahili': 24, 'English': 24}
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:02:13,746 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:02:13,753 - cross_lingual - INFO - SDI matrix:
+            Runyankore   Luganda   Swahili   English
+Runyankore    0.000000  0.485778  0.611919  0.963874
+Luganda       0.485778  0.000000  0.639420  0.968948
+Swahili       0.611919  0.639420  0.000000  0.860192
+English       0.963874  0.968948  0.860192  0.000000
+2026-06-21 15:02:13,756 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   Luganda   Swahili   English
+Runyankore    0.000000  0.485778  0.611919  0.963874
+Luganda       0.485778  0.000000  0.639420  0.968948
+Swahili       0.611919  0.639420  0.000000  0.860192
+English       0.963874  0.968948  0.860192  0.000000
+2026-06-21 15:02:13,756 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:02:13,757 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:02:13,757 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:02:13,757 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:02:13,759 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:02:13,759 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:02:13,759 - cross_lingual - INFO - ==================================================
+2026-06-21 15:02:13,759 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:02:13,759 - cross_lingual - INFO -   Languages: ['Runyankore', 'Luganda', 'Swahili', 'English']
+2026-06-21 15:02:13,759 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:02:13,759 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:02:13,759 - cross_lingual - INFO - ==================================================
+2026-06-21 15:04:51,650 - cross_lingual - INFO - ==================================================
+2026-06-21 15:04:51,651 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:04:51,651 - cross_lingual - INFO - ==================================================
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Luganda': 24, 'Runyankore': 24, 'English': 24}
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:04:51,651 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:04:51,658 - cross_lingual - INFO - SDI matrix:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 15:04:51,659 - cross_lingual - INFO - SDI matrix values:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 15:04:51,660 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:04:51,660 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:04:51,660 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:04:51,660 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:04:51,662 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:04:51,662 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:04:51,662 - cross_lingual - INFO - ==================================================
+2026-06-21 15:04:51,662 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:04:51,662 - cross_lingual - INFO -   Languages: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 15:04:51,662 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:04:51,662 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:04:51,662 - cross_lingual - INFO - ==================================================
+2026-06-21 15:10:03,912 - cross_lingual - INFO - ==================================================
+2026-06-21 15:10:03,913 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:10:03,913 - cross_lingual - INFO - ==================================================
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Language distribution: {'English': 24, 'Swahili': 24, 'Luganda': 24, 'Runyankore': 24}
+2026-06-21 15:10:03,913 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:10:03,914 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:10:03,921 - cross_lingual - INFO - SDI matrix:
+             English   Swahili   Luganda  Runyankore
+English     0.000000  0.860192  0.968948    0.963874
+Swahili     0.860192  0.000000  0.639420    0.611919
+Luganda     0.968948  0.639420  0.000000    0.485778
+Runyankore  0.963874  0.611919  0.485778    0.000000
+2026-06-21 15:10:03,922 - cross_lingual - INFO - SDI matrix values:
+             English   Swahili   Luganda  Runyankore
+English     0.000000  0.860192  0.968948    0.963874
+Swahili     0.860192  0.000000  0.639420    0.611919
+Luganda     0.968948  0.639420  0.000000    0.485778
+Runyankore  0.963874  0.611919  0.485778    0.000000
+2026-06-21 15:10:03,923 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:10:03,923 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:10:03,923 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:10:03,923 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:10:03,925 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:10:03,925 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:10:03,925 - cross_lingual - INFO - ==================================================
+2026-06-21 15:10:03,925 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:10:03,925 - cross_lingual - INFO -   Languages: ['English', 'Swahili', 'Luganda', 'Runyankore']
+2026-06-21 15:10:03,925 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:10:03,925 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:10:03,925 - cross_lingual - INFO - ==================================================
+2026-06-21 15:12:57,946 - cross_lingual - INFO - ==================================================
+2026-06-21 15:12:57,946 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:12:57,946 - cross_lingual - INFO - ==================================================
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'English': 24, 'Swahili': 24, 'Luganda': 24}
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:12:57,946 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:12:57,952 - cross_lingual - INFO - SDI matrix:
+            Runyankore   English   Swahili   Luganda
+Runyankore    0.000000  0.963874  0.611919  0.485778
+English       0.963874  0.000000  0.860192  0.968948
+Swahili       0.611919  0.860192  0.000000  0.639420
+Luganda       0.485778  0.968948  0.639420  0.000000
+2026-06-21 15:12:57,953 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   English   Swahili   Luganda
+Runyankore    0.000000  0.963874  0.611919  0.485778
+English       0.963874  0.000000  0.860192  0.968948
+Swahili       0.611919  0.860192  0.000000  0.639420
+Luganda       0.485778  0.968948  0.639420  0.000000
+2026-06-21 15:12:57,953 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:12:57,954 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:12:57,954 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:12:57,954 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:12:57,956 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:12:57,956 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:12:57,956 - cross_lingual - INFO - ==================================================
+2026-06-21 15:12:57,956 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:12:57,956 - cross_lingual - INFO -   Languages: ['Runyankore', 'English', 'Swahili', 'Luganda']
+2026-06-21 15:12:57,956 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:12:57,956 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:12:57,956 - cross_lingual - INFO - ==================================================
+2026-06-21 15:23:07,808 - cross_lingual - INFO - ==================================================
+2026-06-21 15:23:07,808 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:23:07,808 - cross_lingual - INFO - ==================================================
+2026-06-21 15:23:07,808 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:23:07,808 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Runyankore': 24, 'English': 24, 'Luganda': 24}
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:23:07,809 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:23:07,816 - cross_lingual - INFO - SDI matrix:
+             Swahili  Runyankore   English   Luganda
+Swahili     0.000000    0.611919  0.860192  0.639420
+Runyankore  0.611919    0.000000  0.963874  0.485778
+English     0.860192    0.963874  0.000000  0.968948
+Luganda     0.639420    0.485778  0.968948  0.000000
+2026-06-21 15:23:07,818 - cross_lingual - INFO - SDI matrix values:
+             Swahili  Runyankore   English   Luganda
+Swahili     0.000000    0.611919  0.860192  0.639420
+Runyankore  0.611919    0.000000  0.963874  0.485778
+English     0.860192    0.963874  0.000000  0.968948
+Luganda     0.639420    0.485778  0.968948  0.000000
+2026-06-21 15:23:07,818 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:23:07,818 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:23:07,818 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:23:07,819 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:23:07,821 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:23:07,821 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:23:07,821 - cross_lingual - INFO - ==================================================
+2026-06-21 15:23:07,821 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:23:07,821 - cross_lingual - INFO -   Languages: ['Swahili', 'Runyankore', 'English', 'Luganda']
+2026-06-21 15:23:07,821 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:23:07,821 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:23:07,821 - cross_lingual - INFO - ==================================================
+2026-06-21 15:27:19,770 - cross_lingual - INFO - ==================================================
+2026-06-21 15:27:19,770 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:27:19,770 - cross_lingual - INFO - ==================================================
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Luganda': 24, 'English': 24, 'Runyankore': 24}
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:27:19,770 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:27:19,777 - cross_lingual - INFO - SDI matrix:
+             Swahili   Luganda   English  Runyankore
+Swahili     0.000000  0.639420  0.860192    0.611919
+Luganda     0.639420  0.000000  0.968948    0.485778
+English     0.860192  0.968948  0.000000    0.963874
+Runyankore  0.611919  0.485778  0.963874    0.000000
+2026-06-21 15:27:19,779 - cross_lingual - INFO - SDI matrix values:
+             Swahili   Luganda   English  Runyankore
+Swahili     0.000000  0.639420  0.860192    0.611919
+Luganda     0.639420  0.000000  0.968948    0.485778
+English     0.860192  0.968948  0.000000    0.963874
+Runyankore  0.611919  0.485778  0.963874    0.000000
+2026-06-21 15:27:19,779 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:27:19,780 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:27:19,780 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:27:19,780 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:27:19,782 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:27:19,782 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:27:19,782 - cross_lingual - INFO - ==================================================
+2026-06-21 15:27:19,782 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:27:19,782 - cross_lingual - INFO -   Languages: ['Swahili', 'Luganda', 'English', 'Runyankore']
+2026-06-21 15:27:19,782 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:27:19,782 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:27:19,782 - cross_lingual - INFO - ==================================================
+2026-06-21 15:31:16,789 - cross_lingual - INFO - ==================================================
+2026-06-21 15:31:16,789 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:31:16,789 - cross_lingual - INFO - ==================================================
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Runyankore': 24, 'Swahili': 24, 'English': 24}
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:31:16,789 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:31:16,801 - cross_lingual - INFO - SDI matrix:
+             Luganda  Runyankore   Swahili   English
+Luganda     0.000000    0.485778  0.639420  0.968948
+Runyankore  0.485778    0.000000  0.611919  0.963874
+Swahili     0.639420    0.611919  0.000000  0.860192
+English     0.968948    0.963874  0.860192  0.000000
+2026-06-21 15:31:16,803 - cross_lingual - INFO - SDI matrix values:
+             Luganda  Runyankore   Swahili   English
+Luganda     0.000000    0.485778  0.639420  0.968948
+Runyankore  0.485778    0.000000  0.611919  0.963874
+Swahili     0.639420    0.611919  0.000000  0.860192
+English     0.968948    0.963874  0.860192  0.000000
+2026-06-21 15:31:16,803 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:31:16,803 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:31:16,803 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:31:16,804 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:31:16,806 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:31:16,806 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:31:16,807 - cross_lingual - INFO - ==================================================
+2026-06-21 15:31:16,807 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:31:16,807 - cross_lingual - INFO -   Languages: ['Luganda', 'Runyankore', 'Swahili', 'English']
+2026-06-21 15:31:16,807 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:31:16,807 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:31:16,807 - cross_lingual - INFO - ==================================================
+2026-06-21 15:35:58,740 - cross_lingual - INFO - ==================================================
+2026-06-21 15:35:58,740 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:35:58,740 - cross_lingual - INFO - ==================================================
+2026-06-21 15:35:58,740 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:35:58,740 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:35:58,740 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:35:58,741 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:35:58,741 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:35:58,741 - cross_lingual - INFO - Language distribution: {'English': 24, 'Runyankore': 24, 'Luganda': 24, 'Swahili': 24}
+2026-06-21 15:35:58,741 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:35:58,741 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:35:58,747 - cross_lingual - INFO - SDI matrix:
+             English  Runyankore   Luganda   Swahili
+English     0.000000    0.963874  0.968948  0.860192
+Runyankore  0.963874    0.000000  0.485778  0.611919
+Luganda     0.968948    0.485778  0.000000  0.639420
+Swahili     0.860192    0.611919  0.639420  0.000000
+2026-06-21 15:35:58,749 - cross_lingual - INFO - SDI matrix values:
+             English  Runyankore   Luganda   Swahili
+English     0.000000    0.963874  0.968948  0.860192
+Runyankore  0.963874    0.000000  0.485778  0.611919
+Luganda     0.968948    0.485778  0.000000  0.639420
+Swahili     0.860192    0.611919  0.639420  0.000000
+2026-06-21 15:35:58,749 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:35:58,749 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:35:58,749 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:35:58,750 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:35:58,751 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:35:58,751 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:35:58,751 - cross_lingual - INFO - ==================================================
+2026-06-21 15:35:58,751 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:35:58,751 - cross_lingual - INFO -   Languages: ['English', 'Runyankore', 'Luganda', 'Swahili']
+2026-06-21 15:35:58,751 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:35:58,751 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:35:58,751 - cross_lingual - INFO - ==================================================
+2026-06-21 15:40:11,904 - cross_lingual - INFO - ==================================================
+2026-06-21 15:40:11,905 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:40:11,905 - cross_lingual - INFO - ==================================================
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Runyankore': 24, 'Luganda': 24, 'English': 24}
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:40:11,905 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:40:11,913 - cross_lingual - INFO - SDI matrix:
+             Swahili  Runyankore   Luganda   English
+Swahili     0.000000    0.611919  0.639420  0.860192
+Runyankore  0.611919    0.000000  0.485778  0.963874
+Luganda     0.639420    0.485778  0.000000  0.968948
+English     0.860192    0.963874  0.968948  0.000000
+2026-06-21 15:40:11,914 - cross_lingual - INFO - SDI matrix values:
+             Swahili  Runyankore   Luganda   English
+Swahili     0.000000    0.611919  0.639420  0.860192
+Runyankore  0.611919    0.000000  0.485778  0.963874
+Luganda     0.639420    0.485778  0.000000  0.968948
+English     0.860192    0.963874  0.968948  0.000000
+2026-06-21 15:40:11,914 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:40:11,914 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:40:11,915 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:40:11,915 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:40:11,917 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:40:11,917 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:40:11,917 - cross_lingual - INFO - ==================================================
+2026-06-21 15:40:11,917 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:40:11,917 - cross_lingual - INFO -   Languages: ['Swahili', 'Runyankore', 'Luganda', 'English']
+2026-06-21 15:40:11,917 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:40:11,917 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:40:11,917 - cross_lingual - INFO - ==================================================
+2026-06-21 15:46:09,959 - cross_lingual - INFO - ==================================================
+2026-06-21 15:46:09,960 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 15:46:09,960 - cross_lingual - INFO - ==================================================
+2026-06-21 15:46:09,960 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 15:46:09,960 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 15:46:09,960 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 15:46:09,961 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 15:46:09,961 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 15:46:09,961 - cross_lingual - INFO - Language distribution: {'English': 24, 'Runyankore': 24, 'Swahili': 24, 'Luganda': 24}
+2026-06-21 15:46:09,961 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 15:46:09,961 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 15:46:09,972 - cross_lingual - INFO - SDI matrix:
+             English  Runyankore   Swahili   Luganda
+English     0.000000    0.963874  0.860192  0.968948
+Runyankore  0.963874    0.000000  0.611919  0.485778
+Swahili     0.860192    0.611919  0.000000  0.639420
+Luganda     0.968948    0.485778  0.639420  0.000000
+2026-06-21 15:46:09,975 - cross_lingual - INFO - SDI matrix values:
+             English  Runyankore   Swahili   Luganda
+English     0.000000    0.963874  0.860192  0.968948
+Runyankore  0.963874    0.000000  0.611919  0.485778
+Swahili     0.860192    0.611919  0.000000  0.639420
+Luganda     0.968948    0.485778  0.639420  0.000000
+2026-06-21 15:46:09,975 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 15:46:09,975 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 15:46:09,975 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 15:46:09,976 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 15:46:09,979 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 15:46:09,979 - cross_lingual - INFO - Generating flags...
+2026-06-21 15:46:09,979 - cross_lingual - INFO - ==================================================
+2026-06-21 15:46:09,979 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 15:46:09,979 - cross_lingual - INFO -   Languages: ['English', 'Runyankore', 'Swahili', 'Luganda']
+2026-06-21 15:46:09,979 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 15:46:09,980 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 15:46:09,980 - cross_lingual - INFO - ==================================================
+2026-06-21 16:39:54,396 - cross_lingual - INFO - ==================================================
+2026-06-21 16:39:54,397 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 16:39:54,397 - cross_lingual - INFO - ==================================================
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'Luganda': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 16:39:54,397 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 16:39:54,412 - cross_lingual - INFO - SDI matrix:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 16:39:54,414 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   Luganda   English   Swahili
+Runyankore    0.000000  0.485778  0.963874  0.611919
+Luganda       0.485778  0.000000  0.968948  0.639420
+English       0.963874  0.968948  0.000000  0.860192
+Swahili       0.611919  0.639420  0.860192  0.000000
+2026-06-21 16:39:54,414 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 16:39:54,415 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 16:39:54,415 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 16:39:54,415 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 16:39:54,417 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 16:39:54,417 - cross_lingual - INFO - Generating flags...
+2026-06-21 16:39:54,417 - cross_lingual - INFO - ==================================================
+2026-06-21 16:39:54,417 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 16:39:54,417 - cross_lingual - INFO -   Languages: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 16:39:54,417 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 16:39:54,417 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 16:39:54,417 - cross_lingual - INFO - ==================================================
+2026-06-21 16:50:50,303 - cross_lingual - INFO - ==================================================
+2026-06-21 16:50:50,303 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 16:50:50,303 - cross_lingual - INFO - ==================================================
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'Luganda': 24, 'Runyankore': 24, 'English': 24}
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 16:50:50,303 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 16:50:50,310 - cross_lingual - INFO - SDI matrix:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 16:50:50,312 - cross_lingual - INFO - SDI matrix values:
+             Swahili   Luganda  Runyankore   English
+Swahili     0.000000  0.639420    0.611919  0.860192
+Luganda     0.639420  0.000000    0.485778  0.968948
+Runyankore  0.611919  0.485778    0.000000  0.963874
+English     0.860192  0.968948    0.963874  0.000000
+2026-06-21 16:50:50,312 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 16:50:50,312 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 16:50:50,312 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 16:50:50,313 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 16:50:50,314 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 16:50:50,314 - cross_lingual - INFO - Generating flags...
+2026-06-21 16:50:50,314 - cross_lingual - INFO - ==================================================
+2026-06-21 16:50:50,314 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 16:50:50,314 - cross_lingual - INFO -   Languages: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 16:50:50,314 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 16:50:50,314 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 16:50:50,314 - cross_lingual - INFO - ==================================================
+2026-06-21 16:58:58,471 - cross_lingual - INFO - ==================================================
+2026-06-21 16:58:58,471 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 16:58:58,471 - cross_lingual - INFO - ==================================================
+2026-06-21 16:58:58,471 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 16:58:58,471 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Swahili': 24, 'English': 24, 'Runyankore': 24}
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 16:58:58,472 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 16:58:58,478 - cross_lingual - INFO - SDI matrix:
+             Luganda   Swahili   English  Runyankore
+Luganda     0.000000  0.639420  0.968948    0.485778
+Swahili     0.639420  0.000000  0.860192    0.611919
+English     0.968948  0.860192  0.000000    0.963874
+Runyankore  0.485778  0.611919  0.963874    0.000000
+2026-06-21 16:58:58,480 - cross_lingual - INFO - SDI matrix values:
+             Luganda   Swahili   English  Runyankore
+Luganda     0.000000  0.639420  0.968948    0.485778
+Swahili     0.639420  0.000000  0.860192    0.611919
+English     0.968948  0.860192  0.000000    0.963874
+Runyankore  0.485778  0.611919  0.963874    0.000000
+2026-06-21 16:58:58,480 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 16:58:58,481 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 16:58:58,482 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 16:58:58,483 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 16:58:58,485 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 16:58:58,485 - cross_lingual - INFO - Generating flags...
+2026-06-21 16:58:58,485 - cross_lingual - INFO - ==================================================
+2026-06-21 16:58:58,485 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 16:58:58,485 - cross_lingual - INFO -   Languages: ['Luganda', 'Swahili', 'English', 'Runyankore']
+2026-06-21 16:58:58,485 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 16:58:58,485 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 16:58:58,485 - cross_lingual - INFO - ==================================================
+2026-06-21 17:08:04,216 - cross_lingual - INFO - ==================================================
+2026-06-21 17:08:04,216 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 17:08:04,216 - cross_lingual - INFO - ==================================================
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Runyankore': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 17:08:04,216 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 17:08:04,231 - cross_lingual - INFO - SDI matrix:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 17:08:04,232 - cross_lingual - INFO - SDI matrix values:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 17:08:04,232 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 17:08:04,233 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 17:08:04,233 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 17:08:04,233 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 17:08:04,235 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 17:08:04,235 - cross_lingual - INFO - Generating flags...
+2026-06-21 17:08:04,235 - cross_lingual - INFO - ==================================================
+2026-06-21 17:08:04,235 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 17:08:04,235 - cross_lingual - INFO -   Languages: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 17:08:04,235 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 17:08:04,235 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 17:08:04,235 - cross_lingual - INFO - ==================================================
+2026-06-21 17:52:59,112 - cross_lingual - INFO - ==================================================
+2026-06-21 17:52:59,113 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 17:52:59,114 - cross_lingual - INFO - ==================================================
+2026-06-21 17:52:59,114 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 17:52:59,114 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 17:52:59,115 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 17:52:59,115 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 17:52:59,115 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 17:52:59,116 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'Luganda': 24, 'Swahili': 24, 'English': 24}
+2026-06-21 17:52:59,116 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 17:52:59,116 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 17:52:59,126 - cross_lingual - INFO - SDI matrix:
+            Runyankore   Luganda   Swahili   English
+Runyankore    0.000000  0.485778  0.611919  0.963874
+Luganda       0.485778  0.000000  0.639420  0.968948
+Swahili       0.611919  0.639420  0.000000  0.860192
+English       0.963874  0.968948  0.860192  0.000000
+2026-06-21 17:52:59,129 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   Luganda   Swahili   English
+Runyankore    0.000000  0.485778  0.611919  0.963874
+Luganda       0.485778  0.000000  0.639420  0.968948
+Swahili       0.611919  0.639420  0.000000  0.860192
+English       0.963874  0.968948  0.860192  0.000000
+2026-06-21 17:52:59,129 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 17:52:59,130 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 17:52:59,130 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 17:52:59,131 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 17:52:59,134 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 17:52:59,134 - cross_lingual - INFO - Generating flags...
+2026-06-21 17:52:59,134 - cross_lingual - INFO - ==================================================
+2026-06-21 17:52:59,134 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 17:52:59,134 - cross_lingual - INFO -   Languages: ['Runyankore', 'Luganda', 'Swahili', 'English']
+2026-06-21 17:52:59,134 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 17:52:59,135 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 17:52:59,135 - cross_lingual - INFO - ==================================================
+2026-06-21 17:57:32,669 - cross_lingual - INFO - ==================================================
+2026-06-21 17:57:32,669 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 17:57:32,670 - cross_lingual - INFO - ==================================================
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'English': 24, 'Runyankore': 24, 'Swahili': 24}
+2026-06-21 17:57:32,670 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 17:57:32,671 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 17:57:32,682 - cross_lingual - INFO - SDI matrix:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 17:57:32,684 - cross_lingual - INFO - SDI matrix values:
+             Luganda   English  Runyankore   Swahili
+Luganda     0.000000  0.968948    0.485778  0.639420
+English     0.968948  0.000000    0.963874  0.860192
+Runyankore  0.485778  0.963874    0.000000  0.611919
+Swahili     0.639420  0.860192    0.611919  0.000000
+2026-06-21 17:57:32,684 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 17:57:32,684 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 17:57:32,684 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 17:57:32,685 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 17:57:32,687 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 17:57:32,688 - cross_lingual - INFO - Generating flags...
+2026-06-21 17:57:32,688 - cross_lingual - INFO - ==================================================
+2026-06-21 17:57:32,688 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 17:57:32,688 - cross_lingual - INFO -   Languages: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 17:57:32,688 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 17:57:32,688 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 17:57:32,688 - cross_lingual - INFO - ==================================================
+2026-06-21 17:59:54,800 - cross_lingual - INFO - ==================================================
+2026-06-21 17:59:54,801 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 17:59:54,801 - cross_lingual - INFO - ==================================================
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Language distribution: {'Luganda': 24, 'Runyankore': 24, 'English': 24, 'Swahili': 24}
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 17:59:54,801 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 17:59:54,814 - cross_lingual - INFO - SDI matrix:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 17:59:54,817 - cross_lingual - INFO - SDI matrix values:
+             Luganda  Runyankore   English   Swahili
+Luganda     0.000000    0.485778  0.968948  0.639420
+Runyankore  0.485778    0.000000  0.963874  0.611919
+English     0.968948    0.963874  0.000000  0.860192
+Swahili     0.639420    0.611919  0.860192  0.000000
+2026-06-21 17:59:54,817 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 17:59:54,817 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 17:59:54,817 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 17:59:54,818 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 17:59:54,822 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 17:59:54,822 - cross_lingual - INFO - Generating flags...
+2026-06-21 17:59:54,822 - cross_lingual - INFO - ==================================================
+2026-06-21 17:59:54,822 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 17:59:54,822 - cross_lingual - INFO -   Languages: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 17:59:54,822 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 17:59:54,822 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 17:59:54,822 - cross_lingual - INFO - ==================================================
+2026-06-21 18:06:34,273 - cross_lingual - INFO - ==================================================
+2026-06-21 18:06:34,285 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 18:06:34,285 - cross_lingual - INFO - ==================================================
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 18:06:34,285 - cross_lingual - INFO - Language distribution: {'English': 24, 'Swahili': 24, 'Runyankore': 24, 'Luganda': 24}
+2026-06-21 18:06:34,286 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 18:06:34,286 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 18:06:34,302 - cross_lingual - INFO - SDI matrix:
+             English   Swahili  Runyankore   Luganda
+English     0.000000  0.860192    0.963874  0.968948
+Swahili     0.860192  0.000000    0.611919  0.639420
+Runyankore  0.963874  0.611919    0.000000  0.485778
+Luganda     0.968948  0.639420    0.485778  0.000000
+2026-06-21 18:06:34,306 - cross_lingual - INFO - SDI matrix values:
+             English   Swahili  Runyankore   Luganda
+English     0.000000  0.860192    0.963874  0.968948
+Swahili     0.860192  0.000000    0.611919  0.639420
+Runyankore  0.963874  0.611919    0.000000  0.485778
+Luganda     0.968948  0.639420    0.485778  0.000000
+2026-06-21 18:06:34,306 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 18:06:34,307 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 18:06:34,307 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 18:06:34,308 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 18:06:34,312 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 18:06:34,319 - cross_lingual - INFO - Generating flags...
+2026-06-21 18:06:34,321 - cross_lingual - INFO - ==================================================
+2026-06-21 18:06:34,321 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 18:06:34,322 - cross_lingual - INFO -   Languages: ['English', 'Swahili', 'Runyankore', 'Luganda']
+2026-06-21 18:06:34,322 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 18:06:34,322 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 18:06:34,322 - cross_lingual - INFO - ==================================================
+2026-06-21 18:15:40,533 - cross_lingual - INFO - ==================================================
+2026-06-21 18:15:40,533 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 18:15:40,533 - cross_lingual - INFO - ==================================================
+2026-06-21 18:15:40,533 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 18:15:40,533 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Language distribution: {'Swahili': 24, 'English': 24, 'Runyankore': 24, 'Luganda': 24}
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 18:15:40,534 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 18:15:40,545 - cross_lingual - INFO - SDI matrix:
+             Swahili   English  Runyankore   Luganda
+Swahili     0.000000  0.860192    0.611919  0.639420
+English     0.860192  0.000000    0.963874  0.968948
+Runyankore  0.611919  0.963874    0.000000  0.485778
+Luganda     0.639420  0.968948    0.485778  0.000000
+2026-06-21 18:15:40,549 - cross_lingual - INFO - SDI matrix values:
+             Swahili   English  Runyankore   Luganda
+Swahili     0.000000  0.860192    0.611919  0.639420
+English     0.860192  0.000000    0.963874  0.968948
+Runyankore  0.611919  0.963874    0.000000  0.485778
+Luganda     0.639420  0.968948    0.485778  0.000000
+2026-06-21 18:15:40,549 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 18:15:40,549 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 18:15:40,549 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 18:15:40,550 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 18:15:40,553 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 18:15:40,553 - cross_lingual - INFO - Generating flags...
+2026-06-21 18:15:40,554 - cross_lingual - INFO - ==================================================
+2026-06-21 18:15:40,554 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 18:15:40,554 - cross_lingual - INFO -   Languages: ['Swahili', 'English', 'Runyankore', 'Luganda']
+2026-06-21 18:15:40,554 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 18:15:40,554 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 18:15:40,554 - cross_lingual - INFO - ==================================================
+2026-06-21 18:21:04,705 - cross_lingual - INFO - ==================================================
+2026-06-21 18:21:04,706 - cross_lingual - INFO - STARTING CROSS-LINGUAL EVALUATION
+2026-06-21 18:21:04,706 - cross_lingual - INFO - ==================================================
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Embeddings shape: (96, 384)
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Embeddings mean: 0.000000
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Embeddings std: 0.051031
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Embeddings min: -0.227735
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Embeddings max: 0.234913
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Language distribution: {'Runyankore': 24, 'English': 24, 'Swahili': 24, 'Luganda': 24}
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Computing SDI matrix for 4 languages...
+2026-06-21 18:21:04,706 - cross_lingual - INFO - Computing SDI for 4 languages with 96 samples
+2026-06-21 18:21:04,718 - cross_lingual - INFO - SDI matrix:
+            Runyankore   English   Swahili   Luganda
+Runyankore    0.000000  0.963874  0.611919  0.485778
+English       0.963874  0.000000  0.860192  0.968948
+Swahili       0.611919  0.860192  0.000000  0.639420
+Luganda       0.485778  0.968948  0.639420  0.000000
+2026-06-21 18:21:04,721 - cross_lingual - INFO - SDI matrix values:
+            Runyankore   English   Swahili   Luganda
+Runyankore    0.000000  0.963874  0.611919  0.485778
+English       0.963874  0.000000  0.860192  0.968948
+Swahili       0.611919  0.860192  0.000000  0.639420
+Luganda       0.485778  0.968948  0.639420  0.000000
+2026-06-21 18:21:04,721 - cross_lingual - INFO - Classifying SDI scores...
+2026-06-21 18:21:04,722 - cross_lingual - INFO - SDI Classification: {'average_sdi': 0.7550219173232714, 'bias_level': 'HIGH', 'percentage': '75.5%', 'pair_classifications': {'Runyankore vs English': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'Runyankore vs Swahili': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Runyankore vs Luganda': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'English vs Runyankore': {'sdi': 0.9638741314411163, 'bias_level': 'High', 'percentage': '96.4%'}, 'English vs Swahili': {'sdi': 0.8601920306682587, 'bias_level': 'High', 'percentage': '86.0%'}, 'English vs Luganda': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Swahili vs Runyankore': {'sdi': 0.6119188666343689, 'bias_level': 'High', 'percentage': '61.2%'}, 'Swahili vs English': {'sdi': 0.8601920157670975, 'bias_level': 'High', 'percentage': '86.0%'}, 'Swahili vs Luganda': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}, 'Luganda vs Runyankore': {'sdi': 0.4857780933380127, 'bias_level': 'High', 'percentage': '48.6%'}, 'Luganda vs English': {'sdi': 0.9689482375979424, 'bias_level': 'High', 'percentage': '96.9%'}, 'Luganda vs Swahili': {'sdi': 0.6394201517105103, 'bias_level': 'High', 'percentage': '63.9%'}}, 'total_pairs': 12, 'high_pairs': 12, 'moderate_pairs': 0, 'low_pairs': 0}
+2026-06-21 18:21:04,722 - cross_lingual - INFO - Computing alignment scores...
+2026-06-21 18:21:04,722 - cross_lingual - INFO - Performing root cause analysis...
+2026-06-21 18:21:04,726 - cross_lingual - INFO - Categorizing errors...
+2026-06-21 18:21:04,726 - cross_lingual - INFO - Generating flags...
+2026-06-21 18:21:04,726 - cross_lingual - INFO - ==================================================
+2026-06-21 18:21:04,726 - cross_lingual - INFO - CROSS-LINGUAL EVALUATION COMPLETE
+2026-06-21 18:21:04,726 - cross_lingual - INFO -   Languages: ['Runyankore', 'English', 'Swahili', 'Luganda']
+2026-06-21 18:21:04,726 - cross_lingual - INFO -   Average SDI: 0.755 (75.5%)
+2026-06-21 18:21:04,726 - cross_lingual - INFO -   Bias Level: HIGH
+2026-06-21 18:21:04,726 - cross_lingual - INFO - ==================================================

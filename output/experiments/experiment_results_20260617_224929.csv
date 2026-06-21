@@ -1,0 +1,5 @@
+sample_size,avg_sdi,sdi_percentage,bias_level,total_flags,critical_flags,execution_time,total_sampled
+10,0.999,99.9%,HIGH,35,32,0.32,96
+100,0.9997,100.0%,HIGH,35,32,0.33,96
+1000,0.9996,100.0%,HIGH,35,32,0.32,96
+10000,0.9999,100.0%,HIGH,35,32,0.32,96

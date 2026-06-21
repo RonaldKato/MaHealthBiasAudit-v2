@@ -10,7 +10,6 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, pairwise_distances
-from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -31,42 +30,47 @@ class ModelBiasAuditor:
         if len(embeddings) == 0:
             return {'error': 'No embeddings available'}
         
-        # Dimensionality reduction for visualisation
-        pca = PCA(n_components=50, random_state=42)
+        self.logger.info(f"Computing clustering on {len(embeddings)} embeddings")
+        
+        # PCA for dimensionality reduction
+        pca = PCA(n_components=min(50, len(embeddings)), random_state=42)
         embeddings_pca = pca.fit_transform(embeddings)
         
-        # t-SNE for 2D visualisation
-        tsne = TSNE(n_components=2, random_state=42, perplexity=min(30, len(embeddings)-1))
-        embeddings_2d = tsne.fit_transform(embeddings_pca[:, :50])
+        # t-SNE for 2D visualization
+        perplexity = min(30, max(5, len(embeddings) - 1))
+        tsne = TSNE(n_components=2, random_state=42, perplexity=perplexity)
+        embeddings_2d = tsne.fit_transform(embeddings_pca[:, :min(50, embeddings_pca.shape[1])])
         
-        # Get unique languages
         unique_langs = list(set(labels))
         
-        # Compute cluster purity by language
-        # Try different cluster numbers
+        # Find optimal number of clusters
         best_k = None
         best_silhouette = -1
         
-        for k in range(2, min(8, len(embeddings) // 10 + 2)):
+        max_k = min(8, len(embeddings) // 5 + 2)
+        for k in range(2, max_k):
             if k >= len(embeddings):
                 break
             kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
             cluster_labels = kmeans.fit_predict(embeddings)
             
             if len(set(cluster_labels)) > 1:
-                sil_score = silhouette_score(embeddings, cluster_labels)
-                if sil_score > best_silhouette:
-                    best_silhouette = sil_score
-                    best_k = k
+                try:
+                    sil_score = silhouette_score(embeddings, cluster_labels)
+                    if sil_score > best_silhouette:
+                        best_silhouette = sil_score
+                        best_k = k
+                except:
+                    pass
         
-        # Compute language separation
+        # Compute language centroids
         language_centroids = {}
         for lang in unique_langs:
             lang_indices = [i for i, l in enumerate(labels) if l == lang]
             if lang_indices:
                 language_centroids[lang] = np.mean(embeddings[lang_indices], axis=0)
         
-        # Compute pairwise distances between language centroids
+        # Compute centroid distances
         lang_names = list(language_centroids.keys())
         centroid_distances = np.zeros((len(lang_names), len(lang_names)))
         
@@ -75,7 +79,7 @@ class ModelBiasAuditor:
                 if language_centroids[lang1] is not None and language_centroids[lang2] is not None:
                     centroid_distances[i, j] = np.linalg.norm(language_centroids[lang1] - language_centroids[lang2])
         
-        # Compute intra-language vs inter-language distances
+        # Compute intra/inter distances
         intra_distances = []
         inter_distances = []
         
@@ -90,7 +94,7 @@ class ModelBiasAuditor:
         separation_ratio = np.mean(inter_distances) / max(np.mean(intra_distances), 0.001) if intra_distances else 0
         
         results = {
-            'embeddings_2d': embeddings_2d,
+            'embeddings_2d': embeddings_2d.tolist(),
             'pca_explained_variance': pca.explained_variance_ratio_[:10].tolist(),
             'optimal_clusters': best_k,
             'best_silhouette_score': best_silhouette,
@@ -98,8 +102,9 @@ class ModelBiasAuditor:
             'centroid_distances': centroid_distances.tolist(),
             'centroid_distance_labels': lang_names,
             'separation_ratio': separation_ratio,
-            'intra_language_variance': np.var(intra_distances) if intra_distances else 0,
-            'inter_language_variance': np.var(inter_distances) if inter_distances else 0
+            'intra_language_variance': float(np.var(intra_distances)) if intra_distances else 0,
+            'inter_language_variance': float(np.var(inter_distances)) if inter_distances else 0,
+            'num_samples': len(embeddings)
         }
         
         return results
@@ -114,7 +119,6 @@ class ModelBiasAuditor:
         if not embeddings.size:
             return {}
         
-        # For each non-English language, compute similarity to English
         english_indices = [i for i, l in enumerate(labels) if l == 'English']
         
         for lang in PRIMARY_LANGUAGES:
@@ -127,17 +131,17 @@ class ModelBiasAuditor:
                 consistency_scores[lang] = 0
                 continue
             
-            # Compute pairwise similarities
             english_embs = embeddings[english_indices]
             lang_embs = embeddings[lang_indices]
             
-            # Cosine similarity matrix
             sim_matrix = np.dot(lang_embs, english_embs.T)
             sim_matrix = np.clip(sim_matrix, -1, 1)
             
-            # For each language embedding, find best match (max similarity)
             max_similarities = np.max(sim_matrix, axis=1)
-            consistency_scores[lang] = np.mean(max_similarities)
+            consistency_scores[lang] = float(np.mean(max_similarities))
+            
+            # Also compute standard deviation
+            consistency_scores[f"{lang}_std"] = float(np.std(max_similarities))
         
         return consistency_scores
     
@@ -150,32 +154,35 @@ class ModelBiasAuditor:
         if embeddings.size == 0:
             return biases
         
-        # Check for language-specific clusters
         unique_langs = list(set(labels))
         
-        # Compute within-language and between-language distances
         for lang in unique_langs:
             lang_indices = [i for i, l in enumerate(labels) if l == lang]
             if len(lang_indices) < 2:
                 continue
             
             lang_embeddings = embeddings[lang_indices]
-            
-            # Compute within-cluster variance
             centroid = np.mean(lang_embeddings, axis=0)
             within_var = np.mean([np.linalg.norm(emb - centroid) ** 2 for emb in lang_embeddings])
             
-            # Compare to global variance
             global_centroid = np.mean(embeddings, axis=0)
             global_var = np.mean([np.linalg.norm(emb - global_centroid) ** 2 for emb in embeddings])
             
             variance_ratio = within_var / max(global_var, 0.001)
             
-            if variance_ratio < 0.5:
+            if variance_ratio < 0.3:
+                biases.append({
+                    'Language': lang,
+                    'Type': 'Overclustering_Critical',
+                    'Severity': 'Critical',
+                    'Description': f"Language forms extremely tight cluster (variance ratio: {variance_ratio:.2f})",
+                    'Recommendation': 'URGENT: May indicate severe lack of semantic diversity or translation issues'
+                })
+            elif variance_ratio < 0.5:
                 biases.append({
                     'Language': lang,
                     'Type': 'Overclustering',
-                    'Severity': 'High' if variance_ratio < 0.3 else 'Moderate',
+                    'Severity': 'High',
                     'Description': f"Language forms very tight cluster (variance ratio: {variance_ratio:.2f})",
                     'Recommendation': 'May indicate lack of semantic diversity or translation issues'
                 })
@@ -188,7 +195,7 @@ class ModelBiasAuditor:
                     'Recommendation': 'May indicate inconsistency in responses'
                 })
         
-        # Check for English-centrism
+        # English distance analysis
         english_indices = [i for i, l in enumerate(labels) if l == 'English']
         if english_indices:
             english_centroid = np.mean(embeddings[english_indices], axis=0)
@@ -202,16 +209,31 @@ class ModelBiasAuditor:
                     lang_centroid = np.mean(embeddings[lang_indices], axis=0)
                     dist_to_english = np.linalg.norm(lang_centroid - english_centroid)
                     
-                    # Check if this language is unusually close or far
-                    if dist_to_english < 0.3:
+                    if dist_to_english < 0.2:
+                        biases.append({
+                            'Language': lang,
+                            'Type': 'English_Proximity_Critical',
+                            'Severity': 'Critical',
+                            'Description': f"Language embeddings are extremely close to English (dist: {dist_to_english:.2f})",
+                            'Recommendation': 'URGENT: May indicate translations are too literal or copied'
+                        })
+                    elif dist_to_english < 0.3:
                         biases.append({
                             'Language': lang,
                             'Type': 'English_Proximity',
-                            'Severity': 'Low',
+                            'Severity': 'Moderate',
                             'Description': f"Language embeddings are very close to English (dist: {dist_to_english:.2f})",
                             'Recommendation': 'May indicate translations are too literal'
                         })
                     elif dist_to_english > 1.2:
+                        biases.append({
+                            'Language': lang,
+                            'Type': 'English_Distance_Critical',
+                            'Severity': 'Critical',
+                            'Description': f"Language embeddings are very far from English (dist: {dist_to_english:.2f})",
+                            'Recommendation': 'URGENT: May indicate severe cultural or semantic divergence'
+                        })
+                    elif dist_to_english > 0.9:
                         biases.append({
                             'Language': lang,
                             'Type': 'English_Distance',
@@ -247,61 +269,41 @@ class ModelBiasAuditor:
                 
                 emb2 = embeddings[indices2]
                 
-                # Compute average pairwise cosine similarity
                 sim_matrix = np.dot(emb1, emb2.T)
                 sim_matrix = np.clip(sim_matrix, -1, 1)
-                similarity_matrix[i, j] = np.mean(sim_matrix)
+                similarity_matrix[i, j] = float(np.mean(sim_matrix))
         
         return pd.DataFrame(similarity_matrix, index=unique_langs, columns=unique_langs)
-    
-    def run_full_audit(self,
-                      questions_by_lang: Dict[str, List[str]],
-                      answers_by_lang: Dict[str, List[str]]) -> Dict:
-        """Run complete model bias audit"""
-        self.logger.info("Starting model bias audit")
-        
-        # For this audit, we need embeddings from preprocessing
-        # The embeddings will be passed in via the preprocessing results
-        # For now, we'll return a structure indicating embeddings needed
-        
-        results = {
-            'status': 'embeddings_required',
-            'message': 'Embeddings must be computed in preprocessing stage',
-            'summary': {
-                'languages': list(questions_by_lang.keys()),
-                'embeddings_available': False
-            }
-        }
-        
-        return results
     
     def run_audit_with_embeddings(self,
                                  embeddings: np.ndarray,
                                  labels: List[str],
                                  questions_by_lang: Dict[str, List[str]]) -> Dict:
         """Run model audit with pre-computed embeddings"""
-        self.logger.info("Running model audit with embeddings")
+        self.logger.info("="*50)
+        self.logger.info("STARTING MODEL AUDIT")
+        self.logger.info("="*50)
         
-        # Compute clustering analysis
+        self.logger.info("Computing language clustering...")
         clustering_results = self.compute_language_clustering(embeddings, labels)
         
-        # Compute translation consistency
+        self.logger.info("Computing translation consistency...")
         consistency_scores = self.compute_translation_consistency(embeddings, labels, questions_by_lang)
         
-        # Compute semantic similarity matrix
+        self.logger.info("Computing semantic similarity matrix...")
         similarity_matrix = self.compute_semantic_similarity_matrix(embeddings, labels)
         
-        # Analyse embedding biases
+        self.logger.info("Analysing embedding biases...")
         bias_flags = self.analyse_embedding_biases(embeddings, labels)
         
-        # Summary
         summary = {
-            'embeddings_shape': embeddings.shape,
+            'embeddings_shape': list(embeddings.shape),
             'languages_analyzed': list(set(labels)),
             'optimal_clusters': clustering_results.get('optimal_clusters', 0),
             'separation_ratio': clustering_results.get('separation_ratio', 0),
             'translation_consistency': consistency_scores,
-            'bias_flags_count': len(bias_flags)
+            'bias_flags_count': len(bias_flags),
+            'critical_flags': sum(1 for f in bias_flags if f.get('Severity') == 'Critical')
         }
         
         results = {
@@ -312,5 +314,11 @@ class ModelBiasAuditor:
             'summary': summary
         }
         
-        self.logger.info(f"Model audit complete: {summary}")
+        self.logger.info("="*50)
+        self.logger.info("MODEL AUDIT COMPLETE")
+        self.logger.info(f"  Languages analyzed: {summary['languages_analyzed']}")
+        self.logger.info(f"  Optimal clusters: {summary['optimal_clusters']}")
+        self.logger.info(f"  Bias flags: {summary['bias_flags_count']}")
+        self.logger.info("="*50)
+        
         return results

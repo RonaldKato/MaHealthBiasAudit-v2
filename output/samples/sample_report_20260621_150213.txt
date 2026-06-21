@@ -1,0 +1,121 @@
+================================================================================
+MAHEALTHBIASAUDIT - SAMPLE SENTENCES REPORT
+================================================================================
+Generated: 2026-06-21 15:02:13
+Languages: English, Swahili, Luganda, Runyankore
+
+--------------------------------------------------------------------------------
+UNBIASED SAMPLES (3 per language)
+--------------------------------------------------------------------------------
+These sentences are most representative of each language based on embedding analysis.
+
+
+English:
+  1. If I have issues, I rest or seek medical help.
+  2. I use both traditional herbs and hospital medicine.
+  3. I have some mild discomfort but nothing severe.
+
+Swahili:
+  1. Mimi hutumia mitishamba na dawa za hospitali pamoja.
+  2. Ninazungumza na wanafamilia yangu ninapohisi msongo wa mawazo.
+  3. Ndiyo, nilipoteza mtoto kabla ya kujifungua.
+
+Luganda:
+  1. Nfuba okussa ekitiibwa mu nkola z'obuwangwa nga nkola nga bwe ndagiddwa omusawo.
+  2. Nina obuyambi obulungi awaka okuva eri omwami wange ne maama.
+  3. Mpulira okutya okutonotono ku bulumi bw'okuzaala.
+
+Runyankore:
+  1. Nyine okutiina okukye ahabw'obusaasi bw'okuzaara.
+  2. Ekirungi, tinkatunga obubonero bw'okutwara enda oburikukira kureebeka.
+  3. Ningamba n'abantu b'omuka yangye ku ndikwehurira nyine oburemeezi.
+
+--------------------------------------------------------------------------------
+BIASED SAMPLES WITH REDUCTION SOLUTIONS (3 per language)
+--------------------------------------------------------------------------------
+These sentences show the highest bias compared to English, with proposed solutions.
+
+
+Swahili:
+
+  1. Original: Wengi wanaamini katika kutumia mitishamba kuhakikisha kujifungua salama.
+     Bias Type: cultural_concept_mismatch
+     Bias Score: 0.500
+     Problem: Traditional practices replace or conflict with medical advice
+     Solution: Include both traditional and medical perspectives
+     Debiased: Wengi wanaamini katika kutumia mitishamba kuhakikisha kujifungua salama.
+
+  2. Original: Nina maumivu kidogo ya chini ya tumbo ambayo yanaweza kudhibitiwa.
+     Bias Type: medical_term_omission
+     Bias Score: 0.500
+     Problem: Critical medical terms missing in translation
+     Solution: Use standardized medical terminology
+     Debiased: Nina maumivu kidogo ya chini ya tumbo ambayo yanaweza kudhibitiwa. (including monitoring for preeclampsia and other conditions)
+
+  3. Original: Siku zangu mara nyingi huhusisha kulima. Kunahitaji sana nguvu za kimwili.
+     Bias Type: medical_term_omission
+     Bias Score: 0.500
+     Problem: Critical medical terms missing in translation
+     Solution: Use standardized medical terminology
+     Debiased: Siku zangu mara nyingi huhusisha kulima. Kunahitaji sana nguvu za kimwili. (including monitoring for preeclampsia and other conditions)
+
+Luganda:
+
+  1. Original: Oluusi nkozesa eddagala ly'ekinnansi okunaaba okuwona.
+     Bias Type: cultural_concept_mismatch
+     Bias Score: 0.500
+     Problem: Traditional practices replace or conflict with medical advice
+     Solution: Include both traditional and medical perspectives
+     Debiased: Oluusi nkozesa eddagala ly'ekinnansi okunaaba okuwona.
+
+  2. Original: Yee, mmira eddagala eriragiddwa omusawo.
+     Bias Type: cultural_concept_mismatch
+     Bias Score: 0.500
+     Problem: Traditional practices replace or conflict with medical advice
+     Solution: Include both traditional and medical perspectives
+     Debiased: Yee, mmira eddagala eriragiddwa omusawo.
+
+  3. Original: Oluusi nkozesa entangawuzzi naye nsinga kwagala kwebuuza ku musawo.
+     Bias Type: medical_term_omission
+     Bias Score: 0.500
+     Problem: Critical medical terms missing in translation
+     Solution: Use standardized medical terminology
+     Debiased: Oluusi nkozesa entangawuzzi naye nsinga kwagala kwebuuza ku musawo. (including monitoring for preeclampsia and other conditions)
+
+Runyankore:
+
+  1. Original: Eego, nkaferwa omwana ntakazaire.
+     Bias Type: translation_length_disparity
+     Bias Score: 0.500
+     Problem: Non-English responses are significantly shorter, losing content
+     Solution: Ensure complete translation with all clauses preserved
+     Debiased: Eego, nkaferwa omwana ntakazaire. This is important for your health and your baby's wellbeing.
+
+  2. Original: Ningamba n'abantu b'omuka yangye ku ndikwehurira nyine oburemeezi.
+     Bias Type: medical_term_omission
+     Bias Score: 0.500
+     Problem: Critical medical terms missing in translation
+     Solution: Use standardized medical terminology
+     Debiased: Ningamba n'abantu b'omuka yangye ku ndikwehurira nyine oburemeezi. (including monitoring for preeclampsia and other conditions)
+
+  3. Original: Nyine obuhwezi omuka kuruga aha mushaija wangye na maama.
+     Bias Type: medical_term_omission
+     Bias Score: 0.500
+     Problem: Critical medical terms missing in translation
+     Solution: Use standardized medical terminology
+     Debiased: Nyine obuhwezi omuka kuruga aha mushaija wangye na maama. (including monitoring for preeclampsia and other conditions)
+
+--------------------------------------------------------------------------------
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total unbiased samples: 12
+Total biased samples: 9
+
+Bias Type Distribution:
+  medical_term_omission: 5
+  cultural_concept_mismatch: 3
+  translation_length_disparity: 1
+
+================================================================================
+END OF REPORT
+================================================================================

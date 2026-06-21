@@ -1,0 +1,36 @@
+{
+  "experiment": "MaHealthBiasAudit_MOTHER_English_only",
+  "timestamp": "20260617_224929",
+  "dataset": "MOTHER_English_only",
+  "languages": [
+    "English"
+  ],
+  "execution_time_seconds": 0.11,
+  "key_metrics": {
+    "average_sdi": 0,
+    "sdi_percentage": "0.0%",
+    "bias_level": "LOW",
+    "total_flags": 0,
+    "critical_flags": 0
+  },
+  "sdi_ranking": {},
+  "flags": [],
+  "recommendations": [
+    "🟢 LOW BIAS: Translations are relatively consistent",
+    "📋 Implement standardized medical terminology across all languages",
+    "📋 Train translators on preserving emotional tone and urgency",
+    "📋 Establish quality assurance for translation completeness"
+  ],
+  "output_directory": "/Users/ronaldkato/Downloads/MaHealthBias/output",
+  "bias_characteristics_analyzed": [
+    "translation_length_disparity",
+    "cultural_concept_mismatch",
+    "medical_term_omission",
+    "emotional_tone_shift",
+    "structural_simplification",
+    "pronoun_ambiguity",
+    "instructional_generic_shift",
+    "causality_inversion",
+    "negation_misinterpretation"
+  ]
+}

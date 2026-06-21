@@ -1,0 +1,82 @@
+2026-06-15 21:13:21,182 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:21,188 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:13:21,755 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:21,759 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:13:22,213 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:22,217 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:13:22,660 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:22,664 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:13:23,109 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:23,113 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:13:25,250 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:13:25,255 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:07,909 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:07,913 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:08,454 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:08,459 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:08,898 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:08,902 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:09,350 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:09,354 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:09,796 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:09,800 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:15:11,417 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:15:11,420 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:23,597 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:23,603 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:25,079 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:25,084 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:25,797 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:25,801 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:26,510 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:26,514 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:27,225 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:27,229 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:23:28,579 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:23:28,583 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:29:12,927 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:29:12,933 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:29:17,007 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:29:17,010 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:29:17,452 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:29:17,455 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:29:17,893 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:29:17,897 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:29:18,339 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:29:18,342 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:03,060 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:03,066 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:07,232 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:07,236 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:07,677 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:07,681 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:08,149 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:08,153 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:08,601 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:08,605 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:33:09,569 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:33:09,572 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 6, 'high_piecing_languages': 2, 'trust_issues': 0, 'flags_generated': 6}
+2026-06-15 21:40:10,857 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:10,864 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:40:15,073 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:15,077 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:40:15,527 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:15,531 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:40:15,978 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:15,982 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:40:16,440 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:16,443 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:40:17,323 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:40:17,326 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 6, 'high_piecing_languages': 2, 'trust_issues': 0, 'flags_generated': 6}
+2026-06-15 21:45:12,315 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:12,320 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:45:16,461 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:16,465 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:45:16,914 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:16,917 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:45:17,355 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:17,359 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:45:17,859 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:17,863 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 7, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 7}
+2026-06-15 21:45:18,868 - linguistic - INFO - Starting linguistic bias audit
+2026-06-15 21:45:18,870 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 6, 'high_piecing_languages': 2, 'trust_issues': 0, 'flags_generated': 6}

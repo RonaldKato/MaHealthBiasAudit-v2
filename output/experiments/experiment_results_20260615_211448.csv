@@ -1,0 +1,5 @@
+sample_size,avg_sdi,bias_level,total_flags,execution_time
+10,0.755,HIGH,29,0.45
+100,0.755,HIGH,29,0.44
+1000,0.755,HIGH,29,0.45
+10000,0.755,HIGH,29,0.45

@@ -1,0 +1,42 @@
+[
+  {
+    "sample_size": 10,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 32,
+    "critical_flags": 27,
+    "execution_time": 1.13,
+    "total_sampled": 96
+  },
+  {
+    "sample_size": 100,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 32,
+    "critical_flags": 27,
+    "execution_time": 0.96,
+    "total_sampled": 96
+  },
+  {
+    "sample_size": 1000,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 32,
+    "critical_flags": 27,
+    "execution_time": 0.84,
+    "total_sampled": 96
+  },
+  {
+    "sample_size": 10000,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 32,
+    "critical_flags": 27,
+    "execution_time": 0.73,
+    "total_sampled": 96
+  }
+]

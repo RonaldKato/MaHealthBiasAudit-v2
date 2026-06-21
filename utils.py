@@ -12,7 +12,7 @@ import pandas as pd
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 import logging
-from config import LOGS_DIR, RANDOM_SEED
+from config import LOGS_DIR, RANDOM_SEED, BIAS_SENTENCE_CHARACTERISTICS
 
 
 # ============================================================
@@ -24,16 +24,13 @@ def setup_logger(name: str, level=logging.INFO) -> logging.Logger:
     logger = logging.getLogger(name)
     logger.setLevel(level)
     
-    # File handler
     log_file = os.path.join(LOGS_DIR, f"{name}_{datetime.now().strftime('%Y%m%d')}.log")
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(level)
     
-    # Console handler
     console_handler = logging.StreamHandler()
     console_handler.setLevel(level)
     
-    # Formatter
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
@@ -98,6 +95,13 @@ def basic_tokenize(text: str) -> List[str]:
     return text.lower().split()
 
 
+def advanced_tokenize(text: str) -> List[str]:
+    """Advanced tokenization with punctuation handling"""
+    import re
+    text = re.sub(r'[^\w\s]', ' ', text)
+    return text.lower().split()
+
+
 def compute_vocabulary_richness(tokens: List[str]) -> float:
     """Compute vocabulary richness (type-token ratio)"""
     if not tokens:
@@ -129,6 +133,21 @@ def compute_average_sentence_length(text: str) -> float:
     return np.mean(lengths)
 
 
+def compute_readability_score(text: str) -> float:
+    """Compute a simple readability score"""
+    words = basic_tokenize(text)
+    if not words:
+        return 0
+    
+    avg_word_len = sum(len(w) for w in words) / len(words)
+    sentences = text.split('.')
+    sentences = [s.strip() for s in sentences if s.strip()]
+    avg_sent_len = len(words) / max(len(sentences), 1)
+    
+    readability = 100 - (avg_word_len * 10 + avg_sent_len)
+    return max(0, min(100, readability))
+
+
 # ============================================================
 # Statistical Utilities
 # ============================================================
@@ -156,6 +175,18 @@ def normalize_scores(scores: np.ndarray) -> np.ndarray:
     return (scores - np.min(scores)) / (np.max(scores) - np.min(scores))
 
 
+def compute_confidence_interval(data: List[float], confidence: float = 0.95) -> Tuple[float, float]:
+    """Compute confidence interval for data"""
+    import scipy.stats as stats
+    n = len(data)
+    if n < 2:
+        return (0, 0)
+    mean = np.mean(data)
+    se = stats.sem(data)
+    ci = se * stats.t.ppf((1 + confidence) / 2, n - 1)
+    return (mean - ci, mean + ci)
+
+
 # ============================================================
 # Language Mapping
 # ============================================================
@@ -170,7 +201,8 @@ def get_language_name(lang_code: str) -> str:
         'English': 'English',
         'Swahili': 'Swahili',
         'Luganda': 'Luganda',
-        'Runyankore': 'Runyankore'
+        'Runyankore': 'Runyankore',
+        'Runyankole-Rukiga': 'Runyankole-Rukiga'
     }
     return language_names.get(lang_code, lang_code)
 
@@ -181,7 +213,8 @@ def get_language_code(lang_name: str) -> str:
         'English': 'en',
         'Swahili': 'sw',
         'Luganda': 'lg',
-        'Runyankore': 'run'
+        'Runyankore': 'run',
+        'Runyankole-Rukiga': 'run'
     }
     return language_codes.get(lang_name, lang_name)
 
@@ -198,9 +231,50 @@ CATEGORY_LABELS = {
     'about_recovery_health': 'Recovery & Health',
     'about_symptoms_concerns': 'Symptoms & Concerns',
     'about_traditional_cultural_practices': 'Traditional & Cultural Practices',
-    'community_cultural_considerations': 'Community & Cultural Considerations'
+    'community_cultural_considerations': 'Community & Cultural Considerations',
 }
 
 def get_category_label(category_key: str) -> str:
     """Get human-readable category label"""
     return CATEGORY_LABELS.get(category_key, category_key)
+
+
+# ============================================================
+# Bias Characteristics Printer - ENHANCED
+# ============================================================
+
+def print_bias_characteristics():
+    """Print enhanced bias sentence characteristics with structures"""
+    print("\n" + "="*80)
+    print("BIAS-PRONE SENTENCE CHARACTERISTICS")
+    print("="*80)
+    print("\nThis section identifies sentence patterns that are most likely to introduce bias")
+    print("in cross-lingual maternal health translations.\n")
+    
+    for i, (category, info) in enumerate(BIAS_SENTENCE_CHARACTERISTICS.items(), 1):
+        print(f"\n{i}. {category.replace('_', ' ').upper()}")
+        print(f"   ────────────────────────────────────────────────")
+        print(f"   Description: {info['description']}")
+        print(f"   Structure: {info.get('structure', 'N/A')}")
+        print(f"\n   Example:")
+        for line in info['example'].split('\n'):
+            print(f"   {line}")
+        print(f"\n   Detection: {info['detection']}")
+        print(f"   Severity: {info['severity']}")
+        print(f"   Mitigation: {info['mitigation']}")
+        print("-" * 80)
+    
+    return BIAS_SENTENCE_CHARACTERISTICS
+
+
+def get_bias_characteristics() -> Dict:
+    """Return bias sentence characteristics"""
+    return BIAS_SENTENCE_CHARACTERISTICS
+
+
+def get_bias_examples() -> Dict[str, str]:
+    """Get only bias examples for quick reference"""
+    examples = {}
+    for category, info in BIAS_SENTENCE_CHARACTERISTICS.items():
+        examples[category] = info['example']
+    return examples

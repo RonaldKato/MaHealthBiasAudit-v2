@@ -1,0 +1,45 @@
+2026-06-07 10:59:41,004 - preprocessing - INFO - Loaded embedding model: paraphrase-multilingual-MiniLM-L12-v2
+2026-06-07 10:59:41,061 - preprocessing - INFO - Starting preprocessing pipeline
+2026-06-07 10:59:41,064 - preprocessing - INFO - Processing category: about_healthcare_access
+2026-06-07 10:59:41,069 - preprocessing - INFO - Normalized 39/39 answers for English
+2026-06-07 10:59:41,071 - preprocessing - INFO - Normalized 39/39 answers for Swahili
+2026-06-07 10:59:41,074 - preprocessing - INFO - Normalized 39/39 answers for Luganda
+2026-06-07 10:59:41,075 - preprocessing - INFO - Normalized 39/39 answers for Runyankore
+2026-06-07 10:59:41,076 - preprocessing - INFO - Processing category: about_medical_history_lifestyle
+2026-06-07 10:59:41,102 - preprocessing - INFO - Normalized 900/900 answers for English
+2026-06-07 10:59:41,131 - preprocessing - INFO - Normalized 900/900 answers for Swahili
+2026-06-07 10:59:41,153 - preprocessing - INFO - Normalized 899/900 answers for Luganda
+2026-06-07 10:59:41,169 - preprocessing - INFO - Normalized 868/868 answers for Runyankore
+2026-06-07 10:59:41,169 - preprocessing - INFO - Processing category: about_mental_health_support
+2026-06-07 10:59:41,173 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-07 10:59:41,176 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-07 10:59:41,180 - preprocessing - INFO - Normalized 238/240 answers for Luganda
+2026-06-07 10:59:41,183 - preprocessing - INFO - Normalized 228/228 answers for Runyankore
+2026-06-07 10:59:41,183 - preprocessing - INFO - Processing category: about_recovery_baby_care
+2026-06-07 10:59:41,186 - preprocessing - INFO - Normalized 240/240 answers for English
+2026-06-07 10:59:41,190 - preprocessing - INFO - Normalized 240/240 answers for Swahili
+2026-06-07 10:59:41,193 - preprocessing - INFO - Normalized 240/240 answers for Luganda
+2026-06-07 10:59:41,197 - preprocessing - INFO - Normalized 234/234 answers for Runyankore
+2026-06-07 10:59:41,198 - preprocessing - INFO - Processing category: about_recovery_health
+2026-06-07 10:59:41,200 - preprocessing - INFO - Normalized 127/127 answers for English
+2026-06-07 10:59:41,202 - preprocessing - INFO - Normalized 127/127 answers for Swahili
+2026-06-07 10:59:41,205 - preprocessing - INFO - Normalized 127/127 answers for Luganda
+2026-06-07 10:59:41,207 - preprocessing - INFO - Normalized 127/127 answers for Runyankore
+2026-06-07 10:59:41,207 - preprocessing - INFO - Processing category: about_symptoms_concerns
+2026-06-07 10:59:41,221 - preprocessing - INFO - Normalized 885/896 answers for English
+2026-06-07 10:59:41,234 - preprocessing - INFO - Normalized 885/896 answers for Swahili
+2026-06-07 10:59:41,249 - preprocessing - INFO - Normalized 885/896 answers for Luganda
+2026-06-07 10:59:41,261 - preprocessing - INFO - Normalized 874/876 answers for Runyankore
+2026-06-07 10:59:41,261 - preprocessing - INFO - Processing category: about_traditional_cultural_practices
+2026-06-07 10:59:41,263 - preprocessing - INFO - Normalized 80/81 answers for English
+2026-06-07 10:59:41,264 - preprocessing - INFO - Normalized 80/81 answers for Swahili
+2026-06-07 10:59:41,265 - preprocessing - INFO - Normalized 80/81 answers for Luganda
+2026-06-07 10:59:41,266 - preprocessing - INFO - Normalized 80/80 answers for Runyankore
+2026-06-07 10:59:41,267 - preprocessing - INFO - Processing category: community_cultural_considerations
+2026-06-07 10:59:41,289 - preprocessing - INFO - Normalized 1116/1116 answers for English
+2026-06-07 10:59:41,312 - preprocessing - INFO - Normalized 1119/1119 answers for Swahili
+2026-06-07 10:59:41,338 - preprocessing - INFO - Normalized 1117/1117 answers for Luganda
+2026-06-07 10:59:41,358 - preprocessing - INFO - Normalized 1099/1099 answers for Runyankore
+2026-06-07 10:59:41,382 - preprocessing - INFO - Computing embeddings for 14431 texts
+2026-06-07 11:01:33,365 - preprocessing - INFO - Embeddings shape: (14431, 384)
+2026-06-07 11:01:33,669 - preprocessing - INFO - Preprocessing pipeline completed

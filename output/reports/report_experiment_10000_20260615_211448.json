@@ -1,0 +1,177 @@
+{
+  "experiment": "MaHealthBiasAudit_experiment_10000",
+  "timestamp": "20260615_211448",
+  "dataset": "experiment_10000",
+  "languages": [
+    "English",
+    "Swahili",
+    "Luganda",
+    "Runyankore"
+  ],
+  "execution_time_seconds": 0.45,
+  "key_metrics": {
+    "average_sdi": 0.755,
+    "bias_level": "HIGH",
+    "total_flags": 29
+  },
+  "sdi_ranking": {
+    "Swahili": 0.8601920306682587,
+    "Luganda": 0.9689482375979424,
+    "Runyankore": 0.9638741314411163
+  },
+  "flags": [
+    {
+      "Type": "Length_Bias",
+      "Language": "Runyankore",
+      "Severity": "Moderate",
+      "Description": "Responses are 77.2% of English length (7 vs 9 words)",
+      "Recommendation": "Consider if content loss is occurring"
+    },
+    {
+      "Type": "Statistical_Bias",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "Large effect: English responses are significantly longer",
+      "Recommendation": "Investigate potential systematic differences"
+    },
+    {
+      "Type": "Statistical_Bias",
+      "Comparison": "English vs Runyankore",
+      "Severity": "High",
+      "Description": "Large effect: English responses are significantly longer",
+      "Recommendation": "Investigate potential systematic differences"
+    },
+    {
+      "Type": "Statistical_Bias",
+      "Comparison": "Swahili vs Runyankore",
+      "Severity": "High",
+      "Description": "Large effect: Swahili responses are significantly longer",
+      "Recommendation": "Investigate potential systematic differences"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Swahili",
+      "Tokeniser": "mBERT",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.70) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "mBERT",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.88) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "XLM-R",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.65) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.64) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankore",
+      "Tokeniser": "mBERT",
+      "Severity": "High",
+      "Description": "High fertility penalty (2.00) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankore",
+      "Tokeniser": "XLM-R",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.90) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankore",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.87) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "High_SDI",
+      "Severity": "High",
+      "Description": "Average SDI of 0.755 indicates strong cross-lingual bias",
+      "Recommendation": "Review translation quality and cultural adaptation across all languages"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.969 indicates high bias between English vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Runyankore",
+      "Severity": "High",
+      "Description": "SDI of 0.964 indicates high bias between English vs Runyankore",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Swahili",
+      "Severity": "High",
+      "Description": "SDI of 0.860 indicates high bias between English vs Swahili",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.969 indicates high bias between Luganda vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs Runyankore",
+      "Severity": "High",
+      "Description": "SDI of 0.486 indicates high bias between Luganda vs Runyankore",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs Swahili",
+      "Severity": "High",
+      "Description": "SDI of 0.639 indicates high bias between Luganda vs Swahili",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Runyankore vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.964 indicates high bias between Runyankore vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Runyankore vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.486 indicates high bias between Runyankore vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    }
+  ],
+  "recommendations": [
+    "HIGH BIAS: Improve translation quality and cultural adaptation across all languages",
+    "Focus on improving translation quality for: Swahili, Luganda, Runyankore",
+    "Address root cause 'Translation Length Disparity' affecting 3 language pairs",
+    "Address root cause 'Content Omission' affecting 2 language pairs"
+  ],
+  "output_directory": "/Users/ronaldkato/Downloads/MaHealthBias/output"
+}

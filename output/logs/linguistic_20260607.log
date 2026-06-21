@@ -1,0 +1,2 @@
+2026-06-07 11:01:34,406 - linguistic - INFO - Starting linguistic bias audit
+2026-06-07 11:01:34,805 - linguistic - INFO - Linguistic audit complete: {'tokenisers_analyzed': 3, 'problematic_tokenisers': 0, 'high_piecing_languages': 3, 'trust_issues': 0, 'flags_generated': 0}

@@ -1,0 +1,2 @@
+2026-06-07 11:14:22,878 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-07 11:14:26,807 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Swahili', 'Runyankore'], 'average_sdi': 0.7516613375240316, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}

@@ -1,0 +1,158 @@
+{
+  "experiment": "MaHealthBiasAudit_MOTHER_validation",
+  "timestamp": "20260617_224929",
+  "dataset": "MOTHER_validation",
+  "languages": [
+    "English",
+    "Luganda",
+    "Runyankole-Rukiga"
+  ],
+  "execution_time_seconds": 0.36,
+  "key_metrics": {
+    "average_sdi": 1.0,
+    "sdi_percentage": "100.0%",
+    "bias_level": "HIGH",
+    "total_flags": 15,
+    "critical_flags": 10
+  },
+  "sdi_ranking": {
+    "Luganda": 1.0
+  },
+  "flags": [
+    {
+      "Type": "Statistical_Bias",
+      "Comparison": "English vs Luganda",
+      "Severity": "Moderate",
+      "Description": "Medium effect: English responses are significantly shorter",
+      "Recommendation": "Investigate potential systematic differences",
+      "Effect_Size": 0.471
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "mBERT",
+      "Severity": "Critical",
+      "Description": "High fertility penalty (2.00) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "XLM-R",
+      "Severity": "Critical",
+      "Description": "High fertility penalty (2.00) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.76) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "mBERT",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.57) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "XLM-R",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.57) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "High",
+      "Description": "High fertility penalty (1.57) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Subword_Piecing",
+      "Language": "Luganda",
+      "Severity": "Critical",
+      "Description": "High subword piecing ratio (3.22)",
+      "Recommendation": "Review if over-tokenisation is affecting semantic understanding"
+    },
+    {
+      "Type": "Subword_Piecing",
+      "Language": "Runyankole-Rukiga",
+      "Severity": "Critical",
+      "Description": "High subword piecing ratio (3.23)",
+      "Recommendation": "Review if over-tokenisation is affecting semantic understanding"
+    },
+    {
+      "Language": "Luganda",
+      "Type": "English_Distance_Critical",
+      "Severity": "Critical",
+      "Description": "Language embeddings are very far from English (dist: 4.90)",
+      "Recommendation": "URGENT: May indicate severe cultural or semantic divergence"
+    },
+    {
+      "Language": "Runyankole-Rukiga",
+      "Type": "English_Distance_Critical",
+      "Severity": "Critical",
+      "Description": "Language embeddings are very far from English (dist: 4.41)",
+      "Recommendation": "URGENT: May indicate severe cultural or semantic divergence"
+    },
+    {
+      "Type": "Pairwise_Bias_Critical",
+      "Comparison": "Luganda vs English",
+      "Severity": "Critical",
+      "Description": "SDI of 1.000 (100.0%) indicates high bias between Luganda vs English",
+      "Recommendation": "URGENT: Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias_Critical",
+      "Comparison": "English vs Luganda",
+      "Severity": "Critical",
+      "Description": "SDI of 1.000 (100.0%) indicates high bias between English vs Luganda",
+      "Recommendation": "URGENT: Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Root_Cause_Critical",
+      "Comparison": "Luganda vs English",
+      "Severity": "Critical",
+      "Description": "Critical root cause: Severe Content Omission (SDI: 100.0%)",
+      "Recommendation": "URGENT: Address severe content omission in translation process",
+      "Root_Cause": "Severe Content Omission"
+    },
+    {
+      "Type": "Root_Cause_Critical",
+      "Comparison": "English vs Luganda",
+      "Severity": "Critical",
+      "Description": "Critical root cause: Severe Length Disparity (SDI: 100.0%)",
+      "Recommendation": "URGENT: Address severe length disparity in translation process",
+      "Root_Cause": "Severe Length Disparity"
+    }
+  ],
+  "recommendations": [
+    "🔴 CRITICAL BIAS: Immediate intervention required across all languages",
+    "⚠ CRITICAL FOCUS: Luganda",
+    "📌 Address: Severe Length Disparity",
+    "📌 Address: Severe Content Omission",
+    "📋 Implement standardized medical terminology across all languages",
+    "📋 Train translators on preserving emotional tone and urgency",
+    "📋 Establish quality assurance for translation completeness"
+  ],
+  "output_directory": "/Users/ronaldkato/Downloads/MaHealthBias/output",
+  "bias_characteristics_analyzed": [
+    "translation_length_disparity",
+    "cultural_concept_mismatch",
+    "medical_term_omission",
+    "emotional_tone_shift",
+    "structural_simplification",
+    "pronoun_ambiguity",
+    "instructional_generic_shift",
+    "causality_inversion",
+    "negation_misinterpretation"
+  ]
+}

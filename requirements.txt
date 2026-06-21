@@ -1,4 +1,5 @@
-# MaHealthBiasAudit v2 - Core Dependencies
+# MaHealthBiasAudit - Core Dependencies
+
 # Core scientific computing
 numpy>=1.21.0
 pandas>=1.3.0
@@ -8,17 +9,9 @@ scikit-learn>=1.0.0
 # Visualization
 matplotlib>=3.5.0
 seaborn>=0.11.0
-plotly>=5.10.0
 
 # NLP and Embeddings
 sentence-transformers>=2.2.0
-transformers>=4.25.0
-torch>=1.12.0
-tokenizers>=0.13.0
 
 # Utilities
 tqdm>=4.64.0
-
-# Optional: For Google Colab integration
-google-generativeai>=0.3.0
-

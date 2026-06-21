@@ -28,11 +28,9 @@ class StatisticalBiasAuditor:
         """Compute response length statistics per language"""
         stats = []
         
-        for lang in PRIMARY_LANGUAGES:
-            if lang not in normalized_texts:
+        for lang, texts in normalized_texts.items():
+            if not texts:
                 continue
-            
-            texts = normalized_texts[lang]
             lengths = [len(t.split()) for t in texts]
             
             stats.append({
@@ -54,11 +52,9 @@ class StatisticalBiasAuditor:
         """Compute vocabulary richness metrics per language"""
         stats = []
         
-        for lang in PRIMARY_LANGUAGES:
-            if lang not in normalized_texts:
+        for lang, texts in normalized_texts.items():
+            if not texts:
                 continue
-            
-            texts = normalized_texts[lang]
             richness_scores = []
             diversity_scores = []
             
@@ -70,10 +66,10 @@ class StatisticalBiasAuditor:
             
             stats.append({
                 'Language': lang,
-                'Vocabulary_Richness_Mean': np.mean(richness_scores),
-                'Vocabulary_Richness_Std': np.std(richness_scores),
-                'Lexical_Diversity_Mean': np.mean(diversity_scores),
-                'Lexical_Diversity_Std': np.std(diversity_scores)
+                'Vocabulary_Richness_Mean': np.mean(richness_scores) if richness_scores else 0,
+                'Vocabulary_Richness_Std': np.std(richness_scores) if richness_scores else 0,
+                'Lexical_Diversity_Mean': np.mean(diversity_scores) if diversity_scores else 0,
+                'Lexical_Diversity_Std': np.std(diversity_scores) if diversity_scores else 0
             })
         
         return pd.DataFrame(stats)
@@ -84,31 +80,25 @@ class StatisticalBiasAuditor:
         """Compute n-gram frequency analysis"""
         results = []
         
-        vectorizer = CountVectorizer(ngram_range=(n, n), lowercase=True, 
-                                     tokenizer=basic_tokenize, token_pattern=None)
-        
-        for lang in PRIMARY_LANGUAGES:
-            if lang not in normalized_texts:
-                continue
-            
-            texts = normalized_texts[lang]
+        for lang, texts in normalized_texts.items():
             if not texts:
                 continue
             
             try:
+                vectorizer = CountVectorizer(ngram_range=(n, n), lowercase=True, 
+                                             tokenizer=basic_tokenize, token_pattern=None)
                 ngram_matrix = vectorizer.fit_transform(texts)
                 ngram_counts = np.array(ngram_matrix.sum(axis=0)).flatten()
                 ngram_names = vectorizer.get_feature_names_out()
                 
-                # Get top n-grams
                 top_indices = np.argsort(ngram_counts)[-20:][::-1]
-                top_ngrams = [(ngram_names[i], ngram_counts[i]) for i in top_indices]
+                top_ngrams = [(ngram_names[i], int(ngram_counts[i])) for i in top_indices]
                 
                 results.append({
                     'Language': lang,
                     f'Top_{n}-grams': top_ngrams[:10],
                     'Unique_ngrams': len(ngram_names),
-                    'Total_ngram_occurrences': sum(ngram_counts)
+                    'Total_ngram_occurrences': int(sum(ngram_counts))
                 })
             except Exception as e:
                 self.logger.warning(f"Error computing {n}-grams for {lang}: {e}")
@@ -121,38 +111,29 @@ class StatisticalBiasAuditor:
         """Perform statistical tests comparing languages"""
         results = []
         
-        # Prepare data
         lang_data = {}
-        for lang in PRIMARY_LANGUAGES:
-            if lang in normalized_texts:
-                lengths = [len(t.split()) for t in normalized_texts[lang]]
+        for lang, texts in normalized_texts.items():
+            if texts:
+                lengths = [len(t.split()) for t in texts]
                 lang_data[lang] = lengths
         
-        # Pairwise comparisons
-        for i, lang1 in enumerate(PRIMARY_LANGUAGES):
-            if lang1 not in lang_data:
-                continue
-            for lang2 in PRIMARY_LANGUAGES[i+1:]:
-                if lang2 not in lang_data:
-                    continue
-                
+        lang_list = list(lang_data.keys())
+        for i, lang1 in enumerate(lang_list):
+            for lang2 in lang_list[i+1:]:
                 data1 = lang_data[lang1]
                 data2 = lang_data[lang2]
                 
-                # Mann-Whitney U test (non-parametric)
                 try:
                     u_stat, p_value = stats.mannwhitneyu(data1, data2, alternative='two-sided')
                 except:
                     u_stat, p_value = 0, 1.0
                 
-                # Cohen's d effect size
                 d = cohens_d(np.array(data1), np.array(data2))
                 
-                # Interpretation
                 if p_value < SIGNIFICANCE_ALPHA:
-                    if d > 0.5:
+                    if abs(d) > 0.5:
                         interpretation = f"Large effect: {lang1} responses are significantly {'longer' if np.mean(data1) > np.mean(data2) else 'shorter'}"
-                    elif d > 0.2:
+                    elif abs(d) > 0.2:
                         interpretation = f"Medium effect: {lang1} responses are significantly {'longer' if np.mean(data1) > np.mean(data2) else 'shorter'}"
                     else:
                         interpretation = f"Small effect: {lang1} responses are significantly {'longer' if np.mean(data1) > np.mean(data2) else 'shorter'}"
@@ -161,12 +142,14 @@ class StatisticalBiasAuditor:
                 
                 results.append({
                     'Comparison': f"{lang1} vs {lang2}",
-                    'Mean_Diff': np.mean(data1) - np.mean(data2),
-                    'Mann_Whitney_U': u_stat,
-                    'P_Value': p_value,
+                    'Mean_Diff': round(np.mean(data1) - np.mean(data2), 2),
+                    'Mann_Whitney_U': round(u_stat, 2),
+                    'P_Value': round(p_value, 4),
                     'Significant': p_value < SIGNIFICANCE_ALPHA,
-                    'Effect_Size_Cohens_d': d,
-                    'Interpretation': interpretation
+                    'Effect_Size_Cohens_d': round(d, 3),
+                    'Interpretation': interpretation,
+                    'Lang1_Mean': round(np.mean(data1), 2),
+                    'Lang2_Mean': round(np.mean(data2), 2)
                 })
         
         return results
@@ -176,11 +159,10 @@ class StatisticalBiasAuditor:
         outliers = []
         
         for lang, texts in normalized_texts.items():
-            lengths = [len(t.split()) for t in texts]
-            if not lengths:
+            if not texts:
                 continue
+            lengths = [len(t.split()) for t in texts]
             
-            # IQR method
             q1 = np.percentile(lengths, 25)
             q3 = np.percentile(lengths, 75)
             iqr = q3 - q1
@@ -193,86 +175,111 @@ class StatisticalBiasAuditor:
                         'Language': lang,
                         'Index': idx,
                         'Length': length,
-                        'Text_Preview': texts[idx][:200] if len(texts[idx]) > 200 else texts[idx],
+                        'Text_Preview': texts[idx][:150] + '...' if len(texts[idx]) > 150 else texts[idx],
                         'Outlier_Type': 'Short' if length < lower_bound else 'Long'
                     })
         
         return outliers
     
-    def compute_category_analysis(self, 
-                                  normalized_texts: Dict[str, List[str]],
-                                  category_splits: Dict[str, Dict[str, List[str]]]) -> pd.DataFrame:
-        """Analyse bias across different categories"""
-        results = []
-        
-        for category, lang_texts in category_splits.items():
-            for lang in PRIMARY_LANGUAGES:
-                if lang not in lang_texts:
-                    continue
-                
-                texts = lang_texts[lang]
-                lengths = [len(t.split()) for t in texts]
-                
-                results.append({
-                    'Category': category,
-                    'Language': lang,
-                    'Avg_Length': np.mean(lengths) if lengths else 0,
-                    'Count': len(texts)
-                })
-        
-        return pd.DataFrame(results)
-    
     def generate_flags(self, 
                        length_stats: pd.DataFrame,
                        vocab_stats: pd.DataFrame,
                        test_results: List[Dict]) -> List[Dict]:
-        """Generate flags for potential biases"""
+        """Generate flags for potential biases with enhanced categorization"""
         flags = []
         
-        # Length bias detection
-        english_mean = length_stats[length_stats['Language'] == 'English']['Mean'].values
-        if len(english_mean) > 0:
-            english_mean = english_mean[0]
-            for _, row in length_stats.iterrows():
-                if row['Language'] != 'English':
-                    ratio = row['Mean'] / english_mean
-                    if ratio < 0.6:
-                        flags.append({
-                            'Type': 'Length_Bias',
-                            'Language': row['Language'],
-                            'Severity': 'High',
-                            'Description': f"Responses are {ratio:.1%} of English length ({row['Mean']:.0f} vs {english_mean:.0f} words)",
-                            'Recommendation': 'Review translation quality and cultural adaptation'
-                    })
-                    elif ratio < 0.8:
-                        flags.append({
-                            'Type': 'Length_Bias',
-                            'Language': row['Language'],
-                            'Severity': 'Moderate',
-                            'Description': f"Responses are {ratio:.1%} of English length ({row['Mean']:.0f} vs {english_mean:.0f} words)",
-                            'Recommendation': 'Consider if content loss is occurring'
-                    })
+        if length_stats.empty:
+            return flags
         
-        # Vocabulary richness bias
-        for _, row in vocab_stats.iterrows():
-            if row['Language'] != 'English' and row['Vocabulary_Richness_Mean'] < 0.3:
-                flags.append({
-                    'Type': 'Vocabulary_Bias',
-                    'Language': row['Language'],
-                    'Severity': 'High',
-                    'Description': f"Low vocabulary richness ({row['Vocabulary_Richness_Mean']:.3f})",
-                    'Recommendation': 'Check if data collection captures natural language variation'
-                })
+        # Get English as reference
+        english_row = None
+        for idx, row in length_stats.iterrows():
+            if row.get('Language') == 'English':
+                english_row = row
+                break
+        
+        if english_row is not None:
+            english_mean = english_row.get('Mean', 0)
+            
+            for idx, row in length_stats.iterrows():
+                lang = row.get('Language')
+                if lang != 'English' and lang:
+                    mean_val = row.get('Mean', 0)
+                    if mean_val > 0 and english_mean > 0:
+                        ratio = mean_val / english_mean
+                        if ratio < 0.5:
+                            flags.append({
+                                'Type': 'Length_Bias_Critical',
+                                'Language': lang,
+                                'Severity': 'Critical',
+                                'Description': f"Responses are {ratio:.1%} of English length ({mean_val:.0f} vs {english_mean:.0f} words)",
+                                'Recommendation': 'URGENT: Review translation quality and cultural adaptation',
+                                'Ratio': round(ratio, 2)
+                            })
+                        elif ratio < 0.7:
+                            flags.append({
+                                'Type': 'Length_Bias_High',
+                                'Language': lang,
+                                'Severity': 'High',
+                                'Description': f"Responses are {ratio:.1%} of English length ({mean_val:.0f} vs {english_mean:.0f} words)",
+                                'Recommendation': 'Review if content loss is occurring',
+                                'Ratio': round(ratio, 2)
+                            })
+                        elif ratio < 0.85:
+                            flags.append({
+                                'Type': 'Length_Bias_Moderate',
+                                'Language': lang,
+                                'Severity': 'Moderate',
+                                'Description': f"Responses are {ratio:.1%} of English length",
+                                'Recommendation': 'Monitor for potential content gaps',
+                                'Ratio': round(ratio, 2)
+                            })
+        
+        # Vocabulary richness flags
+        if not vocab_stats.empty:
+            for idx, row in vocab_stats.iterrows():
+                lang = row.get('Language')
+                if lang != 'English' and lang:
+                    richness = row.get('Vocabulary_Richness_Mean', 0)
+                    if richness < 0.25 and richness > 0:
+                        flags.append({
+                            'Type': 'Vocabulary_Bias_Critical',
+                            'Language': lang,
+                            'Severity': 'Critical',
+                            'Description': f"Very low vocabulary richness ({richness:.3f})",
+                            'Recommendation': 'URGENT: Check if data collection captures natural language variation',
+                            'Value': round(richness, 3)
+                        })
+                    elif richness < 0.35:
+                        flags.append({
+                            'Type': 'Vocabulary_Bias_High',
+                            'Language': lang,
+                            'Severity': 'High',
+                            'Description': f"Low vocabulary richness ({richness:.3f})",
+                            'Recommendation': 'Review data collection and translation quality',
+                            'Value': round(richness, 3)
+                        })
         
         # Statistical significance flags
         for test in test_results:
-            if test['Significant'] and abs(test['Effect_Size_Cohens_d']) > 0.5:
+            if test.get('Significant', False):
+                effect = abs(test.get('Effect_Size_Cohens_d', 0))
+                if effect > 0.7:
+                    severity = 'Critical'
+                elif effect > 0.5:
+                    severity = 'High'
+                elif effect > 0.3:
+                    severity = 'Moderate'
+                else:
+                    severity = 'Low'
+                
                 flags.append({
                     'Type': 'Statistical_Bias',
                     'Comparison': test['Comparison'],
-                    'Severity': 'High',
+                    'Severity': severity,
                     'Description': test['Interpretation'],
-                    'Recommendation': 'Investigate potential systematic differences'
+                    'Recommendation': 'Investigate potential systematic differences',
+                    'Effect_Size': round(effect, 3)
                 })
         
         return flags
@@ -281,32 +288,37 @@ class StatisticalBiasAuditor:
                        questions_by_lang: Dict[str, List[str]], 
                        answers_by_lang: Dict[str, List[str]]) -> Dict:
         """Run complete statistical bias audit"""
-        self.logger.info("Starting statistical bias audit")
+        self.logger.info("="*50)
+        self.logger.info("STARTING STATISTICAL BIAS AUDIT")
+        self.logger.info("="*50)
         
-        # Compute statistics
+        self.logger.info("Computing response length statistics...")
         length_stats = self.compute_response_length_stats(answers_by_lang)
+        
+        self.logger.info("Computing vocabulary richness...")
         vocab_stats = self.compute_vocabulary_richness_stats(answers_by_lang)
         
-        # Perform statistical tests
+        self.logger.info("Performing statistical tests...")
         test_results = self.perform_statistical_tests(answers_by_lang)
         
-        # Detect outliers
+        self.logger.info("Detecting outliers...")
         outliers = self.detect_outliers(answers_by_lang)
         
-        # N-gram analysis
+        self.logger.info("Computing n-grams...")
         bigram_stats = self.compute_ngram_analysis(answers_by_lang, n=2)
         trigram_stats = self.compute_ngram_analysis(answers_by_lang, n=3)
         
-        # Generate flags
+        self.logger.info("Generating flags...")
         flags = self.generate_flags(length_stats, vocab_stats, test_results)
         
-        # Prepare summary
         summary = {
             'total_responses': sum(len(v) for v in answers_by_lang.values()),
-            'languages_analyzed': [l for l in PRIMARY_LANGUAGES if l in answers_by_lang],
+            'languages_analyzed': list(answers_by_lang.keys()),
             'significant_differences': sum(1 for t in test_results if t['Significant']),
             'outliers_detected': len(outliers),
-            'flags_generated': len(flags)
+            'flags_generated': len(flags),
+            'critical_flags': sum(1 for f in flags if f.get('Severity') == 'Critical'),
+            'high_flags': sum(1 for f in flags if f.get('Severity') == 'High')
         }
         
         results = {
@@ -315,10 +327,17 @@ class StatisticalBiasAuditor:
             'bigram_analysis': bigram_stats,
             'trigram_analysis': trigram_stats,
             'statistical_tests': test_results,
-            'outliers': outliers[:50],  # Limit outliers
+            'outliers': outliers[:100],
             'flags': flags,
             'summary': summary
         }
         
-        self.logger.info(f"Statistical audit complete: {summary}")
+        self.logger.info("="*50)
+        self.logger.info("STATISTICAL AUDIT COMPLETE")
+        self.logger.info(f"  Languages: {summary['languages_analyzed']}")
+        self.logger.info(f"  Total responses: {summary['total_responses']}")
+        self.logger.info(f"  Significant differences: {summary['significant_differences']}")
+        self.logger.info(f"  Flags generated: {summary['flags_generated']}")
+        self.logger.info("="*50)
+        
         return results

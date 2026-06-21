@@ -1,0 +1,82 @@
+2026-06-15 21:13:21,562 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:21,566 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:13:22,025 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:22,029 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:13:22,475 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:22,478 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:13:22,923 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:22,927 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:13:23,372 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:23,375 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:13:25,520 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:13:25,524 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Swahili', 'Runyankore', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:08,264 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:08,270 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:08,717 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:08,721 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:09,159 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:09,163 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:09,610 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:09,614 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:10,057 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:10,061 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:15:11,687 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:15:11,691 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda', 'Runyankore', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:23,970 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:23,975 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:25,343 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:25,347 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:26,060 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:26,065 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:26,775 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:26,779 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:27,487 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:27,491 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:23:28,842 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:23:28,846 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Swahili', 'Runyankore', 'Luganda', 'English'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:29:13,286 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:29:13,291 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Swahili', 'English', 'Luganda'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:29:17,264 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:29:17,268 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Swahili', 'English', 'Luganda'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:29:17,710 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:29:17,714 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Swahili', 'English', 'Luganda'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:29:18,153 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:29:18,157 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Swahili', 'English', 'Luganda'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:29:18,604 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:29:18,608 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'Swahili', 'English', 'Luganda'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:03,457 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:03,462 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:07,491 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:07,495 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:07,957 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:07,961 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:08,412 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:08,416 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:08,861 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:08,865 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'Runyankore', 'English', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:33:09,944 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:33:09,947 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Luganda', 'English'], 'average_sdi': 0.6758717000484467, 'bias_level': 'High', 'high_sdi_pairs': 2, 'root_causes_identified': 2, 'flags_generated': 5}
+2026-06-15 21:40:11,235 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:11,240 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:40:15,337 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:15,342 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:40:15,790 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:15,794 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:40:16,250 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:16,254 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:40:16,701 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:16,705 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['Runyankore', 'English', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:40:17,680 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:40:17,682 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda'], 'average_sdi': 0.6758717000484467, 'bias_level': 'High', 'high_sdi_pairs': 2, 'root_causes_identified': 2, 'flags_generated': 5}
+2026-06-15 21:45:12,759 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:12,765 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Runyankore', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:45:16,734 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:16,738 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Runyankore', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:45:17,170 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:17,174 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Runyankore', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:45:17,645 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:17,652 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Runyankore', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:45:18,127 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:18,131 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Runyankore', 'Luganda', 'Swahili'], 'average_sdi': 0.7550219173232714, 'bias_level': 'High', 'high_sdi_pairs': 12, 'root_causes_identified': 5, 'flags_generated': 18}
+2026-06-15 21:45:19,297 - cross_lingual - INFO - Starting cross-lingual evaluation
+2026-06-15 21:45:19,300 - cross_lingual - INFO - Cross-lingual evaluation complete: {'languages_evaluated': ['English', 'Luganda'], 'average_sdi': 0.6758717000484467, 'bias_level': 'High', 'high_sdi_pairs': 2, 'root_causes_identified': 2, 'flags_generated': 5}

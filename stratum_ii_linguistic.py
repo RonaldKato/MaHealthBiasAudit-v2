@@ -10,7 +10,7 @@ from collections import Counter
 import warnings
 warnings.filterwarnings('ignore')
 
-from config import PRIMARY_LANGUAGES, MAX_TOKEN_FERTILITY, SENTENCE_PIECING_THRESHOLD, WORD_PIECING_THRESHOLD
+from config import PRIMARY_LANGUAGES, MAX_TOKEN_FERTILITY, SENTENCE_PIECING_THRESHOLD, DOMAIN_KEYWORDS
 from utils import setup_logger, basic_tokenize
 
 
@@ -27,12 +27,21 @@ class LinguisticBiasAuditor:
         
         for lang, perfs in tokeniser_perfs.items():
             for tokeniser, fertility in perfs.items():
+                if fertility > 1.8:
+                    severity = 'Critical'
+                elif fertility > MAX_TOKEN_FERTILITY:
+                    severity = 'High'
+                elif fertility > 1.3:
+                    severity = 'Moderate'
+                else:
+                    severity = 'Low'
+                
                 rows.append({
                     'Language': lang,
                     'Tokeniser': tokeniser,
                     'Fertility_Penalty': fertility,
                     'Is_Problematic': fertility > MAX_TOKEN_FERTILITY,
-                    'Severity': 'High' if fertility > 1.8 else 'Moderate' if fertility > MAX_TOKEN_FERTILITY else 'Low'
+                    'Severity': severity
                 })
         
         return pd.DataFrame(rows)
@@ -43,56 +52,63 @@ class LinguisticBiasAuditor:
         results = []
         
         for lang, words in sample_words.items():
-            if lang == 'English':
+            if lang == 'English' or not words:
                 continue
             
             total_chars = 0
             total_subwords = 0
             
-            for word in words[:100]:  # Sample
+            for word in words[:100]:
                 total_chars += len(word)
-                
-                # Simulate subword splitting
                 subwords = self._simulate_subword_split(word)
                 total_subwords += len(subwords)
             
             avg_pieces_per_char = total_subwords / max(total_chars, 1)
-            piecing_ratio = avg_pieces_per_char * 10  # Scale for readability
+            piecing_ratio = avg_pieces_per_char * 10
+            
+            if piecing_ratio > 0.5:
+                severity = 'Critical'
+            elif piecing_ratio > SENTENCE_PIECING_THRESHOLD:
+                severity = 'High'
+            elif piecing_ratio > 0.15:
+                severity = 'Moderate'
+            else:
+                severity = 'Low'
             
             results.append({
                 'Language': lang,
                 'Sample_Words_Analyzed': min(100, len(words)),
                 'Avg_Subword_Pieces_Per_Word': total_subwords / max(min(100, len(words)), 1),
                 'Piecing_Ratio': piecing_ratio,
+                'Severity': severity,
                 'Is_Highly_Pieced': piecing_ratio > SENTENCE_PIECING_THRESHOLD
             })
         
         return pd.DataFrame(results)
     
     def _simulate_subword_split(self, word: str) -> List[str]:
-        """Simulate subword splitting for a word"""
-        # Simplified simulation based on word length
+        """Simulate subword splitting for a word with BPE-like behavior"""
         if len(word) <= 4:
             return [word]
         
-        # Split at natural boundaries (common prefixes/suffixes)
-        prefixes = ['mu', 'ku', 'ni', 'tu', 'ba', 'wa', 'ki', 'vi', 'a', 'e', 'i']
-        suffixes = ['a', 'e', 'i', 'o', 'u', 'ka', 'ta', 'na', 'za', 'ya']
+        # Common prefixes and suffixes in East African languages
+        prefixes = ['mu', 'ku', 'ni', 'tu', 'ba', 'wa', 'ki', 'vi', 'a', 'e', 'i', 'o', 'u']
+        suffixes = ['a', 'e', 'i', 'o', 'u', 'ka', 'ta', 'na', 'za', 'ya', 'ni', 'ku']
         
         result = []
         remaining = word
         
-        # Check for prefix
+        # Check for prefixes
         for pref in prefixes:
-            if remaining.startswith(pref) and len(pref) < len(remaining):
+            if remaining.startswith(pref) and len(pref) < len(remaining) - 1:
                 result.append(pref)
                 remaining = remaining[len(pref):]
                 break
         
-        # Split remaining by length
+        # Split the rest
         while len(remaining) > 4:
-            # Look for common suffix
             found = False
+            # Check for suffixes
             for suff in suffixes:
                 if remaining.endswith(suff) and len(remaining) - len(suff) >= 3:
                     result.append(remaining[:-len(suff)])
@@ -102,7 +118,8 @@ class LinguisticBiasAuditor:
                     break
             
             if not found:
-                split_point = min(3, len(remaining) - 1)
+                # Split at a natural boundary
+                split_point = min(3, len(remaining) - 2)
                 result.append(remaining[:split_point])
                 remaining = remaining[split_point:]
         
@@ -117,7 +134,7 @@ class LinguisticBiasAuditor:
         results = []
         
         for lang in PRIMARY_LANGUAGES:
-            if lang not in normalized_texts:
+            if lang not in normalized_texts or not normalized_texts[lang]:
                 continue
             
             texts = normalized_texts[lang]
@@ -136,7 +153,6 @@ class LinguisticBiasAuditor:
                 if words:
                     avg_word_lengths.append(np.mean([len(w) for w in words]))
                 
-                # Complexity proxy: ratio of unique structures
                 unique_bigrams = set(zip(words[:-1], words[1:]))
                 total_bigrams = max(len(words) - 1, 1)
                 complexities.append(len(unique_bigrams) / total_bigrams)
@@ -157,64 +173,70 @@ class LinguisticBiasAuditor:
         """Compute trust-aware metrics comparing response quality"""
         results = []
         
-        # Question-answer alignment check
         for lang in PRIMARY_LANGUAGES:
-            if lang not in answers_by_lang or lang not in questions_by_lang:
+            if lang not in answers_by_lang or not answers_by_lang[lang]:
                 continue
             
-            questions = questions_by_lang[lang]
             answers = answers_by_lang[lang]
             
-            # Simplified alignment: check if answers contain keywords from questions
-            alignments = []
-            for q, a in zip(questions, answers):
-                q_words = set(basic_tokenize(q))
-                a_words = set(basic_tokenize(a))
-                
-                if q_words:
-                    overlap = len(q_words.intersection(a_words)) / len(q_words)
-                    alignments.append(overlap)
-            
-            # Also compute answer diversity
+            # Answer diversity
             answer_starts = [a[:30] if len(a) > 30 else a for a in answers]
             unique_starts = len(set(answer_starts))
             diversity_ratio = unique_starts / max(len(answers), 1)
             
+            # Semantic consistency
+            sentences = []
+            for a in answers:
+                sentences.extend(a.split('.'))
+            sentences = [s.strip() for s in sentences if len(s.strip()) > 10]
+            
+            avg_sent_len = np.mean([len(s.split()) for s in sentences]) if sentences else 0
+            
             results.append({
                 'Language': lang,
-                'Question_Answer_Alignment': np.mean(alignments) if alignments else 0,
                 'Answer_Diversity_Ratio': diversity_ratio,
-                'Total_Answers': len(answers)
+                'Total_Answers': len(answers),
+                'Avg_Sentence_Length_Trust': avg_sent_len
             })
         
-        # Compare against English baseline
-        english_alignment = next((r['Question_Answer_Alignment'] for r in results if r['Language'] == 'English'), 0)
+        # Compare to English
+        english_diversity = next((r['Answer_Diversity_Ratio'] for r in results if r['Language'] == 'English'), 0)
         
         trust_aware_results = []
         for r in results:
-            if r['Language'] != 'English' and english_alignment > 0:
-                alignment_ratio = r['Question_Answer_Alignment'] / english_alignment
+            if r['Language'] != 'English' and english_diversity > 0:
+                diversity_ratio = r['Answer_Diversity_Ratio'] / english_diversity
+                if diversity_ratio > 0.8:
+                    trust_level = 'High'
+                    trust_color = 'green'
+                elif diversity_ratio > 0.6:
+                    trust_level = 'Medium'
+                    trust_color = 'orange'
+                else:
+                    trust_level = 'Low'
+                    trust_color = 'red'
+                
                 trust_aware_results.append({
                     'Comparison': f"{r['Language']} vs English",
-                    'Alignment_Ratio': alignment_ratio,
-                    'Trust_Level': 'High' if alignment_ratio > 0.8 else 'Medium' if alignment_ratio > 0.6 else 'Low',
-                    'Interpretation': f"{r['Language']} responses show {alignment_ratio:.1%} alignment compared to English"
+                    'Diversity_Ratio': round(diversity_ratio, 3),
+                    'Trust_Level': trust_level,
+                    'Trust_Color': trust_color,
+                    'Interpretation': f"{r['Language']} responses show {diversity_ratio:.1%} answer diversity compared to English"
                 })
         
         return trust_aware_results
     
     def analyse_content_bias(self, 
-                            normalized_texts: Dict[str, List[str]],
-                            keywords: Dict[str, Dict[str, List[str]]]) -> pd.DataFrame:
+                            normalized_texts: Dict[str, List[str]]) -> pd.DataFrame:
         """Analyse content bias across languages using domain keywords"""
         results = []
         
         for lang in PRIMARY_LANGUAGES:
-            if lang not in normalized_texts:
+            if lang not in normalized_texts or not normalized_texts[lang]:
                 continue
             
             texts = normalized_texts[lang]
-            lang_keywords = keywords.get(lang, {})
+            lang_keywords = DOMAIN_KEYWORDS.get(lang, DOMAIN_KEYWORDS.get('English', {}))
             
             content_scores = {}
             for category, kw_list in lang_keywords.items():
@@ -229,7 +251,6 @@ class LinguisticBiasAuditor:
                 
                 content_scores[category] = np.mean(scores) if scores else 0
             
-            # Calculate distribution
             if content_scores:
                 total = sum(content_scores.values())
                 if total > 0:
@@ -243,87 +264,131 @@ class LinguisticBiasAuditor:
         return pd.DataFrame(results).fillna(0)
     
     def detect_linguistic_flags(self, 
-                                tokeniser_df: pd.DataFrame,
-                                complexity_df: pd.DataFrame,
-                                trust_metrics: List[Dict]) -> List[Dict]:
-        """Generate flags for linguistic biases"""
+                            tokeniser_df: pd.DataFrame,
+                            piecing_df: pd.DataFrame,
+                            complexity_df: pd.DataFrame,
+                            trust_metrics: List[Dict]) -> List[Dict]:
+        """Generate flags for linguistic biases with enhanced severity"""
         flags = []
         
         # Tokeniser flags
-        for _, row in tokeniser_df.iterrows():
-            if row.get('Is_Problematic', False):
-                flags.append({
-                    'Type': 'Tokenisation_Bias',
-                    'Language': row['Language'],
-                    'Tokeniser': row['Tokeniser'],
-                    'Severity': row.get('Severity', 'High'),
-                    'Description': f"High fertility penalty ({row['Fertility_Penalty']:.2f}) for {row['Tokeniser']}",
-                    'Recommendation': 'Consider using a different tokeniser for this language'
-                })
+        if not tokeniser_df.empty:
+            for _, row in tokeniser_df.iterrows():
+                if row.get('Severity') in ['Critical', 'High']:
+                    flags.append({
+                        'Type': 'Tokenisation_Bias',
+                        'Language': row['Language'],
+                        'Tokeniser': row['Tokeniser'],
+                        'Severity': row['Severity'],
+                        'Description': f"High fertility penalty ({row['Fertility_Penalty']:.2f}) for {row['Tokeniser']}",
+                        'Recommendation': 'Consider using a different tokeniser for this language'
+                    })
         
-        # Structural flags
-        english_complexity = complexity_df[complexity_df['Language'] == 'English']['Structural_Complexity_Mean'].values
-        if len(english_complexity) > 0:
-            english_complexity = english_complexity[0]
-            for _, row in complexity_df.iterrows():
-                if row['Language'] != 'English':
-                    ratio = row['Structural_Complexity_Mean'] / max(english_complexity, 0.001)
-                    if ratio < 0.6:
-                        flags.append({
-                            'Type': 'Structural_Bias',
-                            'Language': row['Language'],
-                            'Severity': 'High',
-                            'Description': f"Lower structural complexity ({ratio:.1%} of English)",
-                            'Recommendation': 'Review if simpler responses indicate content loss'
-                        })
+        # Subword piecing flags
+        if not piecing_df.empty:
+            for _, row in piecing_df.iterrows():
+                if row.get('Severity') in ['Critical', 'High']:
+                    flags.append({
+                        'Type': 'Subword_Piecing',
+                        'Language': row['Language'],
+                        'Severity': row['Severity'],
+                        'Description': f"High subword piecing ratio ({row['Piecing_Ratio']:.2f})",
+                        'Recommendation': 'Review if over-tokenisation is affecting semantic understanding'
+                    })
         
-        # Trust-aware flags
+        # Structural complexity flags
+        if not complexity_df.empty:
+            english_complexity = complexity_df[complexity_df['Language'] == 'English']['Structural_Complexity_Mean'].values
+            if len(english_complexity) > 0:
+                english_complexity = english_complexity[0]
+                for _, row in complexity_df.iterrows():
+                    if row['Language'] != 'English':
+                        ratio = row['Structural_Complexity_Mean'] / max(english_complexity, 0.001)
+                        if ratio < 0.4:
+                            severity = 'Critical'
+                        elif ratio < 0.6:
+                            severity = 'High'
+                        elif ratio < 0.8:
+                            severity = 'Moderate'
+                        else:
+                            severity = 'Low'
+                        
+                        if severity in ['Critical', 'High']:
+                            flags.append({
+                                'Type': 'Structural_Bias',
+                                'Language': row['Language'],
+                                'Severity': severity,
+                                'Description': f"Structural complexity is {ratio:.1%} of English",
+                                'Recommendation': 'Review if simpler responses indicate content loss'
+                            })
+        
+        # Trust metrics flags
         for metric in trust_metrics:
             if metric['Trust_Level'] == 'Low':
                 flags.append({
+                    'Type': 'Trust_Bias_Critical',
+                    'Comparison': metric['Comparison'],
+                    'Severity': 'Critical',
+                    'Description': metric['Interpretation'],
+                    'Recommendation': 'URGENT: Review translation quality and cultural adaptation'
+                })
+            elif metric['Trust_Level'] == 'Medium':
+                flags.append({
                     'Type': 'Trust_Bias',
                     'Comparison': metric['Comparison'],
-                    'Severity': 'High',
+                    'Severity': 'Moderate',
                     'Description': metric['Interpretation'],
-                    'Recommendation': 'Review translation quality and cultural adaptation'
+                    'Recommendation': 'Monitor translation quality'
                 })
         
         return flags
-    
     def run_full_audit(self,
-                      questions_by_lang: Dict[str, List[str]],
-                      answers_by_lang: Dict[str, List[str]],
-                      tokeniser_perfs: Dict[str, Dict[str, float]],
-                      sample_words: Dict[str, List[str]]) -> Dict:
+                  questions_by_lang: Dict[str, List[str]],
+                  answers_by_lang: Dict[str, List[str]],
+                  tokeniser_perfs: Dict[str, Dict[str, float]],
+                  sample_words: Dict[str, List[str]]) -> Dict:
         """Run complete linguistic bias audit"""
-        self.logger.info("Starting linguistic bias audit")
+        self.logger.info("="*50)
+        self.logger.info("STARTING LINGUISTIC BIAS AUDIT")
+        self.logger.info("="*50)
         
-        # Analyse tokeniser performance
+        self.logger.info("Analysing tokeniser performance...")
         tokeniser_df = self.analyse_tokeniser_performance(tokeniser_perfs)
         
-        # Analyse subword piecing
+        self.logger.info("Analysing subword piecing...")
         piecing_df = self.analyse_subword_piecing(sample_words)
         
-        # Analyse structural complexity
+        self.logger.info("Analysing structural complexity...")
         complexity_df = self.analyse_structural_complexity(answers_by_lang)
         
-        # Compute trust-aware metrics
+        self.logger.info("Computing trust-aware metrics...")
         trust_metrics = self.compute_trust_aware_metrics(questions_by_lang, answers_by_lang)
         
-        # Analyse content bias
-        from config import DOMAIN_KEYWORDS
-        content_df = self.analyse_content_bias(answers_by_lang, DOMAIN_KEYWORDS)
+        self.logger.info("Analysing content bias...")
+        content_df = self.analyse_content_bias(answers_by_lang)
         
-        # Generate flags
-        flags = self.detect_linguistic_flags(tokeniser_df, complexity_df, trust_metrics)
+        self.logger.info("Detecting linguistic flags...")
+        flags = self.detect_linguistic_flags(tokeniser_df, piecing_df, complexity_df, trust_metrics)
         
-        # Summary
+        # Fix: Use proper pandas column access
+        problematic_count = 0
+        critical_tokenisers = 0
+        if not tokeniser_df.empty and 'Severity' in tokeniser_df.columns:
+            problematic_count = len(tokeniser_df[tokeniser_df['Severity'].isin(['Critical', 'High'])])
+            critical_tokenisers = len(tokeniser_df[tokeniser_df['Severity'] == 'Critical'])
+        
+        high_piecing_count = 0
+        if not piecing_df.empty and 'Severity' in piecing_df.columns:
+            high_piecing_count = len(piecing_df[piecing_df['Severity'].isin(['Critical', 'High'])])
+        
         summary = {
             'tokenisers_analyzed': len(tokeniser_df['Tokeniser'].unique()) if not tokeniser_df.empty else 0,
-            'problematic_tokenisers': len(tokeniser_df[tokeniser_df.get('Is_Problematic', False)]),
-            'high_piecing_languages': len(piecing_df[piecing_df.get('Is_Highly_Pieced', False)]),
+            'problematic_tokenisers': problematic_count,
+            'critical_tokenisers': critical_tokenisers,
+            'high_piecing_languages': high_piecing_count,
             'trust_issues': len([m for m in trust_metrics if m['Trust_Level'] == 'Low']),
-            'flags_generated': len(flags)
+            'flags_generated': len(flags),
+            'critical_flags': sum(1 for f in flags if f.get('Severity') == 'Critical')
         }
         
         results = {
@@ -336,5 +401,11 @@ class LinguisticBiasAuditor:
             'summary': summary
         }
         
-        self.logger.info(f"Linguistic audit complete: {summary}")
+        self.logger.info("="*50)
+        self.logger.info("LINGUISTIC AUDIT COMPLETE")
+        self.logger.info(f"  Tokenisers analyzed: {summary['tokenisers_analyzed']}")
+        self.logger.info(f"  Problematic tokenisers: {summary['problematic_tokenisers']}")
+        self.logger.info(f"  Critical flags: {summary['critical_flags']}")
+        self.logger.info("="*50)
+        
         return results

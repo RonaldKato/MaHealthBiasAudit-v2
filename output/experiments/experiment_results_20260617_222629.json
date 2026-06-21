@@ -1,0 +1,50 @@
+[
+  {
+    "sample_size": 10,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 33,
+    "critical_flags": 28,
+    "execution_time": 0.64,
+    "avg_response_length": 8.34,
+    "vocabulary_richness": 0.7118,
+    "fertility_penalty": 1.736
+  },
+  {
+    "sample_size": 100,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 33,
+    "critical_flags": 28,
+    "execution_time": 0.46,
+    "avg_response_length": 8.34,
+    "vocabulary_richness": 0.7118,
+    "fertility_penalty": 1.736
+  },
+  {
+    "sample_size": 1000,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 33,
+    "critical_flags": 28,
+    "execution_time": 0.45,
+    "avg_response_length": 8.34,
+    "vocabulary_richness": 0.7118,
+    "fertility_penalty": 1.736
+  },
+  {
+    "sample_size": 10000,
+    "avg_sdi": 0.755,
+    "sdi_percentage": "75.5%",
+    "bias_level": "HIGH",
+    "total_flags": 33,
+    "critical_flags": 28,
+    "execution_time": 0.45,
+    "avg_response_length": 8.34,
+    "vocabulary_richness": 0.7118,
+    "fertility_penalty": 1.736
+  }
+]

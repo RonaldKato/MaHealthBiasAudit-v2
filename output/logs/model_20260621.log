@@ -1,0 +1,420 @@
+2026-06-21 11:54:28,682 - model - INFO - ==================================================
+2026-06-21 11:54:28,682 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 11:54:28,682 - model - INFO - ==================================================
+2026-06-21 11:54:28,683 - model - INFO - Computing language clustering...
+2026-06-21 11:54:28,683 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 11:54:29,337 - model - INFO - Computing translation consistency...
+2026-06-21 11:54:29,337 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 11:54:29,338 - model - INFO - Analysing embedding biases...
+2026-06-21 11:54:29,341 - model - INFO - ==================================================
+2026-06-21 11:54:29,341 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 11:54:29,341 - model - INFO -   Languages analyzed: ['English', 'Swahili', 'Luganda', 'Runyankore']
+2026-06-21 11:54:29,341 - model - INFO -   Optimal clusters: 2
+2026-06-21 11:54:29,341 - model - INFO -   Bias flags: 0
+2026-06-21 11:54:29,341 - model - INFO - ==================================================
+2026-06-21 11:59:20,953 - model - INFO - ==================================================
+2026-06-21 11:59:20,955 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 11:59:20,955 - model - INFO - ==================================================
+2026-06-21 11:59:20,956 - model - INFO - Computing language clustering...
+2026-06-21 11:59:20,956 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 11:59:22,056 - model - INFO - Computing translation consistency...
+2026-06-21 11:59:22,057 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 11:59:22,059 - model - INFO - Analysing embedding biases...
+2026-06-21 11:59:22,062 - model - INFO - ==================================================
+2026-06-21 11:59:22,062 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 11:59:22,062 - model - INFO -   Languages analyzed: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 11:59:22,062 - model - INFO -   Optimal clusters: 2
+2026-06-21 11:59:22,062 - model - INFO -   Bias flags: 0
+2026-06-21 11:59:22,062 - model - INFO - ==================================================
+2026-06-21 12:01:51,441 - model - INFO - ==================================================
+2026-06-21 12:01:51,441 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 12:01:51,441 - model - INFO - ==================================================
+2026-06-21 12:01:51,441 - model - INFO - Computing language clustering...
+2026-06-21 12:01:51,441 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 12:01:52,123 - model - INFO - Computing translation consistency...
+2026-06-21 12:01:52,123 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 12:01:52,124 - model - INFO - Analysing embedding biases...
+2026-06-21 12:01:52,128 - model - INFO - ==================================================
+2026-06-21 12:01:52,128 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 12:01:52,128 - model - INFO -   Languages analyzed: ['English', 'Luganda', 'Runyankore', 'Swahili']
+2026-06-21 12:01:52,128 - model - INFO -   Optimal clusters: 2
+2026-06-21 12:01:52,128 - model - INFO -   Bias flags: 0
+2026-06-21 12:01:52,128 - model - INFO - ==================================================
+2026-06-21 12:23:40,876 - model - INFO - ==================================================
+2026-06-21 12:23:40,876 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 12:23:40,878 - model - INFO - ==================================================
+2026-06-21 12:23:40,879 - model - INFO - Computing language clustering...
+2026-06-21 12:23:40,879 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 12:23:41,464 - model - INFO - Computing translation consistency...
+2026-06-21 12:23:41,465 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 12:23:41,466 - model - INFO - Analysing embedding biases...
+2026-06-21 12:23:41,468 - model - INFO - ==================================================
+2026-06-21 12:23:41,468 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 12:23:41,468 - model - INFO -   Languages analyzed: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 12:23:41,468 - model - INFO -   Optimal clusters: 2
+2026-06-21 12:23:41,468 - model - INFO -   Bias flags: 0
+2026-06-21 12:23:41,468 - model - INFO - ==================================================
+2026-06-21 12:25:39,491 - model - INFO - ==================================================
+2026-06-21 12:25:39,491 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 12:25:39,491 - model - INFO - ==================================================
+2026-06-21 12:25:39,491 - model - INFO - Computing language clustering...
+2026-06-21 12:25:39,491 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 12:25:40,961 - model - INFO - Computing translation consistency...
+2026-06-21 12:25:40,964 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 12:25:40,971 - model - INFO - Analysing embedding biases...
+2026-06-21 12:25:40,977 - model - INFO - ==================================================
+2026-06-21 12:25:40,977 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 12:25:40,977 - model - INFO -   Languages analyzed: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 12:25:40,977 - model - INFO -   Optimal clusters: 2
+2026-06-21 12:25:40,978 - model - INFO -   Bias flags: 0
+2026-06-21 12:25:40,978 - model - INFO - ==================================================
+2026-06-21 13:34:00,372 - model - INFO - ==================================================
+2026-06-21 13:34:00,372 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 13:34:00,372 - model - INFO - ==================================================
+2026-06-21 13:34:00,372 - model - INFO - Computing language clustering...
+2026-06-21 13:34:00,373 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 13:34:01,071 - model - INFO - Computing translation consistency...
+2026-06-21 13:34:01,076 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 13:34:01,077 - model - INFO - Analysing embedding biases...
+2026-06-21 13:34:01,080 - model - INFO - ==================================================
+2026-06-21 13:34:01,081 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 13:34:01,081 - model - INFO -   Languages analyzed: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 13:34:01,081 - model - INFO -   Optimal clusters: 2
+2026-06-21 13:34:01,081 - model - INFO -   Bias flags: 0
+2026-06-21 13:34:01,081 - model - INFO - ==================================================
+2026-06-21 14:31:21,430 - model - INFO - ==================================================
+2026-06-21 14:31:21,430 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 14:31:21,430 - model - INFO - ==================================================
+2026-06-21 14:31:21,431 - model - INFO - Computing language clustering...
+2026-06-21 14:31:21,431 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 14:31:22,014 - model - INFO - Computing translation consistency...
+2026-06-21 14:31:22,014 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 14:31:22,015 - model - INFO - Analysing embedding biases...
+2026-06-21 14:31:22,017 - model - INFO - ==================================================
+2026-06-21 14:31:22,017 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 14:31:22,017 - model - INFO -   Languages analyzed: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 14:31:22,017 - model - INFO -   Optimal clusters: 2
+2026-06-21 14:31:22,017 - model - INFO -   Bias flags: 0
+2026-06-21 14:31:22,017 - model - INFO - ==================================================
+2026-06-21 14:41:23,907 - model - INFO - ==================================================
+2026-06-21 14:41:23,907 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 14:41:23,907 - model - INFO - ==================================================
+2026-06-21 14:41:23,907 - model - INFO - Computing language clustering...
+2026-06-21 14:41:23,907 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 14:41:24,323 - model - INFO - Computing translation consistency...
+2026-06-21 14:41:24,323 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 14:41:24,324 - model - INFO - Analysing embedding biases...
+2026-06-21 14:41:24,325 - model - INFO - ==================================================
+2026-06-21 14:41:24,325 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 14:41:24,325 - model - INFO -   Languages analyzed: ['Luganda', 'Runyankore', 'Swahili', 'English']
+2026-06-21 14:41:24,325 - model - INFO -   Optimal clusters: 2
+2026-06-21 14:41:24,325 - model - INFO -   Bias flags: 0
+2026-06-21 14:41:24,325 - model - INFO - ==================================================
+2026-06-21 14:57:02,729 - model - INFO - ==================================================
+2026-06-21 14:57:02,729 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 14:57:02,729 - model - INFO - ==================================================
+2026-06-21 14:57:02,729 - model - INFO - Computing language clustering...
+2026-06-21 14:57:02,729 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 14:57:03,074 - model - INFO - Computing translation consistency...
+2026-06-21 14:57:03,074 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 14:57:03,075 - model - INFO - Analysing embedding biases...
+2026-06-21 14:57:03,076 - model - INFO - ==================================================
+2026-06-21 14:57:03,076 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 14:57:03,076 - model - INFO -   Languages analyzed: ['Luganda', 'Swahili', 'English', 'Runyankore']
+2026-06-21 14:57:03,076 - model - INFO -   Optimal clusters: 2
+2026-06-21 14:57:03,076 - model - INFO -   Bias flags: 0
+2026-06-21 14:57:03,076 - model - INFO - ==================================================
+2026-06-21 15:01:25,326 - model - INFO - ==================================================
+2026-06-21 15:01:25,329 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:01:25,330 - model - INFO - ==================================================
+2026-06-21 15:01:25,330 - model - INFO - Computing language clustering...
+2026-06-21 15:01:25,330 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:01:25,728 - model - INFO - Computing translation consistency...
+2026-06-21 15:01:25,728 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:01:25,728 - model - INFO - Analysing embedding biases...
+2026-06-21 15:01:25,730 - model - INFO - ==================================================
+2026-06-21 15:01:25,730 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:01:25,730 - model - INFO -   Languages analyzed: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 15:01:25,730 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:01:25,730 - model - INFO -   Bias flags: 0
+2026-06-21 15:01:25,730 - model - INFO - ==================================================
+2026-06-21 15:02:13,282 - model - INFO - ==================================================
+2026-06-21 15:02:13,282 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:02:13,282 - model - INFO - ==================================================
+2026-06-21 15:02:13,282 - model - INFO - Computing language clustering...
+2026-06-21 15:02:13,283 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:02:13,737 - model - INFO - Computing translation consistency...
+2026-06-21 15:02:13,737 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:02:13,739 - model - INFO - Analysing embedding biases...
+2026-06-21 15:02:13,740 - model - INFO - ==================================================
+2026-06-21 15:02:13,740 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:02:13,741 - model - INFO -   Languages analyzed: ['Runyankore', 'Luganda', 'Swahili', 'English']
+2026-06-21 15:02:13,741 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:02:13,741 - model - INFO -   Bias flags: 0
+2026-06-21 15:02:13,741 - model - INFO - ==================================================
+2026-06-21 15:04:51,278 - model - INFO - ==================================================
+2026-06-21 15:04:51,279 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:04:51,279 - model - INFO - ==================================================
+2026-06-21 15:04:51,279 - model - INFO - Computing language clustering...
+2026-06-21 15:04:51,279 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:04:51,648 - model - INFO - Computing translation consistency...
+2026-06-21 15:04:51,648 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:04:51,648 - model - INFO - Analysing embedding biases...
+2026-06-21 15:04:51,650 - model - INFO - ==================================================
+2026-06-21 15:04:51,650 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:04:51,650 - model - INFO -   Languages analyzed: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 15:04:51,650 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:04:51,650 - model - INFO -   Bias flags: 0
+2026-06-21 15:04:51,650 - model - INFO - ==================================================
+2026-06-21 15:10:03,545 - model - INFO - ==================================================
+2026-06-21 15:10:03,546 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:10:03,546 - model - INFO - ==================================================
+2026-06-21 15:10:03,546 - model - INFO - Computing language clustering...
+2026-06-21 15:10:03,546 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:10:03,909 - model - INFO - Computing translation consistency...
+2026-06-21 15:10:03,909 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:10:03,910 - model - INFO - Analysing embedding biases...
+2026-06-21 15:10:03,911 - model - INFO - ==================================================
+2026-06-21 15:10:03,911 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:10:03,912 - model - INFO -   Languages analyzed: ['English', 'Swahili', 'Luganda', 'Runyankore']
+2026-06-21 15:10:03,912 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:10:03,912 - model - INFO -   Bias flags: 0
+2026-06-21 15:10:03,912 - model - INFO - ==================================================
+2026-06-21 15:12:57,570 - model - INFO - ==================================================
+2026-06-21 15:12:57,571 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:12:57,571 - model - INFO - ==================================================
+2026-06-21 15:12:57,571 - model - INFO - Computing language clustering...
+2026-06-21 15:12:57,571 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:12:57,943 - model - INFO - Computing translation consistency...
+2026-06-21 15:12:57,943 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:12:57,944 - model - INFO - Analysing embedding biases...
+2026-06-21 15:12:57,945 - model - INFO - ==================================================
+2026-06-21 15:12:57,946 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:12:57,946 - model - INFO -   Languages analyzed: ['Runyankore', 'English', 'Swahili', 'Luganda']
+2026-06-21 15:12:57,946 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:12:57,946 - model - INFO -   Bias flags: 0
+2026-06-21 15:12:57,946 - model - INFO - ==================================================
+2026-06-21 15:23:07,282 - model - INFO - ==================================================
+2026-06-21 15:23:07,283 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:23:07,283 - model - INFO - ==================================================
+2026-06-21 15:23:07,283 - model - INFO - Computing language clustering...
+2026-06-21 15:23:07,283 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:23:07,805 - model - INFO - Computing translation consistency...
+2026-06-21 15:23:07,806 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:23:07,806 - model - INFO - Analysing embedding biases...
+2026-06-21 15:23:07,808 - model - INFO - ==================================================
+2026-06-21 15:23:07,808 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:23:07,808 - model - INFO -   Languages analyzed: ['Swahili', 'Runyankore', 'English', 'Luganda']
+2026-06-21 15:23:07,808 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:23:07,808 - model - INFO -   Bias flags: 0
+2026-06-21 15:23:07,808 - model - INFO - ==================================================
+2026-06-21 15:27:19,417 - model - INFO - ==================================================
+2026-06-21 15:27:19,417 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:27:19,417 - model - INFO - ==================================================
+2026-06-21 15:27:19,417 - model - INFO - Computing language clustering...
+2026-06-21 15:27:19,417 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:27:19,767 - model - INFO - Computing translation consistency...
+2026-06-21 15:27:19,768 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:27:19,768 - model - INFO - Analysing embedding biases...
+2026-06-21 15:27:19,770 - model - INFO - ==================================================
+2026-06-21 15:27:19,770 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:27:19,770 - model - INFO -   Languages analyzed: ['Swahili', 'Luganda', 'English', 'Runyankore']
+2026-06-21 15:27:19,770 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:27:19,770 - model - INFO -   Bias flags: 0
+2026-06-21 15:27:19,770 - model - INFO - ==================================================
+2026-06-21 15:31:16,203 - model - INFO - ==================================================
+2026-06-21 15:31:16,203 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:31:16,203 - model - INFO - ==================================================
+2026-06-21 15:31:16,203 - model - INFO - Computing language clustering...
+2026-06-21 15:31:16,203 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:31:16,786 - model - INFO - Computing translation consistency...
+2026-06-21 15:31:16,786 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:31:16,787 - model - INFO - Analysing embedding biases...
+2026-06-21 15:31:16,789 - model - INFO - ==================================================
+2026-06-21 15:31:16,789 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:31:16,789 - model - INFO -   Languages analyzed: ['Luganda', 'Runyankore', 'Swahili', 'English']
+2026-06-21 15:31:16,789 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:31:16,789 - model - INFO -   Bias flags: 0
+2026-06-21 15:31:16,789 - model - INFO - ==================================================
+2026-06-21 15:35:58,343 - model - INFO - ==================================================
+2026-06-21 15:35:58,343 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:35:58,343 - model - INFO - ==================================================
+2026-06-21 15:35:58,343 - model - INFO - Computing language clustering...
+2026-06-21 15:35:58,344 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:35:58,738 - model - INFO - Computing translation consistency...
+2026-06-21 15:35:58,738 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:35:58,738 - model - INFO - Analysing embedding biases...
+2026-06-21 15:35:58,740 - model - INFO - ==================================================
+2026-06-21 15:35:58,740 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:35:58,740 - model - INFO -   Languages analyzed: ['English', 'Runyankore', 'Luganda', 'Swahili']
+2026-06-21 15:35:58,740 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:35:58,740 - model - INFO -   Bias flags: 0
+2026-06-21 15:35:58,740 - model - INFO - ==================================================
+2026-06-21 15:40:11,495 - model - INFO - ==================================================
+2026-06-21 15:40:11,498 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:40:11,498 - model - INFO - ==================================================
+2026-06-21 15:40:11,498 - model - INFO - Computing language clustering...
+2026-06-21 15:40:11,498 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:40:11,902 - model - INFO - Computing translation consistency...
+2026-06-21 15:40:11,902 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:40:11,903 - model - INFO - Analysing embedding biases...
+2026-06-21 15:40:11,904 - model - INFO - ==================================================
+2026-06-21 15:40:11,904 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:40:11,904 - model - INFO -   Languages analyzed: ['Swahili', 'Runyankore', 'Luganda', 'English']
+2026-06-21 15:40:11,904 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:40:11,904 - model - INFO -   Bias flags: 0
+2026-06-21 15:40:11,904 - model - INFO - ==================================================
+2026-06-21 15:46:09,408 - model - INFO - ==================================================
+2026-06-21 15:46:09,408 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 15:46:09,408 - model - INFO - ==================================================
+2026-06-21 15:46:09,408 - model - INFO - Computing language clustering...
+2026-06-21 15:46:09,408 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 15:46:09,955 - model - INFO - Computing translation consistency...
+2026-06-21 15:46:09,955 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 15:46:09,956 - model - INFO - Analysing embedding biases...
+2026-06-21 15:46:09,959 - model - INFO - ==================================================
+2026-06-21 15:46:09,959 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 15:46:09,959 - model - INFO -   Languages analyzed: ['English', 'Runyankore', 'Swahili', 'Luganda']
+2026-06-21 15:46:09,959 - model - INFO -   Optimal clusters: 2
+2026-06-21 15:46:09,959 - model - INFO -   Bias flags: 0
+2026-06-21 15:46:09,959 - model - INFO - ==================================================
+2026-06-21 16:39:53,687 - model - INFO - ==================================================
+2026-06-21 16:39:53,688 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 16:39:53,688 - model - INFO - ==================================================
+2026-06-21 16:39:53,688 - model - INFO - Computing language clustering...
+2026-06-21 16:39:53,688 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 16:39:54,393 - model - INFO - Computing translation consistency...
+2026-06-21 16:39:54,394 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 16:39:54,394 - model - INFO - Analysing embedding biases...
+2026-06-21 16:39:54,396 - model - INFO - ==================================================
+2026-06-21 16:39:54,396 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 16:39:54,396 - model - INFO -   Languages analyzed: ['Runyankore', 'Luganda', 'English', 'Swahili']
+2026-06-21 16:39:54,396 - model - INFO -   Optimal clusters: 2
+2026-06-21 16:39:54,396 - model - INFO -   Bias flags: 0
+2026-06-21 16:39:54,396 - model - INFO - ==================================================
+2026-06-21 16:50:49,902 - model - INFO - ==================================================
+2026-06-21 16:50:49,903 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 16:50:49,913 - model - INFO - ==================================================
+2026-06-21 16:50:49,914 - model - INFO - Computing language clustering...
+2026-06-21 16:50:49,934 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 16:50:50,300 - model - INFO - Computing translation consistency...
+2026-06-21 16:50:50,300 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 16:50:50,301 - model - INFO - Analysing embedding biases...
+2026-06-21 16:50:50,302 - model - INFO - ==================================================
+2026-06-21 16:50:50,302 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 16:50:50,302 - model - INFO -   Languages analyzed: ['Swahili', 'Luganda', 'Runyankore', 'English']
+2026-06-21 16:50:50,302 - model - INFO -   Optimal clusters: 2
+2026-06-21 16:50:50,302 - model - INFO -   Bias flags: 0
+2026-06-21 16:50:50,302 - model - INFO - ==================================================
+2026-06-21 16:58:57,984 - model - INFO - ==================================================
+2026-06-21 16:58:57,984 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 16:58:57,984 - model - INFO - ==================================================
+2026-06-21 16:58:57,984 - model - INFO - Computing language clustering...
+2026-06-21 16:58:57,984 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 16:58:58,468 - model - INFO - Computing translation consistency...
+2026-06-21 16:58:58,469 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 16:58:58,469 - model - INFO - Analysing embedding biases...
+2026-06-21 16:58:58,471 - model - INFO - ==================================================
+2026-06-21 16:58:58,471 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 16:58:58,471 - model - INFO -   Languages analyzed: ['Luganda', 'Swahili', 'English', 'Runyankore']
+2026-06-21 16:58:58,471 - model - INFO -   Optimal clusters: 2
+2026-06-21 16:58:58,471 - model - INFO -   Bias flags: 0
+2026-06-21 16:58:58,471 - model - INFO - ==================================================
+2026-06-21 17:08:03,821 - model - INFO - ==================================================
+2026-06-21 17:08:03,835 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 17:08:03,835 - model - INFO - ==================================================
+2026-06-21 17:08:03,835 - model - INFO - Computing language clustering...
+2026-06-21 17:08:03,835 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 17:08:04,213 - model - INFO - Computing translation consistency...
+2026-06-21 17:08:04,213 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 17:08:04,214 - model - INFO - Analysing embedding biases...
+2026-06-21 17:08:04,215 - model - INFO - ==================================================
+2026-06-21 17:08:04,215 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 17:08:04,215 - model - INFO -   Languages analyzed: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 17:08:04,215 - model - INFO -   Optimal clusters: 2
+2026-06-21 17:08:04,215 - model - INFO -   Bias flags: 0
+2026-06-21 17:08:04,216 - model - INFO - ==================================================
+2026-06-21 17:52:58,473 - model - INFO - ==================================================
+2026-06-21 17:52:58,474 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 17:52:58,474 - model - INFO - ==================================================
+2026-06-21 17:52:58,474 - model - INFO - Computing language clustering...
+2026-06-21 17:52:58,474 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 17:52:59,108 - model - INFO - Computing translation consistency...
+2026-06-21 17:52:59,108 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 17:52:59,109 - model - INFO - Analysing embedding biases...
+2026-06-21 17:52:59,112 - model - INFO - ==================================================
+2026-06-21 17:52:59,112 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 17:52:59,112 - model - INFO -   Languages analyzed: ['Runyankore', 'Luganda', 'Swahili', 'English']
+2026-06-21 17:52:59,112 - model - INFO -   Optimal clusters: 2
+2026-06-21 17:52:59,112 - model - INFO -   Bias flags: 0
+2026-06-21 17:52:59,112 - model - INFO - ==================================================
+2026-06-21 17:57:32,094 - model - INFO - ==================================================
+2026-06-21 17:57:32,095 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 17:57:32,095 - model - INFO - ==================================================
+2026-06-21 17:57:32,095 - model - INFO - Computing language clustering...
+2026-06-21 17:57:32,095 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 17:57:32,663 - model - INFO - Computing translation consistency...
+2026-06-21 17:57:32,664 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 17:57:32,665 - model - INFO - Analysing embedding biases...
+2026-06-21 17:57:32,668 - model - INFO - ==================================================
+2026-06-21 17:57:32,668 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 17:57:32,668 - model - INFO -   Languages analyzed: ['Luganda', 'English', 'Runyankore', 'Swahili']
+2026-06-21 17:57:32,668 - model - INFO -   Optimal clusters: 2
+2026-06-21 17:57:32,668 - model - INFO -   Bias flags: 0
+2026-06-21 17:57:32,668 - model - INFO - ==================================================
+2026-06-21 17:59:54,113 - model - INFO - ==================================================
+2026-06-21 17:59:54,113 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 17:59:54,113 - model - INFO - ==================================================
+2026-06-21 17:59:54,113 - model - INFO - Computing language clustering...
+2026-06-21 17:59:54,113 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 17:59:54,796 - model - INFO - Computing translation consistency...
+2026-06-21 17:59:54,797 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 17:59:54,797 - model - INFO - Analysing embedding biases...
+2026-06-21 17:59:54,800 - model - INFO - ==================================================
+2026-06-21 17:59:54,800 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 17:59:54,800 - model - INFO -   Languages analyzed: ['Luganda', 'Runyankore', 'English', 'Swahili']
+2026-06-21 17:59:54,800 - model - INFO -   Optimal clusters: 2
+2026-06-21 17:59:54,800 - model - INFO -   Bias flags: 0
+2026-06-21 17:59:54,800 - model - INFO - ==================================================
+2026-06-21 18:06:33,672 - model - INFO - ==================================================
+2026-06-21 18:06:33,673 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 18:06:33,673 - model - INFO - ==================================================
+2026-06-21 18:06:33,673 - model - INFO - Computing language clustering...
+2026-06-21 18:06:33,673 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 18:06:34,269 - model - INFO - Computing translation consistency...
+2026-06-21 18:06:34,270 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 18:06:34,270 - model - INFO - Analysing embedding biases...
+2026-06-21 18:06:34,273 - model - INFO - ==================================================
+2026-06-21 18:06:34,273 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 18:06:34,273 - model - INFO -   Languages analyzed: ['English', 'Swahili', 'Runyankore', 'Luganda']
+2026-06-21 18:06:34,273 - model - INFO -   Optimal clusters: 2
+2026-06-21 18:06:34,273 - model - INFO -   Bias flags: 0
+2026-06-21 18:06:34,273 - model - INFO - ==================================================
+2026-06-21 18:15:39,775 - model - INFO - ==================================================
+2026-06-21 18:15:39,776 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 18:15:39,776 - model - INFO - ==================================================
+2026-06-21 18:15:39,776 - model - INFO - Computing language clustering...
+2026-06-21 18:15:39,776 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 18:15:40,529 - model - INFO - Computing translation consistency...
+2026-06-21 18:15:40,529 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 18:15:40,530 - model - INFO - Analysing embedding biases...
+2026-06-21 18:15:40,533 - model - INFO - ==================================================
+2026-06-21 18:15:40,533 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 18:15:40,533 - model - INFO -   Languages analyzed: ['Swahili', 'English', 'Runyankore', 'Luganda']
+2026-06-21 18:15:40,533 - model - INFO -   Optimal clusters: 2
+2026-06-21 18:15:40,533 - model - INFO -   Bias flags: 0
+2026-06-21 18:15:40,533 - model - INFO - ==================================================
+2026-06-21 18:21:04,034 - model - INFO - ==================================================
+2026-06-21 18:21:04,034 - model - INFO - STARTING MODEL AUDIT
+2026-06-21 18:21:04,034 - model - INFO - ==================================================
+2026-06-21 18:21:04,035 - model - INFO - Computing language clustering...
+2026-06-21 18:21:04,035 - model - INFO - Computing clustering on 96 embeddings
+2026-06-21 18:21:04,701 - model - INFO - Computing translation consistency...
+2026-06-21 18:21:04,702 - model - INFO - Computing semantic similarity matrix...
+2026-06-21 18:21:04,703 - model - INFO - Analysing embedding biases...
+2026-06-21 18:21:04,705 - model - INFO - ==================================================
+2026-06-21 18:21:04,705 - model - INFO - MODEL AUDIT COMPLETE
+2026-06-21 18:21:04,705 - model - INFO -   Languages analyzed: ['Runyankore', 'English', 'Swahili', 'Luganda']
+2026-06-21 18:21:04,705 - model - INFO -   Optimal clusters: 2
+2026-06-21 18:21:04,705 - model - INFO -   Bias flags: 0
+2026-06-21 18:21:04,705 - model - INFO - ==================================================

@@ -1,0 +1,2 @@
+2026-06-07 11:01:34,805 - model - INFO - Running model audit with embeddings
+2026-06-07 11:14:22,844 - model - INFO - Model audit complete: {'embeddings_shape': (14431, 384), 'languages_analyzed': ['English', 'Luganda', 'Swahili', 'Runyankore'], 'optimal_clusters': 2, 'separation_ratio': 1.1608874, 'translation_consistency': {'Swahili': 0.50453424, 'Luganda': 0.5272661, 'Runyankore': 0.5402572}, 'bias_flags_count': 0}

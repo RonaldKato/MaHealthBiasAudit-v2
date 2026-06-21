@@ -1,0 +1,108 @@
+{
+  "experiment": "MaHealthBiasAudit_MOTHER_validation",
+  "timestamp": "20260615_213247",
+  "dataset": "MOTHER_validation",
+  "languages": [
+    "English",
+    "Luganda",
+    "Runyankole-Rukiga"
+  ],
+  "execution_time_seconds": 0.71,
+  "key_metrics": {
+    "average_sdi": 0.6759,
+    "bias_level": "HIGH",
+    "total_flags": 11
+  },
+  "sdi_ranking": {
+    "Luganda": 0.6758717000484467
+  },
+  "flags": [
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "mBERT",
+      "Severity": "High",
+      "Description": "High fertility penalty (2.00) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "XLM-R",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.76) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Luganda",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.76) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "mBERT",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.57) for mBERT",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "XLM-R",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.57) for XLM-R",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "Tokenisation_Bias",
+      "Language": "Runyankole-Rukiga",
+      "Tokeniser": "AfriBERTa",
+      "Severity": "Moderate",
+      "Description": "High fertility penalty (1.57) for AfriBERTa",
+      "Recommendation": "Consider using a different tokeniser for this language"
+    },
+    {
+      "Type": "High_SDI",
+      "Severity": "High",
+      "Description": "Average SDI of 0.676 indicates strong cross-lingual bias",
+      "Recommendation": "Review translation quality and cultural adaptation across all languages"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "Luganda vs English",
+      "Severity": "High",
+      "Description": "SDI of 0.676 indicates high bias between Luganda vs English",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Pairwise_Bias",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "SDI of 0.676 indicates high bias between English vs Luganda",
+      "Recommendation": "Focus translation quality improvement on this language pair"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "Luganda vs English",
+      "Severity": "High",
+      "Description": "Root cause identified: Content Omission (SDI: 0.676)",
+      "Recommendation": "Address content omission in translation process"
+    },
+    {
+      "Type": "Root_Cause",
+      "Comparison": "English vs Luganda",
+      "Severity": "High",
+      "Description": "Root cause identified: Translation Length Disparity (SDI: 0.676)",
+      "Recommendation": "Address translation length disparity in translation process"
+    }
+  ],
+  "recommendations": [
+    "🔴 HIGH BIAS: Improve translation quality across all languages",
+    "⚠ Focus on: Luganda"
+  ],
+  "output_directory": "/Users/ronaldkato/Downloads/MaHealthBias/output"
+}

@@ -1,0 +1,2 @@
+2026-06-07 11:01:33,670 - statistical - INFO - Starting statistical bias audit
+2026-06-07 11:01:34,403 - statistical - INFO - Statistical audit complete: {'total_responses': 14431, 'languages_analyzed': ['English', 'Swahili', 'Luganda', 'Runyankore'], 'significant_differences': 5, 'outliers_detected': 1139, 'flags_generated': 2}

@@ -1,0 +1,3 @@
+2026-06-07 10:59:26,207 - runner - INFO - Starting bias audit at 2026-06-07 10:59:26.207355
+2026-06-07 10:59:26,207 - runner - INFO - Output directory: /Users/ronaldkato/Downloads/MaHealthBias/output
+2026-06-07 11:14:33,720 - runner - INFO - Bias audit completed successfully
